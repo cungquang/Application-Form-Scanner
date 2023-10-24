@@ -19,6 +19,7 @@ namespace afs_extractionfunction
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
+            // Add commit for testing
             string name = req.Query["name"];
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();

@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Application_scanner_POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj": {}
+    "C:\\Users\\hcung\\source\\repos\\Application form scanner POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj": {}
   },
   "projects": {
-    "C:\\Application_scanner_POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj": {
+    "C:\\Users\\hcung\\source\\repos\\Application form scanner POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Application_scanner_POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj",
+        "projectUniqueName": "C:\\Users\\hcung\\source\\repos\\Application form scanner POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj",
         "projectName": "afs-mvcwebapp",
-        "projectPath": "C:\\Application_scanner_POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj",
-        "packagesPath": "C:\\Users\\kchao\\.nuget\\packages\\",
-        "outputPath": "C:\\Application_scanner_POC\\Application_scanner_POC\\afs-mvcwebapp\\obj\\",
+        "projectPath": "C:\\Users\\hcung\\source\\repos\\Application form scanner POC\\Application_scanner_POC\\afs-mvcwebapp\\afs-mvcwebapp.csproj",
+        "packagesPath": "C:\\Users\\hcung\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hcung\\source\\repos\\Application form scanner POC\\Application_scanner_POC\\afs-mvcwebapp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\kchao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hcung\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
