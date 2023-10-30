@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "afs_extractionfunction": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7273",
-      "launchBrowser": false
-    }
-  }
-}
