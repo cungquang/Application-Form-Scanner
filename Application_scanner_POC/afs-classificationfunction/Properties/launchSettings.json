@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "afs_classificationfunction": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7104",
-      "launchBrowser": false
-    }
-  }
-}
