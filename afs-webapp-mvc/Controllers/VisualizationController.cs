@@ -6,11 +6,11 @@ namespace afs_webapp_mvc.Controllers
 {
     public class VisualizationController : Controller
     {
-        private readonly IDownload _downloadService;
+        private readonly IDownloadService _downloadPdf;
 
-        public VisualizationController(IDownload downloadService)
+        public VisualizationController(IDownloadService downloadPdf)
         {
-            _downloadService = downloadService;
+            _downloadPdf = downloadPdf;
         }
         public IActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace afs_webapp_mvc.Controllers
 
         public async Task<IActionResult> DownloadDocument(long documentID)
         {
-            var pdf = await _downloadService.DownloadDocumentAsync("testID");
+            var pdf = await _downloadPdf.DownloadDocumentAsync("testID");
             return File(pdf, "application/pdf", "testDocument.pdf");
         }
     }
