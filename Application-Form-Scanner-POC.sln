@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "afs-webapp-mvc", "afs-webapp-mvc\afs-webapp-mvc.csproj", "{FCBF6671-79F8-483F-92BE-FC08E8187288}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "afs-trigger-staging-container", "afs-trigger-staging-container\afs-trigger-staging-container.csproj", "{F01391DD-2147-41BE-A7AF-6C1396F09706}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
