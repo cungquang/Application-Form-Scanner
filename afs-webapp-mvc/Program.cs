@@ -24,10 +24,17 @@ internal class Program
 
         app.UseAuthorization();
 
-        app.MapControllerRoute(
+        app.UseEndpoints(endpoints =>
+        {
+            // Map MVC controller route
+            app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            // Map API controller route
+            endpoints.MapControllers();
+        });
+        
         app.Run();
     }
 }
