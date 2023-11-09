@@ -7,22 +7,24 @@ namespace afs_webapp_mvc.Controllers
 {
     public class VisualizationController : Controller
     {
-        private readonly IDownloadService _downloadPdf;
+        //private readonly IDownloadService _downloadPdf;
 
-        public VisualizationController(IDownloadService downloadPdf)
+        /*public VisualizationController(IDownloadService downloadPdf)
         {
             _downloadPdf = downloadPdf;
-        }
+        }*/
+
+        public VisualizationController() { }
         public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> DownloadDocument(long documentID)
+        /*public async Task<IActionResult> DownloadDocument(long documentID)
         {
             var pdf = await _downloadPdf.DownloadDocumentAsync("testID");
             return File(pdf, "application/pdf", "testDocument.pdf");
-        }
+        }*/
 
         public async Task<IActionResult> ViewDocument(long documentID)
         {

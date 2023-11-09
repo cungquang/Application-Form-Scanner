@@ -9,15 +9,19 @@ namespace afs_webapp_mvc.Controllers.API
     [ApiController]
     public class DatabaseAPIController : ControllerBase
     {
-        private readonly AfsDbContextService _databaseEngine;
+        /*private readonly AfsDbContextService _databaseEngine;
 
         public DatabaseAPIController(AfsDbContextService afsDbEngine) 
         {
             _databaseEngine = afsDbEngine;
-        }
+        }*/
 
         // GET: api/<DatabaseAPIController>
         [HttpGet]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -25,6 +29,10 @@ namespace afs_webapp_mvc.Controllers.API
 
         // GET api/<DatabaseAPIController>/5
         [HttpGet("{id}")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public string Get(int id)
         {
             return "value";
@@ -32,18 +40,30 @@ namespace afs_webapp_mvc.Controllers.API
 
         // POST api/<DatabaseAPIController>
         [HttpPost]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public void Post([FromBody] string value)
         {
         }
 
         // PUT api/<DatabaseAPIController>/5
         [HttpPut("{id}")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<DatabaseAPIController>/5
         [HttpDelete("{id}")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public void Delete(int id)
         {
         }
