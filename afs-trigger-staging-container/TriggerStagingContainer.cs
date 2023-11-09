@@ -20,7 +20,7 @@ namespace afs_trigger_staging_container
             string eventData = eventGridEvent.Data.ToString();
 
             var response = HttpClients.PostAsync(URL_Communicator, new StringContent(eventData)).Result;
-            log.LogInformation($"HTTP POST: {response.StatusCode}");
+            log.LogInformation($"HTTP POST - TESTING: {response.StatusCode}");
 
             // print log - for tracking purposes
             log.LogInformation(eventData);
