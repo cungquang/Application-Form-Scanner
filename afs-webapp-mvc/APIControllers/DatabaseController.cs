@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace afs_webapp_mvc.Controllers.API
+namespace afs_webapp_mvc.APIControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DatabaseAPIController : ControllerBase
+    public class DatabaseController : ControllerBase
     {
         /*private readonly AfsDbContextService _databaseEngine;
 

@@ -3,19 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace afs_webapp_mvc.Controllers.API
+namespace afs_webapp_mvc.APIControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class APIController: ControllerBase
-    public class BlobStorageAPIController : APIController
+    public class BlobStorageController : ControllerBase
     {
-        private readonly BlobStorageService _blobStorageService;
+/*        private readonly BlobStorageService _blobStorageService;
 
-        public BlobStorageAPIController(BlobStorageService blobStorageService)
+        public BlobStorageController(BlobStorageService blobStorageService)
         {
-            this._blobStorageService = blobStorageService;
-        }
+            _blobStorageService = blobStorageService;
+        }*/
 
         // GET: api/<BlobStorageAPIController>
         [HttpGet]
