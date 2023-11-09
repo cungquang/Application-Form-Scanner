@@ -1,6 +1,6 @@
 ﻿namespace afs_webapp_mvc.Services.GenerateTemplateService
 {
-    public interface IGenerateTemplateService
+    public interface IGenerateTemplateService<T> where T : class
     {
         /*
          * GenerateTemplateAsync
