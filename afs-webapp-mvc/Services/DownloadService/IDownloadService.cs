@@ -1,6 +1,6 @@
 ﻿namespace afs_webapp_mvc.Services.DownloadService
 {
-    public interface IDownload
+    public interface IDownloadService
     {
         /*
          * DownloadAsync
