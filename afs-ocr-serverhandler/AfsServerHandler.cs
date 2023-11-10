@@ -10,11 +10,11 @@ using Newtonsoft.Json;
 
 namespace afs_ocr_serverhandler
 {
-    public static class Function1
+    public static class AfsServerHandler
     {
-        [FunctionName("afs-ocr-serverhandler")]
+        [FunctionName("AfsServerHandler")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
