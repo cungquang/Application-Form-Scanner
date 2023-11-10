@@ -23,6 +23,11 @@ namespace afs_webapp_mvc.Controllers
             return View();
         }
 
+        public IActionResult UploadDocument() 
+        {
+            return RedirectToAction("Index");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
