@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "afs-webapp-mvc", "afs-webapp-mvc\afs-webapp-mvc.csproj", "{FCBF6671-79F8-483F-92BE-FC08E8187288}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCHousing.AfsWebAppMvc", "BCHousing.AfsWebAppMvc\BCHousing.AfsWebAppMvc.csproj", "{514AF132-FAC4-4EBA-B446-AFDFBAD06E9B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "afs-trigger-staging-container", "afs-trigger-staging-container\afs-trigger-staging-container.csproj", "{F01391DD-2147-41BE-A7AF-6C1396F09706}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCHousing.AfsTriggerStagingContainer", "BCHousing.AfsTriggerStagingContainer\BCHousing.AfsTriggerStagingContainer.csproj", "{6D9F006A-27A1-4123-8791-04CFD62D00A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "afs-ocr-serverhandler", "afs-ocr-serverhandler\afs-ocr-serverhandler.csproj", "{EFE2146B-0D2C-43BE-AC3E-0C20D1DE734C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCHousing.AfsOcrServerHandler", "BCHousing.AfsOcrServerHandler\BCHousing.AfsOcrServerHandler.csproj", "{50F57F5B-5FA4-4573-803E-1A16716FDA00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCBF6671-79F8-483F-92BE-FC08E8187288}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F01391DD-2147-41BE-A7AF-6C1396F09706}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFE2146B-0D2C-43BE-AC3E-0C20D1DE734C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFE2146B-0D2C-43BE-AC3E-0C20D1DE734C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFE2146B-0D2C-43BE-AC3E-0C20D1DE734C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFE2146B-0D2C-43BE-AC3E-0C20D1DE734C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{514AF132-FAC4-4EBA-B446-AFDFBAD06E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{514AF132-FAC4-4EBA-B446-AFDFBAD06E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{514AF132-FAC4-4EBA-B446-AFDFBAD06E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{514AF132-FAC4-4EBA-B446-AFDFBAD06E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9F006A-27A1-4123-8791-04CFD62D00A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9F006A-27A1-4123-8791-04CFD62D00A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9F006A-27A1-4123-8791-04CFD62D00A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9F006A-27A1-4123-8791-04CFD62D00A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F57F5B-5FA4-4573-803E-1A16716FDA00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F57F5B-5FA4-4573-803E-1A16716FDA00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F57F5B-5FA4-4573-803E-1A16716FDA00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F57F5B-5FA4-4573-803E-1A16716FDA00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
