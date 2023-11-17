@@ -15,12 +15,14 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new UploadFileViewModel();
+            return View(model);
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Submit(UploadFileViewModel model)
         {
-            return View();
+            return Content($"Form: Name={model.FirstName} {model.LastName} - Document Type={model.DocumentType} - Document: {model.UploadFile.FileName}");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
