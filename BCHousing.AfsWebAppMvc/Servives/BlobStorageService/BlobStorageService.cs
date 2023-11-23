@@ -105,28 +105,25 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 
         public async Task<bool> WriteMetaDataAsync(string containerName, string blobName, string metadata)
         {
+            // Validate if the file is existed
+            if (!await IsExistAsync(containerName, blobName))
+            {
+                throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
+            }
+
+            // Convert new metadata from json string to Dictionary
+            if (string.IsNullOrEmpty(metadata))
+            {
+                throw new ArgumentException("Input cannot be null or empty.", nameof(metadata));
+            }
+            IDictionary<string, string>? newMetadata = JsonSerializer.Deserialize<IDictionary<string, string>>(metadata);
+
+            // Get the current metadata
+            BlobContainerClient blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+            BlobClient blobClient = blobContainer.GetBlobClient(blobName);
+
             try
             {
-                // Validate if the file is existed
-                if (!await IsExistAsync(containerName, blobName))
-                {
-                    throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
-                }
-
-                // Convert new metadata from json string to Dictionary
-                if (string.IsNullOrEmpty(metadata))
-                {
-                    throw new ArgumentException("Input cannot be null or empty.", nameof(metadata));
-                }
-                IDictionary<string, string>? newMetadata = JsonSerializer.Deserialize<IDictionary<string, string>>(metadata);
-
-                // Get the current metadata
-                BlobContainerClient blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
-                BlobClient blobClient = blobContainer.GetBlobClient(blobName);
-
-                // Lease the blob
-                //var leaseBlob = await AcquireBlobLeaseAsync(blobClient);
-
                 var properties = await blobClient.GetPropertiesAsync();
 
                 //Write/overwrite new metadata to the current metadata
@@ -137,9 +134,6 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 
                 //Update metadata
                 await blobClient.SetMetadataAsync(properties.Value.Metadata);
-
-                //Release the lease
-                //await ReleaseBlobLeaseAsync(blobClient, leaseBlob.LeaseId);
 
                 return true;
             }
@@ -162,9 +156,18 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
                 BlobContainerClient blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
                 BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
 
-                //Get properties of the blob
+                //Get properties of the blob: SubmitBy, DocumentName, UserDeclareType
                 var blobProperties = await blobClient.GetPropertiesAsync();
-                return blobProperties.Value.Metadata;
+
+                IDictionary<string, string> response = blobProperties.Value.Metadata;
+
+                //Add SubmissionID (blob name), DocumentSize, Timestamp, URL
+                response["SubmissionID"] = blobClient.Uri.Segments[^1];
+                response["DocumentSize"] = blobProperties.Value.ContentLength.ToString();
+                response["Timestamp"] = blobProperties.Value.LastModified.ToString("G");
+                response["URL"] = blobClient.Uri.ToString();
+
+                return response;
             }
             catch (Exception)
             {
@@ -195,12 +198,23 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             }
         }
 
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////// Private Method //////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         private static async Task<BlobLeaseClient> AcquireBlobLeaseAsync(BlobClient blobClientToLease)
         {
-            BlobLeaseClient leaseClient = blobClientToLease.GetBlobLeaseClient();
-            Response<BlobLease> response = await leaseClient.AcquireAsync(duration: TimeSpan.FromSeconds(10));
-
-            return leaseClient;
+            try
+            {
+                BlobLeaseClient leaseClient = blobClientToLease.GetBlobLeaseClient();
+                Response<BlobLease> response = await leaseClient.AcquireAsync(TimeSpan.FromSeconds(20));
+                return response == null ? throw new RequestFailedException("Failed to acquire lease on the blob") : leaseClient;
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
         }
 
         private static async Task RenewBlobLeaseAsync(BlobClient blobClientToLease, string leaseID)
