@@ -10,7 +10,7 @@
 
         public Task DeleteBlobAsync(string containerName, string blobName);
 
-        public Task<bool> CopyBlobToAsync(string sourceBlobName, string destinationContainer, string destinationBlobName);
+        public Task<bool> CopyBlobToAsync(string sourceContainer, string sourceBlobName, string destinationContainer, string destinationBlobName);
 
         public Task<bool> WriteMetaDataAsync(string containerName, string blobName, string metadata);
 
