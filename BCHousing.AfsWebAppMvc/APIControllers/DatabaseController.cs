@@ -1,4 +1,6 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities;
+using BCHousing.AfsWebAppMvc.Entities.BlobStorage;
+using BCHousing.AfsWebAppMvc.Entities.Database;
 using BCHousing.AfsWebAppMvc.Repositories;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.AspNetCore.Mvc;
@@ -20,31 +22,40 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             _submissionLogRepository = submissionLogRepository;
         }
 
-        // GET: api/Database/GetSubmissionForms
-        [HttpGet("GetSubmissionForms")]
-        public async Task<IList<SubmissionLog>> GetSubmissionForms()
+        // GET: api/Database/GetSubmissionLogs
+        [HttpGet("GetSubmissionLogs")]
+        public async Task<IList<SubmissionLog>> GetSubmissionLogs()
         {
-            IList<SubmissionLog> submissionForms = await _submissionLogRepository.GetSubmissionLogs();
-
-            return submissionForms;
+            return await _submissionLogRepository.GetSubmissionLogs();
         }
 
-        // GET: api/Database/CreateSubmissionLogRecord?classifyType=<classify type>&fileUrl=<file url>
-        [HttpGet("CreateNewSubmissionLog")]
-        public async Task<string> CreateSubmissionLogRecord([FromQuery] string classifyType, [FromQuery] string fileUrl)
+        // GET: api/DataBase/GetSubmissionLogByUrl
+        [HttpGet("GetSubmissionLogByUrl")]
+        public async Task<SubmissionLog> GetSubmissionLogByUrl([FromBody] SubmissionLogRequest requestBody)
+        {
+            var fileUrl = requestBody.FileUrl;
+            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLog(fileUrl);
+
+            return submissionLog;
+        }
+
+
+        // POST: api/Database/CreateSubmissionLog
+        [HttpPost("CreateSubmissionLog")]
+        public async Task<string> CreateSubmissionLog([FromBody] SubmissionLogRequest requestBody)
         {
             // TODO: Blob API will return a proper metadata
             SubmissionLog newLog = new SubmissionLog();
             newLog.submissionId = Guid.NewGuid();
             newLog.timestamp = DateTime.Now;
-            newLog.submit_by = "Mary Cooper";
+            newLog.submit_by = "Misst Cooper";
             newLog.document_name = "Ptt123xyz.pdf";
             newLog.document_size = 89574;
-            newLog.user_declared_type = "SAFER";
-            newLog.classify_type = classifyType;
+            newLog.user_declared_type = "RAP";
+            newLog.classify_type = requestBody.ClassifyType;
             newLog.is_read = true;
             newLog.avg_confidence_level = (decimal)0.75;
-            newLog.path_to_document = fileUrl;
+            newLog.path_to_document = requestBody.FileUrl;
             newLog.path_to_analysis_report = "path/Ptt123xyz.pdf";
 
 
