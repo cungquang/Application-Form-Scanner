@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Servives\UtilityService\" />
+  </ItemGroup>
+
 </Project>
