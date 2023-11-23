@@ -1,6 +1,10 @@
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BCHousing.AfsWebAppMvc.Repositories;
+using BCHousing.AfsWebAppMvc.Servives.AfsDbContextService;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 public class Program
 {
