@@ -122,9 +122,6 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             BlobContainerClient blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
             BlobClient blobClient = blobContainer.GetBlobClient(blobName);
 
-            // Lease the blob
-            //BlobLeaseClient leaseBlob = await AcquireBlobLeaseAsync(blobClient);
-
             try
             {
                 var properties = await blobClient.GetPropertiesAsync();
