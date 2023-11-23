@@ -16,8 +16,17 @@ Content-Type: application/json
 POST https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/Metadata
 Content-Type: application/json
 
-
 {
   "URL":"https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/ApiForAFS.txt",
   "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Hong\",\"UserDeclaredType\":\"SAFER\"}"
+}
+
+
+####
+POST https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/MoveStagingBlob/Capture.PNG
+Content-Type: application/json
+
+{
+  "DestinationContainer":"file-container",
+  "DestinationFolder": "Other"
 }

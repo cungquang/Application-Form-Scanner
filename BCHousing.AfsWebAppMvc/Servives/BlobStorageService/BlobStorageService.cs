@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Reflection.Metadata;
+using System.Text.Json;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
@@ -39,7 +40,8 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
                     throw new ArgumentException("Input data cannot be null", nameof(blobContent));
                 }
 
-                BlobClient blobClient = _stagingContainerClient.GetBlobClient(blobName);
+                BlobContainerClient blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+                BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
 
                 // Upload the new blob to Azure
                 await blobClient.UploadAsync(blobContent, true);
@@ -67,12 +69,6 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
         {
             try
             {
-                // Validate if the file is existed
-                if (!await IsExistAsync(containerName, blobName))
-                {
-                    throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
-                }
-
                 BlobContainerClient blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
                 BlobClient blobClient = blobContainer.GetBlobClient(blobName);
 
@@ -84,23 +80,56 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             }
         }
 
-        public async Task<bool> CopyBlobToAsync(string sourceBlobName, string destinationContainer, string destinationBlobName)
+        public async Task<Stream> GetBlobContentAsync(string containerName, string blobName)
         {
-            // Validate if the file is existed
-            if (!await IsExistAsync(_stagingContainerName, sourceBlobName))
+            try
             {
-                throw new ArgumentException("Input container or blob does not exist", _stagingContainerName + "/" + sourceBlobName);
+                // Validate if the file is existed
+                if (!await IsExistAsync(containerName, blobName))
+                {
+                    throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
+                }
+
+                BlobContainerClient blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+                BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
+
+                Stream response = await blobClient.OpenReadAsync();
+                return response;
             }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-            //Setup resource for source
-            BlobClient blobSourceClient = _stagingContainerClient.GetBlobClient(sourceBlobName);
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////// API Method ////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            //Setup resources for destination
-            BlobContainerClient blobContainerDestinationClient = _blobServiceClient.GetBlobContainerClient(destinationContainer);
-            BlobClient blobDestinationClient = blobContainerDestinationClient.GetBlobClient(destinationBlobName);
+        public async Task<bool> CopyBlobToAsync(string sourceContainer, string sourceBlobName, string destinationContainer, string destinationBlobName)
+        {
+            try
+            {
+                // Validate if the file is existed
+                if (!await IsExistAsync(_stagingContainerName, sourceBlobName))
+                {
+                    throw new ArgumentException("Input container or blob does not exist", _stagingContainerName + "/" + sourceBlobName);
+                }
+            
+                //Get content from source
+                var sourceContent = await GetBlobContentAsync(sourceContainer, sourceBlobName);
 
-            // Write logic here
-            return true;
+                //Create and upload content to destination
+                await UploadBlobToAsync(destinationContainer, destinationBlobName, sourceContent);
+
+                //Delete source blob
+                await DeleteBlobAsync(sourceContainer, sourceBlobName);
+
+                return true;
+            }
+            catch {
+                return false; 
+            }
         }
 
         public async Task<bool> WriteMetaDataAsync(string containerName, string blobName, string metadata)
@@ -173,31 +202,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             {
                 throw;
             }
-
         }
-
-        public async Task<Stream> GetBlobContentAsync(string containerName, string blobName)
-        {
-            try
-            {
-                // Validate if the file is existed
-                if (!await IsExistAsync(containerName, blobName))
-                {
-                    throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
-                }
-
-                BlobContainerClient blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-                BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
-
-                Stream response = await blobClient.OpenReadAsync();
-                return response;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////// Private Method //////////////////////////////////////////////////////////
