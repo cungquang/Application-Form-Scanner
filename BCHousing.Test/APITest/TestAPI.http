@@ -1,0 +1,22 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@hostname=localhost
+@port=7158
+@subRoute=api
+@action=BlobStorage
+
+GET https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/Metadata
+Content-Type: application/json
+
+{
+  "URL":"https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/ApiForAFS.txt"
+}
+
+
+####
+POST https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/Metadata
+Content-Type: application/json
+
+{
+  "URL":"https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/ApiForAFS.txt",
+  "Metadata": "{\"submit_by\":\"Kai\",\"user_declared_type\":\"RAP\"}"
+}
