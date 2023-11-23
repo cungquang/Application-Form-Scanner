@@ -1,6 +1,10 @@
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BCHousing.AfsWebAppMvc.Repositories;
+using BCHousing.AfsWebAppMvc.Servives.AfsDbContextService;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 public class Program
 {
@@ -13,6 +17,11 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<IBlobStorageService>(provider => new BlobStorageService(BlobConnectionString));
+
+
+        var DBConnectionString = builder.Configuration.GetSection("ConnectionStrings:AzureDBConnect").Value;
+        builder.Services.AddDbContext<AfsDbContextService>(options => options.UseSqlServer(DBConnectionString));
+        builder.Services.AddScoped<ISubmissionLogRepository, SubmissionLogRepository>();
 
         var app = builder.Build();
 

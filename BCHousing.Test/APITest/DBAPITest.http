@@ -1,0 +1,25 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@hostname=localhost
+@port=7158
+@subRoute=api
+@action=Database
+
+// api/Database/GetSubmissionLogs
+GET https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/GetSubmissionLogs
+
+####
+GET https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/GetSubmissionLogByUrl
+Content-Type: application/json
+
+{
+  "FileUrl": "123abc123/123abc123.pdf"
+}
+
+####
+POST https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/CreateSubmissionLog
+Content-Type: application/json
+
+{
+  "ClassifyType":"RAP",
+  "FileUrl": "123abc123/123abc123.pdf"
+}
