@@ -1,7 +1,6 @@
-using BCHousing.AfsWebAppMvc.Repositories;
-using BCHousing.AfsWebAppMvc.Servives.AfsDbContextService;
-using Microsoft.EntityFrameworkCore;
+using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 public class Program
 {
@@ -9,8 +8,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        string BlobConnectionString = builder.Configuration.GetSection("ConnectionString:AzureBlobConnect").Value;
+        
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.AddTransient<IBlobStorageService>(provider => new BlobStorageService(BlobConnectionString));
 
 
         var DBConnectionString = builder.Configuration.GetSection("ConnectionStrings:AzureDBConnect").Value;
