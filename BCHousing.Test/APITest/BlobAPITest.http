@@ -1,10 +1,9 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
-@hostname=localhost
-@port=7158
+@domainName=https://bchousingafswebappmvc.azurewebsites.net
 @subRoute=api
 @action=BlobStorage
 
-GET https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/Metadata
+GET {{domainName}}/{{subRoute}}/{{action}}/Metadata
 Content-Type: application/json
 
 {
@@ -13,17 +12,17 @@ Content-Type: application/json
 
 
 ####
-POST https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/Metadata
+POST {{domainName}}/{{subRoute}}/{{action}}/Metadata
 Content-Type: application/json
 
 {
   "URL":"https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/ApiForAFS.txt",
-  "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Hong\",\"UserDeclaredType\":\"SAFER\"}"
+  "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Kai\",\"UserDeclaredType\":\"SAFER\"}"
 }
 
 
 ####
-POST https://{{hostname}}:{{port}}/{{subRoute}}/{{action}}/MoveStagingBlob/Capture.PNG
+POST {{domainName}}/{{subRoute}}/{{action}}/MoveStagingBlob/Capture.PNG
 Content-Type: application/json
 
 {
