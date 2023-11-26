@@ -47,6 +47,11 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             }
         }
 
+        public IActionResult Visualization()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Submission(UploadFileViewModel model)
