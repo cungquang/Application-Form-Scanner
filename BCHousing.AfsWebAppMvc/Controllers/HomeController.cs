@@ -70,12 +70,11 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                         _sessionManagementService.SetSubmissionViewInputModel(model, false);
                     }
 
-
-                    // Refresh the page
+                    // Refresh the page after submit
                     return RedirectToAction(nameof(HomeController.Submission));
                 }
 
-                // Need to return to the page with current data - in case invalid data
+                // return to the page with current data - trigger validation
                 return View(model);
 
             }
