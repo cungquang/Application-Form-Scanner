@@ -28,10 +28,10 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = _sessionManagementService.GetSubmissionViewInputModel();
+            return View(model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Client, NoStore = true)]
         public IActionResult Submission()
         {
             try
@@ -55,6 +55,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Create Session
                     string blobName = UtilityService.GenerateSystemGuid().ToString() + $".{model.UploadFile.FileName.Split(".")[^1]}";
 
                     //Upload new blob
@@ -62,7 +63,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                     {
                         //Write metadata to the blob
                         await _blobStorageService.WriteMetaDataAsync("staging-container", blobName, await UtilityService.SerializeMetadataAsync(model));
+                        _sessionManagementService.SetSubmissionViewInputModel(model, true);
                     }
+                    else
+                    {
+                        _sessionManagementService.SetSubmissionViewInputModel(model, false);
+                    }
+
 
                     // Refresh the page
                     return RedirectToAction(nameof(HomeController.Submission));

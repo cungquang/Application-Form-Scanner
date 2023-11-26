@@ -20,9 +20,6 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         }
         public IActionResult Index()
         {
-            var model = _sessionManagementService.GetUploadFileViewModel();
-            ViewBag.UserName = $"Hello {model.FirstName}, {model.LastName}";
-            ViewBag.FileUpload = $"Has upload the file {model.UploadFileName} with size = {model.UploadFileSize}";
             return View();
         }
 
