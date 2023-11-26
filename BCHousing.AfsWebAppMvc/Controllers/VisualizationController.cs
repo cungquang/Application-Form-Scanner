@@ -1,4 +1,6 @@
 ﻿using BCHousing.AfsWebAppMvc.Models;
+using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
+using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +8,21 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 {
     public class VisualizationController : Controller
     {
-        //private readonly IDownloadService _downloadPdf;
+        private readonly SessionManagementService _sessionManagementService;
+        private readonly ILogger<HomeController> _logger;
+        private readonly IBlobStorageService _blobStorageService;
 
-        /*public VisualizationController(IDownloadService downloadPdf)
+        public VisualizationController(SessionManagementService sessionManagementService, ILogger<HomeController> logger, IBlobStorageService blobStorageService)
         {
-            _downloadPdf = downloadPdf;
-        }*/
-
-        public VisualizationController() { }
+            _sessionManagementService = sessionManagementService;
+            _logger = logger;
+            _blobStorageService = blobStorageService;
+        }
         public IActionResult Index()
         {
+            var model = _sessionManagementService.GetUploadFileViewModel();
+            ViewBag.UserName = $"Hello {model.FirstName}, {model.LastName}";
+            ViewBag.FileUpload = $"Has upload the file {model.UploadFileName} with size = {model.UploadFileSize}";
             return View();
         }
 
