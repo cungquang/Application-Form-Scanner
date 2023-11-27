@@ -4,7 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using BCHousing.AfsWebAppMvc.Repositories;
 using BCHousing.AfsWebAppMvc.Servives.AfsDbContextService;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 
 public class Program
 {
@@ -12,16 +13,28 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        string BlobConnectionString = builder.Configuration.GetSection("ConnectionString:AzureBlobConnect").Value;
-        
+        // Get connection string 
+        var BlobConnectionString = builder.Configuration.GetSection("ConnectionString:AzureBlobConnect").Value;
+        var DBConnectionString = builder.Configuration.GetSection("ConnectionStrings:AzureDBConnect").Value;
+
         // Add services to the container.
         builder.Services.AddControllersWithViews();
-        builder.Services.AddTransient<IBlobStorageService>(provider => new BlobStorageService(BlobConnectionString));
-
-
-        var DBConnectionString = builder.Configuration.GetSection("ConnectionStrings:AzureDBConnect").Value;
+        builder.Services.AddScoped<IBlobStorageService>(provider => new BlobStorageService(BlobConnectionString));
         builder.Services.AddDbContext<AfsDbContextService>(options => options.UseSqlServer(DBConnectionString));
+
         builder.Services.AddScoped<ISubmissionLogRepository, SubmissionLogRepository>();
+
+        // Add HttpContextAccessor & Session
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddSingleton<SessionManagementService>();
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(options =>
+        {
+            options.Cookie.Name = ".ApplicationFormScanner";
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+            options.IdleTimeout = TimeSpan.FromMinutes(15);
+        });
 
         var app = builder.Build();
 
@@ -39,6 +52,7 @@ public class Program
         app.UseRouting();
 
         app.UseAuthorization();
+        app.UseSession();
 
         app.UseEndpoints(endpoints =>
         {
