@@ -23,6 +23,7 @@ public class Program
         builder.Services.AddDbContext<AfsDbContextService>(options => options.UseSqlServer(DBConnectionString));
 
         builder.Services.AddScoped<ISubmissionLogRepository, SubmissionLogRepository>();
+        builder.Services.AddScoped<IFormRepository, FormRepository>();
 
         // Add HttpContextAccessor & Session
         builder.Services.AddHttpContextAccessor();

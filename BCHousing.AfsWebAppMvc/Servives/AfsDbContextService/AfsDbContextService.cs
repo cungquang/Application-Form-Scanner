@@ -13,5 +13,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDbContextService
         }
 
         public virtual DbSet<SubmissionLog> SubmissionLog { get; set; }
+
+        public virtual DbSet<Form> Form { get; set; }
     }
 }
