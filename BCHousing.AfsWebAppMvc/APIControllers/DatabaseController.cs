@@ -90,7 +90,7 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
         {
           List<FormData> formDatas = requestBody.FormDatas;
 
-            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLog("https://afspocstorage.blob.core.windows.net/staging-container/RAP_training_data_03.pdf");
+            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLog(requestBody.fileUrl);
             Guid? submissionId = submissionLog.submissionId;
 
            foreach (FormData data in formDatas) {
