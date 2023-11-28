@@ -13,18 +13,20 @@
         <thead>
         </thead>
         <tbody>
-            @for(int i = 0; i < Model.NumberOfFile; i++)
-            {
-                <tr style="padding:8px; text-align: left;">
-                    <td>File Name @i</td>
-                    <td>
-                        <div class="btn-group float-sm-end" id="buttonGroup-@i">
-                            <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Review</a>
-                            <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</a>
-                            <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Download</a>
-                        </div>
-                    </td>
-                </tr>
+            @if(@Model.NumberOfFile > 0) {
+                @for(int i = 0; i < @Model.NumberOfFile; i++)
+                {
+                    <tr style="padding:8px; text-align: left;">
+                        <td>@Model.SubmissionLogs[i].submissionId - @Model.SubmissionLogs[i].document_name - @Model.SubmissionLogs[i].document_size [bytes]</td>
+                        <td>
+                            <div class="btn-group float-sm-end" id="buttonGroup-@i">
+                                <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Review</a>
+                                <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</a>
+                                <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Download</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

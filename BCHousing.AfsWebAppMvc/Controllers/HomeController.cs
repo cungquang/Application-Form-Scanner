@@ -1,5 +1,6 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities.Database;
 using BCHousing.AfsWebAppMvc.Models;
+using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using BCHousing.AfsWebAppMvc.Servives.UtilityService;
@@ -14,16 +15,19 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         private readonly SessionManagementService _sessionManagementService;
         private readonly ILogger<HomeController> _logger;
         private readonly IBlobStorageService _blobStorageService;
+        private readonly IAfsDatabaseService _afsDatabaseService;
 
         public HomeController(
             SessionManagementService sessionManagementService, 
+            IAfsDatabaseService afsDatabaseService,
             ILogger<HomeController> logger, 
             IBlobStorageService blobStorageService
         )
         {
             _sessionManagementService = sessionManagementService;
-            _logger = logger;
             _blobStorageService = blobStorageService;
+            _afsDatabaseService = afsDatabaseService;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -47,12 +51,9 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             }
         }
 
-        public IActionResult Visualization()
+        public async Task<IActionResult> Visualization()
         {
-            var model = new ListOfFilesVisualizationViewModel()
-            {
-                NumberOfFile = 20
-            };
+            var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogs());
             return View(model);
         }
 

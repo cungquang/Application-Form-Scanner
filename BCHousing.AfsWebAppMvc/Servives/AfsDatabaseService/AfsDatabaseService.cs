@@ -7,14 +7,14 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
     public class AfsDatabaseService : IAfsDatabaseService
     {
         private readonly IMemoryCache _memoryCache;
-        private readonly FormRepository _formRepository;
-        private readonly SubmissionLogRepository _submissionLogRepository;
+        private readonly ISubmissionLogRepository _submissionLogRepository;
+        private readonly IFormRepository _formRepository;
 
-        public AfsDatabaseService(IMemoryCache memoryCache, FormRepository formRepository, SubmissionLogRepository submissionLogRepository)
+        public AfsDatabaseService(IMemoryCache memoryCache, IFormRepository formRepository, ISubmissionLogRepository submissionLogRepository)
         {
             _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
-            _formRepository = formRepository;
             _submissionLogRepository = submissionLogRepository;
+            _formRepository = formRepository;
         }
 
         public async Task<IList<SubmissionLog>?> GetAllSubmissionLogs()
