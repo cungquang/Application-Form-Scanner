@@ -64,7 +64,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                     string blobName = UtilityService.GenerateSystemGuid().ToString() + $".{model.UploadFile.FileName.Split(".")[^1]}";
 
                     //Upload new blob
-                    if(await _blobStorageService.UploadBlobToAsync("staging-container", blobName, model.UploadFile.OpenReadStream()))
+                    if(!string.IsNullOrEmpty(await _blobStorageService.UploadBlobToAsync("staging-container", blobName, model.UploadFile.OpenReadStream())))
                     {
                         //Write metadata to the blob
                         await _blobStorageService.WriteMetaDataAsync("staging-container", blobName, await UtilityService.SerializeMetadataAsync(model));
