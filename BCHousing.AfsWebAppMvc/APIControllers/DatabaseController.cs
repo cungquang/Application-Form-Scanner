@@ -59,9 +59,10 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             System.Diagnostics.Debug.WriteLine($"container: {container}");
 
             var blobInfo = await _blobStorageService.GetMetaDataAsync(container, filename);
-            
+            string blobSubmissionId = blobInfo["SubmissionID"].Split("/")[^1].Split(".")[0];
+
             SubmissionLog newLog = new SubmissionLog();
-            newLog.submissionId = Guid.NewGuid();
+            newLog.submissionId = Guid.Parse(blobSubmissionId);
             newLog.timestamp = DateTime.Parse(blobInfo["Timestamp"]);
             newLog.submit_by = blobInfo["SubmitBy"];
             newLog.document_name = blobInfo["DocumentName"];
@@ -104,6 +105,18 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             }
 
             return requestBody;
+        }
+
+        // PUT: api/Database/UpdatePathToFile
+        [HttpPut("UpdatePathToFile")]
+        public async Task<string> UpdatePathToFile([FromBody] UpdateFilePath requestBody) {
+            int result = await _submissionLogRepository.UpdatePathToFile(requestBody);
+            string message = "Log path_to_file not update";
+            if (result == 1) {
+                message = "Log path_to_file updated";
+            }
+
+            return message;
         }
     }
 }

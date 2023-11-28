@@ -1,4 +1,5 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities;
+using BCHousing.AfsWebAppMvc.Entities.Database;
 using BCHousing.AfsWebAppMvc.Models;
 using BCHousing.AfsWebAppMvc.Servives.AfsDbContextService;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,18 @@ namespace BCHousing.AfsWebAppMvc.Repositories
             _dbContext.SubmissionLog.Add(newSubmissionLog);
             return await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<int> UpdatePathToFile(UpdateFilePath updateFilePath) {
+            var LogToUpdate = _dbContext.SubmissionLog.FirstOrDefault(log => log.path_to_document == updateFilePath.CurrentFilePath);
+
+            if (LogToUpdate != null) { 
+                LogToUpdate.path_to_document = updateFilePath.NewFilePath;
+            }
+
+            return await _dbContext.SaveChangesAsync();
+
+        }
+
     }
 
     public interface ISubmissionLogRepository
@@ -47,5 +60,7 @@ namespace BCHousing.AfsWebAppMvc.Repositories
         Task<int> CreateSubmissionLog(SubmissionLog newSubmissionLog);
 
         Task<SubmissionLog> GetSubmissionLog(string fileUrl);
+
+        Task<int> UpdatePathToFile(UpdateFilePath updateFilePath);
     }
 }
