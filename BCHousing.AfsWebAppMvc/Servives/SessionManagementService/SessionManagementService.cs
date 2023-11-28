@@ -1,6 +1,7 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities.Session;
 using BCHousing.AfsWebAppMvc.Models;
 using Microsoft.Extensions.Azure;
+using System.Runtime.InteropServices;
 
 namespace BCHousing.AfsWebAppMvc.Servives.SessionManagementService
 {

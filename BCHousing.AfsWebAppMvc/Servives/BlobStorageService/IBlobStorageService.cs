@@ -1,10 +1,12 @@
-﻿namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
+﻿using System.Runtime.InteropServices;
+
+namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 {
     public interface IBlobStorageService
     {
         public Task<Boolean> IsExistAsync(string containerName, string blobName);
 
-        public Task<string> UploadBlobToAsync(string containerName, string blobName, Stream blobContent);
+        public Task<string> UploadBlobToAsync(string containerName, string blobName, Stream blobContent, [Optional] string metadata);
 
         public Task<Stream> DownloadBlobFromAsync(string containerName, string blobName);
 
