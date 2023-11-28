@@ -1,9 +1,11 @@
 ﻿using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs.Specialized;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 {
@@ -31,7 +33,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             return await blobContainerClient.GetBlockBlobClient(blobName).ExistsAsync();
         }
 
-        public async Task<string> UploadBlobToAsync(string containerName, string blobName, Stream blobContent)
+        public async Task<string> UploadBlobToAsync(string containerName, string blobName, Stream blobContent, [Optional] string metadata)
         {
             try
             {
@@ -44,7 +46,18 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
                 BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
 
                 // Upload the new blob to Azure
-                await blobClient.UploadAsync(blobContent, true);
+                if (!string.IsNullOrEmpty(metadata))
+                {
+                    IDictionary<string, string>? newMetadata = JsonSerializer.Deserialize<IDictionary<string, string>>(metadata);
+                    await blobClient.UploadAsync(blobContent, new BlobUploadOptions {
+                        Metadata = newMetadata
+                    });
+                }
+                else
+                {
+                    await blobClient.UploadAsync(blobContent, true);
+                }
+
                 return blobClient.Uri.ToString();
             }
             catch (Exception)

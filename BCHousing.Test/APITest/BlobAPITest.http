@@ -8,16 +8,16 @@ GET {{domainName}}/{{subRoute}}/{{action}}/Metadata
 Content-Type: application/json
 
 {
-  "URL":"https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/ApiForAFS.txt"
+  "URL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf"
 }
 
 
 ####
-POST {{domainName}}/{{subRoute}}/{{action}}/Metadata
+POST {{testDomainName}}/{{subRoute}}/{{action}}/Metadata
 Content-Type: application/json
 
 {
-  "URL":"https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/ApiForAFS.txt",
+  "URL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf",
   "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Kai\",\"UserDeclaredType\":\"SAFER\"}"
 }
 
@@ -39,7 +39,12 @@ POST {{testDomainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
 Content-Type: application/json
 
 {
-  "SourceURL":"https://afspocstorage.blob.core.windows.net/staging-container/TestNote.txt",
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf",
   "DestinationContainer":"file-container",
   "DestinationFolder": "Other"
 }
+
+
+###
+GET {{testDomainName}}/{{subRoute}}/{{action}}/Metadata?url=https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf
+Content-Type: application/json
