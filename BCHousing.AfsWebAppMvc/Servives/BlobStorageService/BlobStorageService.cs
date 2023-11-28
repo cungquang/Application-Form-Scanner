@@ -124,9 +124,9 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             try
             {
                 // Validate if the file is existed
-                if (!await IsExistAsync(_stagingContainerName, sourceBlobName))
+                if (!await IsExistAsync(sourceContainer, sourceBlobName))
                 {
-                    throw new ArgumentException("Input container or blob does not exist", _stagingContainerName + "/" + sourceBlobName);
+                    throw new ArgumentException("Input container or blob does not exist", sourceContainer + "/" + sourceBlobName);
                 }
             
                 //Get content from source

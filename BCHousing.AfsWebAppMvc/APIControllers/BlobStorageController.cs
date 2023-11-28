@@ -3,6 +3,7 @@ using BCHousing.AfsWebAppMvc.Entities.BlobStorage;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.ObjectPool;
+using System.Text;
 using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -81,7 +82,10 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
         {
             try
             {
-                //Sample URL: https://afspocstorage.blob.core.windows.net/staging-container/TestNote.txt
+                if (string.IsNullOrEmpty(requestBody.SourceURL) || string.IsNullOrEmpty(requestBody.DestinationContainer))
+                {
+                    throw new BadHttpRequestException("SourceURL/DestinationContainer cannot be null or empty");
+                }
                 string response = "";
                 string destinationFileName = "";
                 string sourceFileName = requestBody.SourceURL.Split("/")[^1];
@@ -89,7 +93,12 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
                 if (!string.IsNullOrEmpty(requestBody.DestinationFolder)) destinationFileName = $"{requestBody.DestinationFolder}/{sourceFileName}";
 
                 //Call Blobstorage service
-                response = await _blobStorageService.CopyBlobToAsync(requestBody.SourceURL.Split("/")[^2], sourceFileName, requestBody.DestinationContainer, destinationFileName);
+                response = await _blobStorageService.CopyBlobToAsync(
+                    requestBody.SourceURL.Split("/")[3], 
+                    sourceFileName, 
+                    requestBody.DestinationContainer, 
+                    destinationFileName
+                    );
 
                 return StatusCode(StatusCodes.Status200OK, response);
             }
@@ -97,6 +106,32 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Internal Server Error", Details = ex.Message });
             }
+        }
+
+        [HttpPost("UploadBlobAsync")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UploadBlobAsync([FromBody] UploadBlobPostRequest requestBody)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(requestBody.ContainerName) || string.IsNullOrEmpty(requestBody.BlobName))
+                {
+                    throw new BadHttpRequestException("ContainerName/BlobName cannot be null or empty");
+                }
+
+                using Stream readStream = new MemoryStream(Encoding.UTF8.GetBytes(requestBody.BlobContent));
+                string response = await _blobStorageService.UploadBlobToAsync(requestBody.ContainerName, requestBody.BlobName, readStream, requestBody.Metadata);
+
+                return StatusCode(StatusCodes.Status200OK, response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Internal Server Error", Details = ex.Message});
+            }
+            
         }
     }
 }

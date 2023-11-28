@@ -4,15 +4,13 @@
 @subRoute=api
 @action=BlobStorage
 
-GET {{domainName}}/{{subRoute}}/{{action}}/Metadata
+
+### GET metadata
+GET {{testDomainName}}/{{subRoute}}/{{action}}/Metadata?url=https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf
 Content-Type: application/json
 
-{
-  "URL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf"
-}
 
-
-####
+#### POST Metadata
 POST {{testDomainName}}/{{subRoute}}/{{action}}/Metadata
 Content-Type: application/json
 
@@ -22,8 +20,7 @@ Content-Type: application/json
 }
 
 
-
-####
+#### POST MovingStagingBlob
 POST {{domainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
 Content-Type: application/json
 
@@ -34,17 +31,23 @@ Content-Type: application/json
 }
 
 
-###
+### POST MovingStagingBlob
 POST {{testDomainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
 Content-Type: application/json
 
 {
-  "SourceURL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf",
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/file-container/text.json",
   "DestinationContainer":"file-container",
   "DestinationFolder": "Other"
 }
 
-
-###
-GET {{testDomainName}}/{{subRoute}}/{{action}}/Metadata?url=https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf
+### POST UploadBlobAsync
+POST {{testDomainName}}/{{subRoute}}/{{action}}/UploadBlobAsync
 Content-Type: application/json
+
+{
+  "ContainerName": "file-container",
+  "BlobName": "text.json",
+  "BlobContent": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Kai\",\"UserDeclaredType\":\"SAFER\"}",
+  "Metadata":""
+}
