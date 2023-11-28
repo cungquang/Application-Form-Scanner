@@ -2,6 +2,7 @@
 {
     public class FormRecordRequest
     {
+        public string? fileUrl {  get; set; }
         public List<FormData>? FormDatas {  get; set; }
     }
 
