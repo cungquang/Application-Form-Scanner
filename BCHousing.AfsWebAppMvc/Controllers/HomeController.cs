@@ -62,12 +62,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 {
                     // Create Session
                     string blobName = UtilityService.GenerateSystemGuid().ToString() + $".{model.UploadFile.FileName.Split(".")[^1]}";
-
+                    string newBlobURL = await _blobStorageService.UploadBlobToAsync("staging-container", blobName, model.UploadFile.OpenReadStream());
+                    
                     //Upload new blob
-                    if(await _blobStorageService.UploadBlobToAsync("staging-container", blobName, model.UploadFile.OpenReadStream()))
+                    if (!string.IsNullOrEmpty(newBlobURL))
                     {
                         //Write metadata to the blob
-                        await _blobStorageService.WriteMetaDataAsync("staging-container", blobName, await UtilityService.SerializeMetadataAsync(model));
+                        await _blobStorageService.WriteMetaDataAsync(newBlobURL.Split("/")[^2], newBlobURL.Split("/")[^1], await UtilityService.SerializeMetadataAsync(model));
                         _sessionManagementService.SetSubmissionViewInputModel(model, true);
                     }
                     else

@@ -31,7 +31,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             return await blobContainerClient.GetBlockBlobClient(blobName).ExistsAsync();
         }
 
-        public async Task<bool> UploadBlobToAsync(string containerName, string blobName, Stream blobContent)
+        public async Task<string> UploadBlobToAsync(string containerName, string blobName, Stream blobContent)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 
                 // Upload the new blob to Azure
                 await blobClient.UploadAsync(blobContent, true);
-                return true;
+                return blobClient.Uri.ToString();
             }
             catch (Exception)
             {
@@ -106,7 +106,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
         /////////////////////////////////////////////////////// API Method ////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public async Task<bool> CopyBlobToAsync(string sourceContainer, string sourceBlobName, string destinationContainer, string destinationBlobName)
+        public async Task<string> CopyBlobToAsync(string sourceContainer, string sourceBlobName, string destinationContainer, string destinationBlobName)
         {
             try
             {
@@ -120,15 +120,15 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
                 var sourceContent = await GetBlobContentAsync(sourceContainer, sourceBlobName);
 
                 //Create and upload content to destination
-                await UploadBlobToAsync(destinationContainer, destinationBlobName, sourceContent);
+                string uri = await UploadBlobToAsync(destinationContainer, destinationBlobName, sourceContent);
 
                 //Delete source blob
                 await DeleteBlobAsync(sourceContainer, sourceBlobName);
 
-                return true;
+                return uri;
             }
-            catch {
-                return false; 
+            catch(Exception) {
+                throw;
             }
         }
 

@@ -1,5 +1,6 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
 @domainName=https://bchousingafswebappmvc.azurewebsites.net
+@testDomainName=https://localhost:7158
 @subRoute=api
 @action=BlobStorage
 
@@ -21,11 +22,24 @@ Content-Type: application/json
 }
 
 
+
 ####
-POST {{domainName}}/{{subRoute}}/{{action}}/MoveStagingBlob/Capture.PNG
+POST {{domainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
 Content-Type: application/json
 
 {
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/staging-container/TestNote.txt",
+  "DestinationContainer":"file-container",
+  "DestinationFolder": "Other"
+}
+
+
+###
+POST {{testDomainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
+Content-Type: application/json
+
+{
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/staging-container/TestNote.txt",
   "DestinationContainer":"file-container",
   "DestinationFolder": "Other"
 }

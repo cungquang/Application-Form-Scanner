@@ -64,24 +64,25 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             }
         }
 
-        // POST api/<BlobStorageAPIController>/StagingBlob/{resource}
-        [HttpPost("MoveStagingBlob/{resource}")]
+        // POST api/<BlobStorageAPIController>/StagingBlob}
+        [HttpPost("MoveStagingBlob")]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> MoveStagingBlob(string resource, [FromBody] CopyBlobPostRequest requestBody)
+        public async Task<IActionResult> MoveStagingBlob([FromBody] CopyBlobPostRequest requestBody)
         {
             try
             {
+                //Sample URL: https://afspocstorage.blob.core.windows.net/staging-container/TestNote.txt
                 string response = "";
-                string fileName = resource;
-                if (!string.IsNullOrEmpty(requestBody.DestinationFolder)) fileName = $"{requestBody.DestinationFolder}/{fileName}";
+                string destinationFileName = "";
+                string sourceFileName = requestBody.SourceURL.Split("/")[^1];
+
+                if (!string.IsNullOrEmpty(requestBody.DestinationFolder)) destinationFileName = $"{requestBody.DestinationFolder}/{sourceFileName}";
 
                 //Call Blobstorage service
-                if(await _blobStorageService.CopyBlobToAsync("staging-container", resource, requestBody.DestinationContainer, fileName)){
-                    response = $"Successfully move the file to {requestBody.DestinationContainer}/{requestBody.DestinationFolder}";
-                }
+                response = await _blobStorageService.CopyBlobToAsync(requestBody.SourceURL.Split("/")[^2], sourceFileName, requestBody.DestinationContainer, destinationFileName);
 
                 return StatusCode(StatusCodes.Status200OK, response);
             }
