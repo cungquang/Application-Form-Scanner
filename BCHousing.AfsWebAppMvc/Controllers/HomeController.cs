@@ -51,7 +51,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             var model = new ListOfFilesVisualizationViewModel()
             {
-                NumberOfFile = 50
+                NumberOfFile = 20
             };
             return View(model);
         }
