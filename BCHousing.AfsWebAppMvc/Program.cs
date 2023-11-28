@@ -6,6 +6,7 @@ using BCHousing.AfsWebAppMvc.Servives.AfsDbContextService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
+using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 
 public class Program
 {
@@ -24,6 +25,7 @@ public class Program
 
         builder.Services.AddScoped<ISubmissionLogRepository, SubmissionLogRepository>();
         builder.Services.AddScoped<IFormRepository, FormRepository>();
+        builder.Services.AddScoped<IAfsDatabaseService, AfsDatabaseService>();
 
         // Add HttpContextAccessor & Session
         builder.Services.AddHttpContextAccessor();
