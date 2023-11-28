@@ -49,7 +49,11 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public IActionResult Visualization()
         {
-            return View();
+            var model = new ListOfFilesVisualizationViewModel()
+            {
+                NumberOfFile = 50
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -89,7 +93,6 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 LogRequestError(ex);
                 throw;
             }
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

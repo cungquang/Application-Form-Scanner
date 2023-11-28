@@ -1,8 +1,31 @@
-﻿@{
+﻿@model BCHousing.AfsWebAppMvc.Models.ListOfFilesVisualizationViewModel;
+@{
     ViewData["Title"] = "Visualization Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="text-center text-dark">
-    <h1 class="display-2">Welcome to Submission Portal</h1>
+    <h1 class="display-2">Welcome to Visualization Portal</h1>
+</div>
+
+<div class="container-fluid">
+    <table style="width:100%; border-collapse:collapse; padding: 8px;">
+        <thead>
+        </thead>
+        <tbody>
+            @for(int i = 0; i < Model.NumberOfFile; i++)
+            {
+                <tr style="padding:8px; text-align: left;">
+                    <td>File Name @i</td>
+                    <td>
+                        <div class="btn-group float-sm-end" id="buttonGroup-@i">
+                            <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Review</a>
+                            <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</a>
+                            <a href="#" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Download</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
