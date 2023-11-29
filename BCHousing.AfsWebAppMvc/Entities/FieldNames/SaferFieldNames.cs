@@ -1,6 +1,6 @@
-﻿namespace BCHousing.AfsWebAppMvc.Entities.Enum
+﻿namespace BCHousing.AfsWebAppMvc.Entities.FieldNames
 {
-    public static class SaferFieldNamesEnum
+    public static class SaferFieldNames
     {
         public static long GetNumberOfFields()
         {
@@ -58,7 +58,7 @@
             "Name",                                     //42
             "Date moved to Canada (dd/mm/yyyy)",
             "Current status in Canada",
-            "Name of Sponsor", 
+            "Name of Sponsor",
             "End Date of Sponsorship Agreement",        //46
             "Name",                                     //47
             "Date moved to Canada (dd/mm/yyyy)",
@@ -159,10 +159,86 @@
             "Trailer Rent",                                                             //143
             "Yes",                                                                      //144
             "No",                                                                       //145
-            "Pad Rent"                      //146 - end page 4
-
-
-
+            "Pad Rent",                      //146 - end page 4
+            "Yes",                      //147
+            "No",                       //148
+            "If yes, please describe",   //149
+            "Yes",                      //150
+            "No",                       //151
+            "If yes, when did you last work? (Month/Year)",      //152
+            "Yes",                      //153
+            "No",                       //154
+            "Yes",                      //155
+            "No",                       //156
+            "If yes, when was the last payment received? (Month/Year)",      //157
+            "Yes",                      //158
+            "No",                       //159
+            "Yes",                      //160
+            "No",                       //161
+            "If yes, please describe and attach supporting documentation",    //162
+            "Yes",                      //163
+            "No",                       //164
+            "List all currente Income Sources including any regular ongoing funds received from non-taxable Sources:",       //165
+            "APPLICANT",                //166
+            "SPOUSE",                   //167
+            "List all currente Income Sources including any regular ongoing funds received from non-taxable Sources:",       //168
+            "APPLICANT",                //169
+            "SPOUSE",                   //170
+            "List all currente Income Sources including any regular ongoing funds received from non-taxable Sources:",       //171
+            "APPLICANT",                //172
+            "SPOUSE",                   //173
+            "List all currente Income Sources including any regular ongoing funds received from non-taxable Sources:",       //174
+            "APPLICANT",                //175
+            "SPOUSE",                   //176
+            "List all currente Income Sources including any regular ongoing funds received from non-taxable Sources:",       //177
+            "APPLICANT",                //178
+            "SPOUSE",                   //179
+            "List all currente Income Sources including any regular ongoing funds received from non-taxable Sources:",       //180
+            "APPLICANT",                //181
+            "SPOUSE",                   //182 End of page 5
+            "Signature of Applicant",    //183
+            "Date",                     //184
+            "Signature of Spouse (if applicable)",      //185
+            "Date",                     //186 End of page 6
+            "A printed, personalized blank cheque marked VOID; or",         //187
+            "A Preauthorized Debit Form provided by your financial institution; or",        //188
+            "Have your financial institution complete the information below:",              //189
+            "Name of Applicant",                //190
+            "Transit Number",                   //191
+            "Bank Number",                      //192
+            "Account Number",                   //193
+            "Name(s) on the account",           //194
+            "Phone number of financial institution",     //195
+            "Financial Institution Stamp",          //196
+            "Landlord / Building Manager Name (Print)",         //197
+            "Rental address (Unit #, Street#, City)",            //198
+            "Print Tenant's Name(s)",                           //199    
+            "Date tenancy started (MM/DD/YY)",                  //200
+            "The Rent is $",                                    //201
+            "Month",                                            //202
+            "Week",                                             //203
+            "Night",                                            //204
+            "Yes",                                              //205
+            "No",                                               //206
+            "Landlord Signature",                               //207
+            "Landlord Phone #",                                 //208
+            "Date",                                             //209
+            "Birth or baptismal certificate, Passport, Driver's License or a BC ID Card",       //210
+            "If born in Canada, Copy of Canadian birth of baptismal certificate, or Passport",  //211
+            "If not born in Canada, documentation showing date of birth as well as your status in Canada and that you are not under private sposorship. For more information, please call 604-433-2218 or toll-free at 1-800-257-7756",  //212
+            "Attach Power of Attorney authorizing documents",                   //213
+            "Attach a personalized blank cheque marked VOID to the application form; or",       //214
+            "Attach a Preauthorized Debit Form provided by your financial institution; or",     //215
+            "Have your financial institution complete the SAFER Direct Deposit section of this application",    //216
+            "Rent Receipt showing address, rent amount, date and landlord name; or",            //217
+            "Copy of recent Rent Increase Notice; or",            //218
+            "Copy of Lease or Tenancy Agreement (if signed within the past 12 months); or",              //219
+            "Have your landlord complete the Proof of Rent - Landlord Declaration section of this application",                                                                 //220
+            "Provide consent for release of tax information from Canada Revenue Agency (CRA) on page 2 of this  application; or",                                               //221
+            "Provide copies of last year's Income Tax Notice of Assessment AND detailed Income Tax Return (include all pages); or T-slips from all income sources.",            //222
+            "Statement of Income and Expenses from last year's Income Tax return and all related worksheets (form T2125)",                                                      //223
+            "Proof of CURRENT gross monthly income, from all sources (cheque stubs, letter from employer bank statements showing direct deposits or other income statement",    //224
+            "The T5007 tax slip that indicates the bus pass benefit amount"                                                                                                     //225
         };
 
     }
