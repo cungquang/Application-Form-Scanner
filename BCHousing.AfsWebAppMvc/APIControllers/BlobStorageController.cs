@@ -1,8 +1,10 @@
 ﻿using BCHousing.AfsWebAppMvc.Controllers;
 using BCHousing.AfsWebAppMvc.Entities.BlobStorage;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
+using BCHousing.AfsWebAppMvc.Servives.UtilityService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.ObjectPool;
+using System;
 using System.Text;
 using System.Text.Json;
 
@@ -34,10 +36,11 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
         {
             try
             {
-                string[] UrlParts = url.Split("/");
-                string blobName = UrlParts.Length > 5 ? $"{UrlParts[^2]}/{UrlParts[^1]}" : $"{UrlParts[^1]}";
-                string containerName = UrlParts[3];
-                string response = JsonSerializer.Serialize(await _blobStorageService.GetMetaDataAsync(containerName, blobName));
+                Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(url);
+                string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
+                
+                // Retrieve metadata from the blob
+                string response = JsonSerializer.Serialize(await _blobStorageService.GetMetaDataAsync(UrlParts["Container Name"], blobFullPath));
 
                 return StatusCode(StatusCodes.Status200OK, response);
             }catch (Exception ex)
@@ -56,14 +59,13 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
         {
             try
             {
-                string response = "";
-                string[] UrlParts = requestBody.URL.Split("/");
-                string blobName = UrlParts.Length > 5 ? $"{UrlParts[^2]}/{UrlParts[^1]}" : $"{UrlParts[^1]}";
-                string containerName = UrlParts[3];
-                if (await _blobStorageService.WriteMetaDataAsync(containerName, blobName, metadata: requestBody.Metadata))
-                {
-                    response = "Successfully update metadata";
-                }
+                Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(requestBody.URL);
+                string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
+
+                // Update metadta
+                string response = await _blobStorageService.WriteMetaDataAsync(UrlParts["Container Name"], blobFullPath, metadata: requestBody.Metadata) ?
+                    "Successfully update metadata" : "Fail to update metadata";
+
                 return StatusCode(StatusCodes.Status200OK, response);
             }
             catch(Exception ex)
