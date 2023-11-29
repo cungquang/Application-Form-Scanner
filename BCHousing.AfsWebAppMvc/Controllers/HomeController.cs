@@ -90,7 +90,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(url);
                 string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
                 var fileStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
-                var fileName = $"{UrlParts["Blob Name"].Split(".")[0]}-{DateTime.UtcNow.ToString("yyyyMMdd")}.pdf";
+                var fileName = $"{UrlParts["Blob Name"].Split(".")[0]}-{DateTime.UtcNow:yyyyMMdd}.pdf";
                 var contentType = "application/pdf";
 
                 return File(fileStream, contentType, fileName);
