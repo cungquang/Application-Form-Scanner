@@ -1,9 +1,11 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities.Database;
 using BCHousing.AfsWebAppMvc.Models;
+using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using BCHousing.AfsWebAppMvc.Servives.UtilityService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -14,20 +16,24 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         private readonly SessionManagementService _sessionManagementService;
         private readonly ILogger<HomeController> _logger;
         private readonly IBlobStorageService _blobStorageService;
+        private readonly IAfsDatabaseService _afsDatabaseService;
 
         public HomeController(
             SessionManagementService sessionManagementService, 
+            IAfsDatabaseService afsDatabaseService,
             ILogger<HomeController> logger, 
             IBlobStorageService blobStorageService
         )
         {
             _sessionManagementService = sessionManagementService;
-            _logger = logger;
             _blobStorageService = blobStorageService;
+            _afsDatabaseService = afsDatabaseService;
+            _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _afsDatabaseService.GetAllSubmissionLogs();
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
@@ -47,13 +53,53 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             }
         }
 
-        public IActionResult Visualization()
+        public async Task<IActionResult> Visualization()
         {
-            var model = new ListOfFilesVisualizationViewModel()
+            try
             {
-                NumberOfFile = 20
-            };
-            return View(model);
+                var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogs());
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                LogRequestError(ex);
+                throw;
+            }
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Review()
+        {
+            return default(IActionResult);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit()
+        {
+            return default(IActionResult);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Download(string url)
+        {
+            try
+            {
+                Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(url);
+                string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
+                var fileStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
+                var fileName = $"{UrlParts["Blob Name"].Split(".")[0]}-{DateTime.UtcNow:yyyyMMdd}.pdf";
+                var contentType = "application/pdf";
+
+                return File(fileStream, contentType, fileName);
+            }
+            catch (Exception ex)
+            {
+                LogRequestError(ex);
+                throw;
+            }
         }
 
         [HttpPost]
@@ -72,7 +118,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                         await UtilityService.SerializeMetadataAsync(model)
                         );
                     
-                    // Verify the upload
+                    // Verify the upload - update the session with new data
                     if (!string.IsNullOrEmpty(newBlobURL))
                     { 
                         _sessionManagementService.SetSubmissionViewInputModel(model, true);

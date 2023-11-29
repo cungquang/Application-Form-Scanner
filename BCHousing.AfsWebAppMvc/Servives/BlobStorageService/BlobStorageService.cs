@@ -12,18 +12,12 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
     public class BlobStorageService : IBlobStorageService
     {
         private readonly BlobServiceClient _blobServiceClient;
-        private readonly BlobContainerClient _fileContainerClient;
-        private readonly BlobContainerClient _stagingContainerClient;
         private readonly string _connectionString;
-        private readonly string _fileContainerName = "file-container";
-        private readonly string _stagingContainerName = "staging-container";
 
         public BlobStorageService(string connectionString)
         {
             _connectionString = connectionString;
             _blobServiceClient = new BlobServiceClient(_connectionString);
-            _fileContainerClient = _blobServiceClient.GetBlobContainerClient(_fileContainerName);
-            _stagingContainerClient = _blobServiceClient.GetBlobContainerClient(_stagingContainerName);
         }
 
         public async Task<Boolean> IsExistAsync(string containerName, string blobName)
@@ -68,13 +62,25 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 
         public async Task<Stream> DownloadBlobFromAsync(string containerName, string blobName)
         {
-            BlobClient blobClient = _fileContainerClient.GetBlobClient(blobName);
-
-            var responseStream = await blobClient.OpenReadAsync();
-            using (var memoryStream = new MemoryStream())
+            // Validate if the file is existed
+            if (!await IsExistAsync(containerName, blobName))
             {
-                await responseStream.CopyToAsync(memoryStream);
-                return memoryStream;
+                throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
+            }
+
+            try
+            {
+                BlobContainerClient blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+                BlobClient blobClient = blobContainer.GetBlobClient(blobName);
+
+                var responseStream = new MemoryStream();
+                await blobClient.DownloadToAsync(responseStream);
+                responseStream.Position = 0;
+                return responseStream;
+            }
+            catch(Exception)
+            {
+                throw;
             }
         }
 
