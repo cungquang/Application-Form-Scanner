@@ -89,18 +89,17 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
                     throw new BadHttpRequestException("SourceURL/DestinationContainer cannot be null or empty");
                 }
                 
-                string destinationFileName = "";
-                string sourceFileName = requestBody.SourceURL.Split("/")[^1];
+                Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(requestBody.SourceURL);
 
-                if (!string.IsNullOrEmpty(requestBody.DestinationFolder)) destinationFileName = $"{requestBody.DestinationFolder}/{sourceFileName}";
+                string sourceFileName = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? 
+                    UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
+
+                string destinationFileName = string.IsNullOrEmpty(requestBody.DestinationFolder) ? 
+                    UrlParts["Blob Name"] : $"{requestBody.DestinationFolder}/{UrlParts["Blob Name"]}";
 
                 //Call Blobstorage service
-                string response = await _blobStorageService.CopyBlobToAsync(
-                    requestBody.SourceURL.Split("/")[3], 
-                    sourceFileName, 
-                    requestBody.DestinationContainer, 
-                    destinationFileName
-                    );
+                string response = await _blobStorageService.CopyBlobToAsync(UrlParts["Container Name"], sourceFileName, 
+                    requestBody.DestinationContainer, destinationFileName);
 
                 return StatusCode(StatusCodes.Status200OK, response);
             }
