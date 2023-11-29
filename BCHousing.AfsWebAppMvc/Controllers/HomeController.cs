@@ -118,7 +118,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                         await UtilityService.SerializeMetadataAsync(model)
                         );
                     
-                    // Verify the upload
+                    // Verify the upload - update the session with new data
                     if (!string.IsNullOrEmpty(newBlobURL))
                     { 
                         _sessionManagementService.SetSubmissionViewInputModel(model, true);
