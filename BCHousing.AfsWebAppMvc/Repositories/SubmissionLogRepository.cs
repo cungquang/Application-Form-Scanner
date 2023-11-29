@@ -41,14 +41,26 @@ namespace BCHousing.AfsWebAppMvc.Repositories
         }
 
         public async Task<int> UpdatePathToFile(UpdateFilePath updateFilePath) {
-            var LogToUpdate = _dbContext.SubmissionLog.FirstOrDefault(log => log.path_to_document == updateFilePath.CurrentFilePath);
+            var logToUpdate = _dbContext.SubmissionLog.FirstOrDefault(log => log.path_to_document == updateFilePath.CurrentFilePath);
 
-            if (LogToUpdate != null) { 
-                LogToUpdate.path_to_document = updateFilePath.NewFilePath;
+            if (logToUpdate != null) { 
+                logToUpdate.path_to_document = updateFilePath.NewFilePath;
             }
 
             return await _dbContext.SaveChangesAsync();
 
+        }
+
+        public async Task<int> UpdateLogAfterExtractOCR(UpdateLogAfterOCRExtraction updateLog) { 
+            var logToUpdate = _dbContext.SubmissionLog.FirstOrDefault(log => log.path_to_document == updateLog.FileUrl);
+            if (logToUpdate != null)
+            {
+                logToUpdate.avg_confidence_level = updateLog.AvgConfidenceScore;
+                logToUpdate.is_read = updateLog.isRead;
+                logToUpdate.path_to_analysis_report = updateLog.PathToAnalysisReport;
+            }
+
+            return await _dbContext.SaveChangesAsync();
         }
 
     }
@@ -62,5 +74,7 @@ namespace BCHousing.AfsWebAppMvc.Repositories
         Task<SubmissionLog> GetSubmissionLog(string fileUrl);
 
         Task<int> UpdatePathToFile(UpdateFilePath updateFilePath);
+
+        Task<int> UpdateLogAfterExtractOCR(UpdateLogAfterOCRExtraction updateLog);
     }
 }

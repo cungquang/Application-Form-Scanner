@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
   "ClassifyType":"SAFER",
-  "FileUrl": "https://afspocstorage.blob.core.windows.net/staging-container/e5309b08-b34c-4ac7-bec8-598fa09e1040.pdf"
+  "FileUrl": "https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/292e5df6-53ae-43a9-b490-e9848caff413.pdf"
 }
 
 
@@ -46,4 +46,15 @@ Content-Type: application/json
 {
   "CurrentFilePath" : "https://afspocstorage.blob.core.windows.net/staging-container/09de1ec8-5d4e-4441-a9eb-ba53e7074413.pdf",
   "NewFilePath" : "test/test.pdf"
+}
+
+####
+PUT https://localhost:7158/api/Database/UpdateSubmissionLogAfterOCRExtraction
+Content-Type: application/json
+
+{
+  "FileUrl" : "https://afspocstorage.blob.core.windows.net/file-container/SAFER-RAP/b782db8a-0c1c-49d9-b8f9-01e0a08e45cc.pdf",
+  "isRead" : true,
+  "AvgConfidenceScore" : 0.95,
+  "PathToAnalysisReport" : "https://afspocstorage.blob.core.windows.net/file-container/Analysis/a32de51c-c38f-4415-ada8-f24de7bfd232.json"
 }

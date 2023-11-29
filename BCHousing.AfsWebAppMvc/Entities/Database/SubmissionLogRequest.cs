@@ -10,4 +10,11 @@
         public string? CurrentFilePath { get; set; }
         public string? NewFilePath { get; set;}
     }
+
+    public class UpdateLogAfterOCRExtraction { 
+        public string? FileUrl { get; set; }
+        public bool? isRead {  get; set; }
+        public decimal? AvgConfidenceScore { get; set; }
+        public string? PathToAnalysisReport { get; set; }
+    }
 }
