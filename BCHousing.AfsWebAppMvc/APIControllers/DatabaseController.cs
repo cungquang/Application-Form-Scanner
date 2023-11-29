@@ -52,8 +52,8 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
         {
             // TODO: Blob API will return a proper metadata
             string[] urlInformation = requestBody.FileUrl.Split("/");
-            string filename = urlInformation[urlInformation.Length - 1];
-            string container = urlInformation[urlInformation.Length - 2];
+            string filename = urlInformation[^1];
+            string container = urlInformation[^2];
 
             System.Diagnostics.Debug.WriteLine($"filename: {filename}");
             System.Diagnostics.Debug.WriteLine($"container: {container}");
@@ -69,10 +69,8 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             newLog.document_size = int.Parse(blobInfo["DocumentSize"]);
             newLog.user_declared_type = blobInfo["UserDeclaredType"];
             newLog.classify_type = requestBody.ClassifyType;
-            newLog.avg_confidence_level = (decimal)0.925; // TODO: this should be allow to be Null
             newLog.is_read = false;
             newLog.path_to_document = requestBody.FileUrl;
-            newLog.path_to_analysis_report = requestBody.FileUrl; // TODO: this should be allow to be Null
 
 
             int result = await _submissionLogRepository.CreateSubmissionLog(newLog); 
@@ -114,6 +112,20 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
             string message = "Log path_to_file not update";
             if (result == 1) {
                 message = "Log path_to_file updated";
+            }
+
+            return message;
+        }
+
+        // PUT: api/Database/UpdateSubmissionLogAfterOCRExtraction
+        [HttpPut("UpdateSubmissionLogAfterOCRExtraction")]
+        public async Task<string> UpdateSubmissionLogAfterOCRExtraction([FromBody] UpdateLogAfterOCRExtraction requestBody)
+        {
+            int result = await _submissionLogRepository.UpdateLogAfterExtractOCR(requestBody);
+            string message = "Log (avg_confidence_score, isRead, path_to_analysis_report) not update";
+            if (result == 1)
+            {
+                message = "Log (avg_confidence_score, isRead, path_to_analysis_report) updated";
             }
 
             return message;
