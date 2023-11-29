@@ -68,13 +68,25 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 
         public async Task<Stream> DownloadBlobFromAsync(string containerName, string blobName)
         {
-            BlobClient blobClient = _fileContainerClient.GetBlobClient(blobName);
-
-            var responseStream = await blobClient.OpenReadAsync();
-            using (var memoryStream = new MemoryStream())
+            // Validate if the file is existed
+            if (!await IsExistAsync(containerName, blobName))
             {
-                await responseStream.CopyToAsync(memoryStream);
-                return memoryStream;
+                throw new ArgumentException("Input container or blob does not exist", containerName + "/" + blobName);
+            }
+
+            try
+            {
+                BlobContainerClient blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+                BlobClient blobClient = blobContainer.GetBlobClient(blobName);
+
+                var responseStream = new MemoryStream();
+                await blobClient.DownloadToAsync(responseStream);
+                responseStream.Position = 0;
+                return responseStream;
+            }
+            catch(Exception)
+            {
+                throw;
             }
         }
 

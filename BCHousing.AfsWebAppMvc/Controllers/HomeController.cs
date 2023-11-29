@@ -5,6 +5,7 @@ using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using BCHousing.AfsWebAppMvc.Servives.UtilityService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -30,8 +31,9 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _afsDatabaseService.GetAllSubmissionLogs();
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
@@ -53,8 +55,51 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public async Task<IActionResult> Visualization()
         {
-            var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogs());
-            return View(model);
+            try
+            {
+                var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogs());
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                LogRequestError(ex);
+                throw;
+            }
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Review()
+        {
+            return default(IActionResult);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit()
+        {
+            return default(IActionResult);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Download(string url)
+        {
+            try
+            {
+                Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(url);
+                string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
+                var fileStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
+                var fileName = $"{UrlParts["Blob Name"].Split(".")[0]}-{DateTime.UtcNow.ToString("yyyyMMdd")}.pdf";
+                var contentType = "application/pdf";
+
+                return File(fileStream, contentType, fileName);
+            }
+            catch (Exception ex)
+            {
+                LogRequestError(ex);
+                throw;
+            }
         }
 
         [HttpPost]
