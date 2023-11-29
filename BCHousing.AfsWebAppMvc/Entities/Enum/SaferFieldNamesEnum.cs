@@ -2,7 +2,12 @@
 {
     public static class SaferFieldNamesEnum
     {
-        public static List<string> EnumValues { get; set; } = new List<string>()
+        public static string GetFieldNameBySequence(int sequence)
+        {
+            return EnumValues[sequence - 1];
+        }
+
+        private static List<string> EnumValues { get; set; } = new List<string>()
         {
             "Social Insurance Number",
             "Last Name",
@@ -54,7 +59,8 @@
             "Living with a spouse or common-law partner",
             "Sharing with another adult(s)",
             "Other, describe:",
-            "Other, describe:"
+            "Other, describe:",
+
 
         };
 
