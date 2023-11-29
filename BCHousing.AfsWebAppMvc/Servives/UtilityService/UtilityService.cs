@@ -31,5 +31,21 @@ namespace BCHousing.AfsWebAppMvc.Servives.UtilityService
             await JsonSerializer.SerializeAsync<Dictionary<string, string>>(stream, metadata);
             return System.Text.Encoding.UTF8.GetString(stream.ToArray());
         }
+
+        public static async Task<Dictionary<string, string>> GetContainerAndBlobName(string blobUrl)
+        {
+            //Sample URL: https://afspocstorage.blob.core.windows.net/file-container/Other/2d5fe2e9-152a-46ae-befc-25cc936fcb1b.pdf
+            //Sample URL: https://afspocstorage.blob.core.windows.net/staging-container/2d5fe2e9-152a-46ae-befc-25cc936fcb1b.pdf
+            await Task.Delay(0);
+            Dictionary<string, string> UrlParts = new();
+            string[] parts = blobUrl.Split("/");
+            UrlParts["Protocols"] = parts[0];
+            UrlParts["Domain Name"] = parts[2];
+            UrlParts["Container Name"] = parts[3];
+            UrlParts["Folder Name"] = parts.Length > 5 ? parts[4] : "";
+            UrlParts["Blob Name"] = parts[^1];
+
+            return UrlParts;
+        }
     }
 }
