@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
   "URL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf",
-  "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Cao\",\"UserDeclaredType\":\"SAFER\"}"
+  "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Chai\",\"UserDeclaredType\":\"SAFER\"}"
 }
 
 
@@ -36,9 +36,9 @@ POST {{testDomainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
 Content-Type: application/json
 
 {
-  "SourceURL":"https://afspocstorage.blob.core.windows.net/file-container/test-folder/text.json",
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/test-container/test-folder/text.json",
   "DestinationContainer":"test-container",
-  "DestinationFolder": "test-folder"
+  "DestinationFolder": "fun-folder"
 }
 
 ### POST UploadBlobAsync

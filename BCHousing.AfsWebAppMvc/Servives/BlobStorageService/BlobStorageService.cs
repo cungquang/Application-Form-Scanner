@@ -12,18 +12,12 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
     public class BlobStorageService : IBlobStorageService
     {
         private readonly BlobServiceClient _blobServiceClient;
-        private readonly BlobContainerClient _fileContainerClient;
-        private readonly BlobContainerClient _stagingContainerClient;
         private readonly string _connectionString;
-        private readonly string _fileContainerName = "file-container";
-        private readonly string _stagingContainerName = "staging-container";
 
         public BlobStorageService(string connectionString)
         {
             _connectionString = connectionString;
             _blobServiceClient = new BlobServiceClient(_connectionString);
-            _fileContainerClient = _blobServiceClient.GetBlobContainerClient(_fileContainerName);
-            _stagingContainerClient = _blobServiceClient.GetBlobContainerClient(_stagingContainerName);
         }
 
         public async Task<Boolean> IsExistAsync(string containerName, string blobName)
