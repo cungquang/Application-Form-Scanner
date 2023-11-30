@@ -35,9 +35,9 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            await _cacheManagementService.CacheData(CacheKey.SubmissionLogKey, TimeSpan.FromMinutes(4), TimeSpan.FromMinutes(1), _afsDatabaseService.GetAllSubmissionLogsSync());
+            await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(), () => _afsDatabaseService.GetAllSubmissionLogsSync());
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
@@ -61,7 +61,10 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             try
             {
-                var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogsCacheAsync());
+                var model = new ListOfFilesVisualizationViewModel(
+                    await _cacheManagementService.GetCachedDataAsync(CacheKey.GetSubmissionLogCacheKey(),
+                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
+                ));
                 return View(model);
             }
             catch(Exception ex)
