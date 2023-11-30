@@ -61,12 +61,11 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             try
             {
-                Task<IList<Entities.SubmissionLog>>? task = _cacheManagementService.GetCachedDataAsync(
+                Task<IList<Entities.SubmissionLog>>? CacheData = _cacheManagementService.GetCachedDataAsync(
                                     CacheKey.GetSubmissionLogCacheKey(),
                                     async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
                                 );
-                var cacheData = await task;
-                var model = new ListOfFilesVisualizationViewModel(cacheData);
+                var model = new ListOfFilesVisualizationViewModel(await CacheData);
 
                 return View(model);
             }
@@ -85,6 +84,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
 
             var pdfStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
+            
             return File(pdfStream, "application/pdf");
         }
 
