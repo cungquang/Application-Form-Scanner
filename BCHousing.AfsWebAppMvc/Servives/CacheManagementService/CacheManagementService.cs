@@ -22,7 +22,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.CacheManagementService
         /////////////////////////////////////////////////////// Sync Method ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public void RefreshCache<TResult>(string cacheKey, Func<TResult> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
+        public void RefreshCache<TResult>(string cacheKey, Func<TResult>? GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
         {
             _memoryCache.Set(cacheKey, GetDataToCache(), new MemoryCacheEntryOptions
             {
@@ -31,7 +31,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.CacheManagementService
             });
         }
 
-        public TResult? GetCachedData<TResult>(string cacheKey, Func<TResult> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
+        public TResult? GetCachedData<TResult>(string cacheKey, Func<TResult>? GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
         {
             if (!_memoryCache.TryGetValue(cacheKey, out TResult? cachedData))
                 RefreshCache(cacheKey, GetDataToCache, expirationTime, slidingExpiration);
@@ -43,7 +43,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.CacheManagementService
         /////////////////////////////////////////////////////// Async Method ////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        public async Task RefreshCacheAsync<TResult>(string cacheKey, Func<Task<TResult>> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
+        public async Task RefreshCacheAsync<TResult>(string cacheKey, Func<Task<TResult>?> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
         {
             _memoryCache.Set(cacheKey, await GetDataToCache(), new MemoryCacheEntryOptions
             {

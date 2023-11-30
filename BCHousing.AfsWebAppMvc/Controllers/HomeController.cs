@@ -61,10 +61,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             try
             {
-                var model = new ListOfFilesVisualizationViewModel(
-                    await _cacheManagementService.GetCachedDataAsync(CacheKey.GetSubmissionLogCacheKey(),
-                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
-                ));
+                Task<IList<Entities.SubmissionLog>>? task = _cacheManagementService.GetCachedDataAsync(
+                                    CacheKey.GetSubmissionLogCacheKey(),
+                                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
+                                );
+                var cacheData = await task;
+                var model = new ListOfFilesVisualizationViewModel(cacheData);
+
                 return View(model);
             }
             catch(Exception ex)
