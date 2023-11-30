@@ -22,15 +22,15 @@
                             <div class="btn-group float-sm-end" id="buttonGroup-@i">
                                 <form method="post" asp-controller="Home" asp-action="Review">
                                     <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
-                                    <button type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Review</button>
+                                    <button id="ReviewButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Review</button>
                                 </form>
                                 <form method="post" asp-controller="Home" asp-action="Edit">
                                     <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
-                                    <button type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</button>
+                                    <button id="EditButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</button>
                                 </form>
                                 <form method="post" asp-controller="Home" asp-action="Download">
                                     <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
-                                    <button type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Download</button>
+                                    <button id="DownloadButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Download</button>
                                 </form>
                             </div>
                         </td>

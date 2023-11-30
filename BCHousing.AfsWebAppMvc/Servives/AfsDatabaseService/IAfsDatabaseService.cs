@@ -5,8 +5,6 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 {
     public interface IAfsDatabaseService
     {
-        public Task<IList<SubmissionLog>?> GetAllSubmissionLogs();
-
         public Task<IList<SubmissionLog>> GetAllSubmissionLogsSync();
 
         public Task<SubmissionLog> GetSubmissionLogByUrl(string fileUrl);
@@ -18,5 +16,8 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
         public Task<string> UpdatePathToFile(UpdateFilePath requestBody);
 
         public Task<string> UpdateSubmissionLogAfterOCRExtraction(UpdateLogAfterOCRExtraction requestBody);
+
+        public Task<IList<Form>> GetFormBySubmissionIdAsync(Guid targetSubmissionId);
+
     }
 }

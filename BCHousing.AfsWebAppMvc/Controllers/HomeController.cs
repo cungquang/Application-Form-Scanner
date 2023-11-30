@@ -2,6 +2,7 @@
 using BCHousing.AfsWebAppMvc.Models;
 using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
+using BCHousing.AfsWebAppMvc.Servives.CacheManagementService;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using BCHousing.AfsWebAppMvc.Servives.UtilityService;
 using Microsoft.AspNetCore.Mvc;
@@ -13,27 +14,30 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CacheManagementService _cacheManagementService;
         private readonly SessionManagementService _sessionManagementService;
         private readonly ILogger<HomeController> _logger;
         private readonly IBlobStorageService _blobStorageService;
         private readonly IAfsDatabaseService _afsDatabaseService;
 
         public HomeController(
+            CacheManagementService cacheManagementService,
             SessionManagementService sessionManagementService, 
             IAfsDatabaseService afsDatabaseService,
             ILogger<HomeController> logger, 
             IBlobStorageService blobStorageService
         )
         {
+            _cacheManagementService = cacheManagementService;
             _sessionManagementService = sessionManagementService;
             _blobStorageService = blobStorageService;
             _afsDatabaseService = afsDatabaseService;
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            await _afsDatabaseService.GetAllSubmissionLogs();
+            await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(), () => _afsDatabaseService.GetAllSubmissionLogsSync());
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
@@ -57,7 +61,12 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             try
             {
-                var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogs());
+                Task<IList<Entities.SubmissionLog>>? CacheData = _cacheManagementService.GetCachedDataAsync(
+                                    CacheKey.GetSubmissionLogCacheKey(),
+                                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
+                                );
+                var model = new ListOfFilesVisualizationViewModel(await CacheData);
+
                 return View(model);
             }
             catch(Exception ex)
@@ -75,6 +84,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
 
             var pdfStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
+            
             return File(pdfStream, "application/pdf");
         }
 

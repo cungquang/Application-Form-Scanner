@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
+using BCHousing.AfsWebAppMvc.Servives.CacheManagementService;
 
 public class Program
 {
@@ -22,14 +23,15 @@ public class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddScoped<IBlobStorageService>(provider => new BlobStorageService(BlobConnectionString));
         builder.Services.AddDbContext<AfsDbContextService>(options => options.UseSqlServer(DBConnectionString));
+        builder.Services.AddHttpContextAccessor();
 
         builder.Services.AddScoped<ISubmissionLogRepository, SubmissionLogRepository>();
         builder.Services.AddScoped<IFormRepository, FormRepository>();
         builder.Services.AddScoped<IAfsDatabaseService, AfsDatabaseService>();
+        builder.Services.AddScoped<CacheManagementService>();
+        builder.Services.AddScoped<SessionManagementService>();
 
-        // Add HttpContextAccessor & Session
-        builder.Services.AddHttpContextAccessor();
-        builder.Services.AddSingleton<SessionManagementService>();
+        // Add Memory Cache and Session
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession(options =>
         {

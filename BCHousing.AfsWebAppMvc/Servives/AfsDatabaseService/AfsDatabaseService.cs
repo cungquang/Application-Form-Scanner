@@ -9,42 +9,15 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 {
     public class AfsDatabaseService : IAfsDatabaseService
     {
-        private readonly IMemoryCache _memoryCache;
         private readonly IBlobStorageService _blobStorageService;
         private readonly ISubmissionLogRepository _submissionLogRepository;
         private readonly IFormRepository _formRepository;
 
-        public AfsDatabaseService(IMemoryCache memoryCache, IBlobStorageService blobStorageService, IFormRepository formRepository, ISubmissionLogRepository submissionLogRepository)
+        public AfsDatabaseService(IBlobStorageService blobStorageService, IFormRepository formRepository, ISubmissionLogRepository submissionLogRepository)
         {
-            _memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
             _blobStorageService = blobStorageService;
             _submissionLogRepository = submissionLogRepository;
             _formRepository = formRepository;
-        }
-
-        public async Task<IList<SubmissionLog>?> GetAllSubmissionLogs()
-        {
-            // If data not in the cache -> retrieve data from database -> save to submissionLogCachedData
-            if (!_memoryCache.TryGetValue(CacheKey.SubmissionLogKey, out IList<SubmissionLog>? submissionLogCachedData))
-            {
-                // Request data from Repository
-                submissionLogCachedData = await _submissionLogRepository.GetSubmissionLogs();
-
-                // Setup Cache option
-                var cacheEntryOptions = new MemoryCacheEntryOptions
-                {
-                    // Cache will be fixed remove from the Cache after 15 minutes
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(4),
-
-                    // If no access to the data with 3 minutes -> remove from the cache -> need to retrieve data again
-                    SlidingExpiration = TimeSpan.FromMinutes(1)
-                };
-
-                // Cache new data into memory
-                _memoryCache.Set(CacheKey.SubmissionLogKey, submissionLogCachedData, cacheEntryOptions);
-            }
-
-            return submissionLogCachedData;
         }
 
         public async Task<IList<SubmissionLog>> GetAllSubmissionLogsSync()
@@ -137,5 +110,11 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 
             return message;
         }
+
+        public async Task<IList<Form>> GetFormBySubmissionIdAsync(Guid targetSubmissionId)
+        {
+            return await _formRepository.GetFormRecordAsync(targetSubmissionId);
+        }
+
     }
 }
