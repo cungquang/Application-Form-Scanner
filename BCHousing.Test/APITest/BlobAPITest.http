@@ -36,9 +36,9 @@ POST {{testDomainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
 Content-Type: application/json
 
 {
-  "SourceURL":"https://afspocstorage.blob.core.windows.net/test-container/test-folder/text.json",
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/file-container/text.json",
   "DestinationContainer":"test-container",
-  "DestinationFolder": "fun-folder"
+  "DestinationFolder": ""
 }
 
 ### POST UploadBlobAsync

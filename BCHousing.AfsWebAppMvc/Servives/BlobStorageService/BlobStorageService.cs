@@ -99,7 +99,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
             }
         }
 
-        public async Task<Stream> GetBlobContentAsync(string containerName, string blobName)
+        public async Task<byte[]> GetBlobContentAsync(string containerName, string blobName)
         {
             try
             {
@@ -112,8 +112,10 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
                 BlobContainerClient blobContainerClient = _blobServiceClient.GetBlobContainerClient(containerName);
                 BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
 
-                Stream response = await blobClient.OpenReadAsync();
-                return response;
+                using var memoryStream = new MemoryStream();
+                await blobClient.DownloadToAsync(memoryStream);
+
+                return memoryStream.ToArray();
             }
             catch (Exception)
             {
@@ -136,7 +138,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
                 }
             
                 //Get content from source
-                var sourceContent = await GetBlobContentAsync(sourceContainer, sourceBlobName);
+                var sourceContent = await DownloadBlobFromAsync(sourceContainer, sourceBlobName);
 
                 //Create and upload content to destination
                 string uri = await UploadBlobToAsync(destinationContainer, destinationBlobName, sourceContent);
