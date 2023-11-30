@@ -2,6 +2,7 @@
 using BCHousing.AfsWebAppMvc.Models;
 using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
+using BCHousing.AfsWebAppMvc.Servives.CacheManagementService;
 using BCHousing.AfsWebAppMvc.Servives.SessionManagementService;
 using BCHousing.AfsWebAppMvc.Servives.UtilityService;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,21 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CacheManagementService _cacheManagementService;
         private readonly SessionManagementService _sessionManagementService;
         private readonly ILogger<HomeController> _logger;
         private readonly IBlobStorageService _blobStorageService;
         private readonly IAfsDatabaseService _afsDatabaseService;
 
         public HomeController(
+            CacheManagementService cacheManagementService,
             SessionManagementService sessionManagementService, 
             IAfsDatabaseService afsDatabaseService,
             ILogger<HomeController> logger, 
             IBlobStorageService blobStorageService
         )
         {
+            _cacheManagementService = cacheManagementService;
             _sessionManagementService = sessionManagementService;
             _blobStorageService = blobStorageService;
             _afsDatabaseService = afsDatabaseService;
@@ -33,7 +37,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _afsDatabaseService.GetAllSubmissionLogsCacheAsync();
+            await _cacheManagementService.CacheData(CacheKey.SubmissionLogKey, TimeSpan.FromMinutes(4), TimeSpan.FromMinutes(1), _afsDatabaseService.GetAllSubmissionLogsSync());
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
