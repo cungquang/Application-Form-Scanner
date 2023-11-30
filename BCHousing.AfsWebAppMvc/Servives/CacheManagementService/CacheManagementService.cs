@@ -10,17 +10,20 @@ namespace BCHousing.AfsWebAppMvc.Servives.CacheManagementService
     public class CacheManagementService
     {
         private readonly IMemoryCache _memoryCache;
-        private static TimeSpan defaultExpirationTime = TimeSpan.FromMinutes(3);
-        private static TimeSpan defaultSlidingExpiration = TimeSpan.FromMinutes(1);
+        private static TimeSpan defaultExpirationTime = TimeSpan.FromMinutes(3);        //Fixed time period force data to being removed from Cache
+        private static TimeSpan defaultSlidingExpiration = TimeSpan.FromMinutes(1);     //Idle time period force data to being removed from Cache
 
         public CacheManagementService(IMemoryCache memoryCache)
         {
             _memoryCache = memoryCache;
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////// Sync Method ////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public void RefreshCache<TResult>(string cacheKey, Func<TResult> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
         {
-            //Cache option - fixed time to remove from cache = <expirationTime> - idle time before removing from cache = <slidingExpiration>
             _memoryCache.Set(cacheKey, GetDataToCache(), new MemoryCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = expirationTime == TimeSpan.Zero ? defaultExpirationTime : expirationTime,
@@ -30,18 +33,18 @@ namespace BCHousing.AfsWebAppMvc.Servives.CacheManagementService
 
         public TResult? GetCachedData<TResult>(string cacheKey, Func<TResult> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
         {
-            //If data is not yet cache -> cache new data
             if (!_memoryCache.TryGetValue(cacheKey, out TResult? cachedData))
-            {
                 RefreshCache(cacheKey, GetDataToCache, expirationTime, slidingExpiration);
-            }
 
             return cachedData;
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////// Async Method ////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         public async Task RefreshCacheAsync<TResult>(string cacheKey, Func<Task<TResult>> GetDataToCache, [Optional] TimeSpan expirationTime, [Optional] TimeSpan slidingExpiration)
         {
-            //Cache option - fixed time to remove from cache = <expirationTime> - idle time before removing from cache = <slidingExpiration>
             _memoryCache.Set(cacheKey, await GetDataToCache(), new MemoryCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = expirationTime == TimeSpan.Zero ? defaultExpirationTime : expirationTime,
@@ -53,9 +56,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.CacheManagementService
         {
             //If data is not yet cache -> cache new data
             if (!_memoryCache.TryGetValue(cacheKey, out TResult? cachedData))
-            {
                 await RefreshCacheAsync(cacheKey, GetDataToCache, expirationTime, slidingExpiration);
-            }
 
             return cachedData;
         }
