@@ -17,6 +17,15 @@ namespace BCHousing.AfsWebAppMvc.Servives.UtilityService
             return Guid.NewGuid();
         }
 
+        public static Guid ConvertStringToGuid(string idValue)
+        {
+            if(!Guid.TryParse(idValue, out Guid validGuid))
+            {
+                throw new ArgumentException("Invalid input argument, cannot convert to Guid type");
+            }
+            return validGuid;
+        }
+
         public static async Task<string> SerializeMetadataAsync(UploadFileViewModel model)
         {
             Dictionary<string, string> metadata = new()
