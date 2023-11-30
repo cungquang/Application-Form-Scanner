@@ -263,7 +263,7 @@
             "No",                   //247
             "Bank, financial institution or company name",              //248
             "Applicant",            //249
-            "Spouse",               //250
+            "Spouse"               //250
 
 
 
