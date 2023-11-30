@@ -18,6 +18,6 @@ namespace BCHousing.AfsWebAppMvc.Servives.BlobStorageService
 
         public Task<IDictionary<string, string>> GetMetaDataAsync(string containerName, string blobName);
 
-        public Task<Stream> GetBlobContentAsync(string containerName, string blobName);
+        public Task<byte[]> GetBlobContentAsync(string containerName, string blobName);
     }
 }

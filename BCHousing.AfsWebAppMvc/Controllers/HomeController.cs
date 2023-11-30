@@ -7,7 +7,7 @@ using BCHousing.AfsWebAppMvc.Servives.UtilityService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
-using System.Text.Json;
+using System.Web;
 
 namespace BCHousing.AfsWebAppMvc.Controllers
 {
@@ -69,9 +69,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Review()
+        public async Task<IActionResult> Review(string url)
         {
-            return default(IActionResult);
+            Dictionary<string, string> UrlParts = await UtilityService.GetContainerAndBlobName(url);
+            string blobFullPath = string.IsNullOrEmpty(UrlParts["Folder Name"]) ? UrlParts["Blob Name"] : $"{UrlParts["Folder Name"]}/{UrlParts["Blob Name"]}";
+
+            var pdfStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
+            return File(pdfStream, "application/pdf");
         }
 
         [HttpPost]
