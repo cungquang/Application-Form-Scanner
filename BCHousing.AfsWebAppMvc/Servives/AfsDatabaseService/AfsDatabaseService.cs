@@ -22,62 +22,6 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
             _formRepository = formRepository;
         }
 
-        public async Task<IList<SubmissionLog>?> GetAllSubmissionLogs()
-        {
-            // If data not in the cache -> retrieve data from database -> save to submissionLogCachedData
-            if (!_memoryCache.TryGetValue(CacheKey.SubmissionLogKey, out IList<SubmissionLog>? submissionLogCachedData))
-            {
-                // Request data from Repository
-                submissionLogCachedData = await _submissionLogRepository.GetSubmissionLogs();
-
-                    // Setup Cache option
-                    var cacheEntryOptions = new MemoryCacheEntryOptions
-                    {
-                        // Cache will be fixed remove from the Cache after 15 minutes
-                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(4),
-
-                        // If no access to the data with 3 minutes -> remove from the cache -> need to retrieve data again
-                        SlidingExpiration = TimeSpan.FromMinutes(1)
-                    };
-
-                    // Cache new data into memory
-                    _memoryCache.Set(CacheKey.SubmissionLogKey, submissionLogCachedData, cacheEntryOptions);
-                }
-
-            return submissionLogCachedData;
-        }
-
-        public async Task<IList<Form>?> GetFormRecordAsync(string targetSubmissionId)
-        {
-            try
-            {
-                string FormCacheKey = $"{CacheKey.FormKey}::{targetSubmissionId}::";
-                if (!_memoryCache.TryGetValue(FormCacheKey, out IList<Form>? formCachedData))
-                {
-                    formCachedData = await _formRepository.GetFormRecordAsync(UtilityService.UtilityService.ConvertStringToGuid(targetSubmissionId));
-
-                    // Setup Cache option
-                    var cacheEntryOptions = new MemoryCacheEntryOptions
-                    {
-                        // Cache will be fixed remove from the Cache after 15 minutes
-                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(4),
-
-                        // If no access to the data with 3 minutes -> remove from the cache -> need to retrieve data again
-                        SlidingExpiration = TimeSpan.FromMinutes(1)
-                    };
-
-                    // Cache new data into memory
-                    _memoryCache.Set(FormCacheKey, formCachedData, cacheEntryOptions);
-                }
-
-                return formCachedData;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
         public async Task<IList<SubmissionLog>> GetAllSubmissionLogsSync()
         {
             return await _submissionLogRepository.GetSubmissionLogs();
@@ -168,5 +112,67 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 
             return message;
         }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////// Cache Method ////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+
+        public async Task<IList<SubmissionLog>?> GetAllSubmissionLogsCacheAsync()
+        {
+            // If data not in the cache -> retrieve data from database -> save to submissionLogCachedData
+            if (!_memoryCache.TryGetValue(CacheKey.SubmissionLogKey, out IList<SubmissionLog>? submissionLogCachedData))
+            {
+                // Request data from Repository
+                submissionLogCachedData = await _submissionLogRepository.GetSubmissionLogs();
+
+                // Setup Cache option
+                var cacheEntryOptions = new MemoryCacheEntryOptions
+                {
+                    // Cache will be fixed remove from the Cache after 15 minutes
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(4),
+
+                    // If no access to the data with 3 minutes -> remove from the cache -> need to retrieve data again
+                    SlidingExpiration = TimeSpan.FromMinutes(1)
+                };
+
+                // Cache new data into memory
+                _memoryCache.Set(CacheKey.SubmissionLogKey, submissionLogCachedData, cacheEntryOptions);
+            }
+
+            return submissionLogCachedData;
+        }
+
+        public async Task<IList<Form>?> GetFormRecordCacheAsync(string targetSubmissionId)
+        {
+            try
+            {
+                string FormCacheKey = $"{CacheKey.FormKey}::{targetSubmissionId}::";
+                if (!_memoryCache.TryGetValue(FormCacheKey, out IList<Form>? formCachedData))
+                {
+                    formCachedData = await _formRepository.GetFormRecordAsync(UtilityService.UtilityService.ConvertStringToGuid(targetSubmissionId));
+
+                    // Setup Cache option
+                    var cacheEntryOptions = new MemoryCacheEntryOptions
+                    {
+                        // Cache will be fixed remove from the Cache after 15 minutes
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(4),
+
+                        // If no access to the data with 3 minutes -> remove from the cache -> need to retrieve data again
+                        SlidingExpiration = TimeSpan.FromMinutes(1)
+                    };
+
+                    // Cache new data into memory
+                    _memoryCache.Set(FormCacheKey, formCachedData, cacheEntryOptions);
+                }
+
+                return formCachedData;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }

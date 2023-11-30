@@ -33,7 +33,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            await _afsDatabaseService.GetAllSubmissionLogs();
+            await _afsDatabaseService.GetAllSubmissionLogsCacheAsync();
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
@@ -57,7 +57,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             try
             {
-                var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogs());
+                var model = new ListOfFilesVisualizationViewModel(await _afsDatabaseService.GetAllSubmissionLogsCacheAsync());
                 return View(model);
             }
             catch(Exception ex)
