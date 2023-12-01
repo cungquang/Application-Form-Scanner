@@ -1,0 +1,248 @@
+﻿@model BCHousing.AfsWebAppMvc.Models.PartialView.SaferUserInputViewModel
+<style>
+    th, td{
+        padding: 8px;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    input{
+        padding: 8px;
+        font-size: 16px;
+        color: black;
+    }
+    .col-textbox{
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+
+<form class="container">
+    <h1>1. Applicant Information</h1>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Social Insurance Number</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="123456" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Last Name</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Last Name" />
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="container">
+                        <p><strong>First Name(s)</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="First Name" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Birth Date (dd/mm/yyyy)</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Age</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="19" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Gender</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Male" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Born in Canada? (Yes/No)</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Yes" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>2. Spouse or Partner Information (if applicable)</h1>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Social Insurance Number</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="123456" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Last Name</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Last Name" />
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="container">
+                        <p><strong>First Name(s)</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="First Name" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Birth Date (dd/mm/yyyy)</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Age</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="19" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Gender</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Male" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Born in Canada? (Yes/No)</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Yes" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="container">
+                        <h1>3. Consent For Release of Information From Canada Revenue Agency</h1>
+                        <p>
+                            To determine eligibility for the Shelter Aid For Elderly Renters Program, income tax information is required.
+                            give the Canada Revenue Agency permision to provide the required information or you may provide the tax information
+                            directly to BC Housing yourself
+                        </p>
+                        <p><strong>SELECT Option 1 or Option 2 below.</strong> Do not check more than one box.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        @Html.CheckBox("myCheckBox", true) Option 1: Consent Granted
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        @Html.CheckBox("myCheckBox2", false) Option 2: Consent Not Granted
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p>
+                            <strong>We hereby consent</strong> to the release, by the Canada
+                            Revenue Agency, to BC Housing of information from
+                            my/our income tax records, whether supplied by me/us or
+                            by a third party. The information will be relevant to, and
+                            used solely for the purpose of, determining and verifying
+                            my/our eligibility, entitlement for and the general administration
+                            and enforcement of rental assistance/subsidies from BC Housing.
+
+                            This authorization is valid for the current taxation year,
+                            the two taxation year and each subsequent consecutive taxation
+                            assistance/benefit.
+
+                            I/we understand that if I/we wish to withdraw this consent, I/we may
+                            do so at any time by writing to:
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <p>Manger, Applicant Services <br /> BC Housing, 1701 - 4555 Kingsway <br /> Burnaby,BC V5H 4V8</p>
+                    </div>
+                </td>
+                <td>
+                    <p>
+                        <strong>I/We do not give consent</strong> for the Canada Revenue
+                        Agency to provide my/our income tax information to BC Housing. I/We
+                        understand that I/we will be responsible for providing verification of
+                        my/our income and assets in order to confirm eligibility for rental
+                        assistance/benefit. I/We have attached the following proof:
+                    </p>
+                    <ul>
+                        <li>Copy of Notice of Assessment for the last field tax year</li>
+                        <li>Copy of detailed Income Tax Return for the last filed tax year</li>
+                        <li>
+                            If self-employed: Copy of Statement of Business Activities and all related
+                            worksheets (only required for individuals with self-employment income, either
+                            business or professional on their tax return).
+                        </li>
+                    </ul>
+                    <p>
+                        If you are not able to locate your income documents please obtain a Proof of Income
+                        Statement (Option C print) from www.cra.gc.ca/myaccount or contact the Canada Revenue
+                        Agency at 1-800 959-8281.
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Applicant:</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Applicant Name" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Signature</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Signature" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Date</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Applicant:</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Applicant Name" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Signature</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="Signature" />
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Date</strong></p>
+                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

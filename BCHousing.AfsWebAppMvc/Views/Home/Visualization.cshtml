@@ -31,6 +31,7 @@
                                 </form>
                                 <form method="post" asp-controller="Home" asp-action="Edit">
                                     <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
+                                    <input type="hidden" name="classify_type" value="@Model.SubmissionLogs[i].classify_type">
                                     <button id="EditButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</button>
                                 </form>
                                 <form method="post" asp-controller="Home" asp-action="Download">

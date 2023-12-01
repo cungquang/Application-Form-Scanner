@@ -1,0 +1,22 @@
+﻿@model BCHousing.AfsWebAppMvc.Models.PartialView.SaferUserInputViewModel
+@{
+    ViewData["Title"] = "Edit Page";
+}
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" data-bs-toggle="tab" href="#partialView2">Page 2</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" data-bs-toggle="tab" href="#partialView3">Page 3</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="partialView2">
+        @Html.Partial("_SaferPage2")
+    </div>
+    <div class="tab-pane fade show" id="partialView3">
+        @Html.Partial("_SaferPage2")
+    </div>
+</div>
