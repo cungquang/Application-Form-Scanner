@@ -75,6 +75,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 throw;
             }
         }
+
+        public async Task<IActionResult> Refresh()
+        {
+            await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(),
+                async () => await _afsDatabaseService.GetAllSubmissionLogsSync());
+            return RedirectToAction("Visualization");
+        }
         
         [HttpPost]
         [ValidateAntiForgeryToken]

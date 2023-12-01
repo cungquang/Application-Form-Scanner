@@ -11,13 +11,18 @@
 <div class="container-fluid">
     <table style="width:100%; border-collapse:collapse; padding: 8px;">
         <thead>
+            <tr>
+                <th>
+                    <button id="RefreshButton" type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Refresh","Home")'">Refresh</button>
+                </th>
+            </tr>
         </thead>
         <tbody>
             @if(@Model.NumberOfFile > 0) {
                 @for(int i = 0; i < @Model.NumberOfFile; i++)
                 {
                     <tr style="padding:8px; text-align: left;">
-                        <td>@Model.SubmissionLogs[i].submissionId - @Model.SubmissionLogs[i].document_name - @Model.SubmissionLogs[i].document_size [bytes]</td>
+                        <td>@(i+1). @Model.SubmissionLogs[i].submissionId - @Model.SubmissionLogs[i].document_name - @Model.SubmissionLogs[i].document_size [bytes]</td>
                         <td>
                             <div class="btn-group float-sm-end" id="buttonGroup-@i">
                                 <form method="post" asp-controller="Home" asp-action="Review">
