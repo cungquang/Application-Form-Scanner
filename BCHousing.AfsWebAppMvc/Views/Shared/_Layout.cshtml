@@ -10,25 +10,22 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-collapse navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
             <div class="container-fluid">
-                <button class="navbar-toggler-icon" style="border: none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerList1" aria-controls="navbarTogglerList1" aria-expanded="false" aria-label="Toggle navigation">
-                    <img src="https://www.bchousing.org/themes/custom/bchousing/logo.svg" alt="BC Housing Logo" width="150" height="50">
+                <a class="navbar-brand" href="/"><img src="https://www.bchousing.org/themes/custom/bchousing/logo.svg" alt="BC Housing Logo" width="150" height="50"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar">
-                    <form class="d-flex padding">
-                        <input class="form-control me-2" type="search" placeholder="Search Text" aria-label="Search">
-                        <button class="btn btn-outline-dark" type="submit">Search</button>
-                    </form>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarTogglerList1">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link text-primary" aria-current="page" href="/">Home</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle text-primary" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Services</a>
-                            <ul class="dropdown-menu" style="background-color:transparent; border:none;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-primary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Services
+                            </a>
+                            <ul class="dropdown-menu">
                                 <li><a class="dropdown-item text-dark" href="/Home/Submission" style="font-size:inherit;">Submission</a></li>
                                 <li><a class="dropdown-item text-dark" href="/Home/Visualization" style="font-size:inherit;">Visualization</a></li>
                             </ul>

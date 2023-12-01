@@ -7,45 +7,57 @@
     <h1 class="display-2">Submission Application Form</h1>
 </div>
 
-<div class="center">
-    <form asp-controller="Home" asp-action="Submission" method="post" enctype="multipart/form-data">
-        <div class="container-fluid row gy-3 gx-2">
-            <div class="input-group col-auto">
-                <label class="visually-hidden" for="submission-form-first-name1">First Name</label>
-                <div class="input-group">
-                    <div class="input-group-text">First Name</div>
-                    <input type="text" class="form-control" id="submission-form-last-name1" placeholder="First Name" asp-for="FirstName">
+<div class="card text-center">
+    <div class="card-header">
+        Explainations: Please submit a SAFER or RAP application
+    </div>
+    <div class="card-body">
+        <div class="center">
+            <form asp-controller="Home" asp-action="Submission" method="post" enctype="multipart/form-data">
+                <div class="container-fluid row gy-3 gx-2">
+                    <div class="input-group col-auto">
+                        <label class="visually-hidden" for="submission-form-first-name1">First Name</label>
+                        <div class="input-group">
+                            <div class="input-group-text">First Name</div>
+                            <input type="text" class="form-control" id="submission-form-last-name1" placeholder="First Name" asp-for="FirstName">
+                        </div>
+                    </div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <div class="input-group col-auto">
+                        <label class="visually-hidden" for="submission-form-last-name1">Last Name</label>
+                        <div class="input-group">
+                            <div class="input-group-text">Last Name</div>
+                            <input type="text" class="form-control" id="submission-form-last-name1" placeholder="Last Name" asp-for="LastName">
+                        </div>
+                    </div>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <div class="col-auto">
+                        <label class="visually-hidden" for="autoSizingSelect">Preference</label>
+                        <div class="input-group">
+                            <div class="input-group-text">File Type</div>
+                            <select class="form-select" id="autoSizingSelect" asp-for="DocumentType" required>
+                                <option selected>Choose Type...</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Safer">Safer</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <span asp-validation-for="DocumentType" class="text-danger"></span>
+                    <div class="input-group form-group col-auto">
+                        <input asp-for="UploadFile" type="file" class="form-control" id="input-file-submit1" accept=".pdf">
+                    </div>
+                    <span asp-validation-for="UploadFile" class="text-danger"></span>
+                    <div class="input-group col-auto">
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </div>
                 </div>
-            </div>
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-            <div class="input-group col-auto">
-                <label class="visually-hidden" for="submission-form-last-name1">Last Name</label>
-                <div class="input-group">
-                    <div class="input-group-text">Last Name</div>
-                    <input type="text" class="form-control" id="submission-form-last-name1" placeholder="Last Name" asp-for="LastName">
-                </div>
-            </div>
-            <span asp-validation-for="LastName" class="text-danger"></span>
-            <div class="col-auto">
-                <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-                <div class="input-group">
-                    <div class="input-group-text">File Type</div>
-                    <select class="form-select" id="autoSizingSelect" asp-for="DocumentType" required>
-                        <option selected>Choose Type...</option>
-                        <option value="Rap">Rap</option>
-                        <option value="Safer">Safer</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-            </div>
-            <span asp-validation-for="DocumentType" class="text-danger"></span>
-            <div class="input-group form-group col-auto">
-                <input asp-for="UploadFile" type="file" class="form-control" id="input-file-submit1" accept=".pdf">
-            </div>
-            <span asp-validation-for="UploadFile" class="text-danger"></span>
-            <div class="input-group col-auto">
-                <button type="submit" class="btn btn-secondary">Submit</button>
-            </div>
+            </form>
         </div>
-    </form>
+    </div>
+    <div class="card-footer text-muted">
+        More question? contact: abc@abc.ca
+    </div>
 </div>
+
+
