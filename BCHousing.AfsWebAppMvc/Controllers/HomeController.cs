@@ -1,5 +1,6 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities.Database;
 using BCHousing.AfsWebAppMvc.Models;
+using BCHousing.AfsWebAppMvc.Models.PartialView;
 using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using BCHousing.AfsWebAppMvc.Servives.CacheManagementService;
@@ -75,6 +76,12 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 throw;
             }
         }
+        
+        public async Task<IActionResult> Edit()
+        {
+            var model = new SaferUserInputViewModel();
+            return View(model);  
+        }
 
         public async Task<IActionResult> Refresh()
         {
@@ -97,9 +104,9 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(string url, string classify_type)
         {
-            return default(IActionResult);
+            return View(nameof(HomeController.Edit));
         }
 
         [HttpPost]
