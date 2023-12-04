@@ -111,9 +111,23 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
             return message;
         }
 
+        public async Task<IList<SubmissionLog>> GetAllSaferRapSubmissionLogAsync()
+        {
+            var submission = await _submissionLogRepository.GetSubmissionLogs();
+            return submission.Where(submission =>
+                submission.classify_type.Trim().Equals("SAFER", StringComparison.OrdinalIgnoreCase) || 
+                submission.classify_type.Trim().Equals("RAP", StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+
         public async Task<IList<Form>> GetFormBySubmissionIdAsync(Guid targetSubmissionId)
         {
             return await _formRepository.GetFormRecordAsync(targetSubmissionId);
+        }
+
+        public async Task<int> SetFormBySubmissionIdAndSequenceAsync(Guid targetSubmissionId, int sequence, string? newValue)
+        {
+            return (await _formRepository.UpdateFormBySubmissionIdAndSequence(targetSubmissionId, sequence, newValue));
         }
 
     }
