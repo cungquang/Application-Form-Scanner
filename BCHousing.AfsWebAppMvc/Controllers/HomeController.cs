@@ -76,7 +76,6 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             }
         }
 
-        [HttpGet]
         public async Task<IActionResult> Edit(string submissionId, string classifyType, int? activeTab)
         {
             IList<Form> formFields = await _afsDatabaseService.GetFormBySubmissionIdAsync(UtilityService.ConvertStringToGuid(submissionId));

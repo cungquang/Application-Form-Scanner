@@ -1,5 +1,23 @@
 ﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
+<script>
+    $(document).read(function () {
+        var checkbox1 = $"#Option-1-Consent-Granted";
+        var checkbox2 = $"#Option-2-Consent-Granted";
+        var hiddenField1 = $"#m[14].field_value";
+        var hiddenField1 = $"#m[15].field_value";
 
+        hiddenField1.val(checkbox1 == true ? ":selected:" : ":unselected:");
+        checkbox1.change(function () {
+            hiddenField1.val(checkbox1 == true ? ":selected:" : ":unselected:");
+        });
+        //Initiate state
+        hiddenField2.val(checkbox2 == true ? ":selected:" : ":unselected:");
+        // If update happen
+        checkbox2.change(function () {
+            hiddenField2.val(checkbox2 == true ? ":selected:" : ":unselected:");
+        });
+    });
+</script>
 
 @using(Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 2 }, FormMethod.Post))
 {
@@ -171,7 +189,8 @@
                         @Html.HiddenFor(m => m[14].submissionId)
                         @Html.HiddenFor(m => m[14].sequence)
                         @Html.HiddenFor(m => m[14].field_name)
-                        @Html.CheckBox("Option-1:-Consent-Granted", (Model[14].field_value == ":selected:" ? true : false)) Option 1: Consent Granted
+                        @Html.CheckBox("Option-1-Consent-Granted", (Model[14].field_value == ":selected:" ? true : false)) Option 1: Consent Granted
+                        @Html.HiddenFor(m => m[14].field_value)
                     </div>
                 </td>
                 <td>
@@ -179,7 +198,8 @@
                         @Html.HiddenFor(m => m[15].submissionId)
                         @Html.HiddenFor(m => m[15].sequence)
                         @Html.HiddenFor(m => m[15].field_name)
-                        @Html.CheckBox("Option-1:-Consent-Granted", (Model[15].field_value == ":selected:" ? true : false)) Option 1: Consent Granted
+                        @Html.CheckBox("Option-2-Consent-Granted", (Model[15].field_value == ":selected:" ? true : false)) Option 2: Consent Not Granted
+                        @Html.HiddenFor(m => m[15].field_value)
                     </div>
                 </td>
             </tr>
@@ -301,3 +321,5 @@
             <input type="submit" value="Submit" class="btn btn-primary" />
     </div>
 }
+
+
