@@ -17,7 +17,11 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 
         public Task<string> UpdateSubmissionLogAfterOCRExtraction(UpdateLogAfterOCRExtraction requestBody);
 
+        public Task<IList<SubmissionLog>> GetAllSaferRapSubmissionLogAsync();
+
         public Task<IList<Form>> GetFormBySubmissionIdAsync(Guid targetSubmissionId);
+
+        public Task<int> SetFormBySubmissionIdAndSequenceAsync(Guid targetSubmissionId, int sequence, string? newValue);
 
     }
 }

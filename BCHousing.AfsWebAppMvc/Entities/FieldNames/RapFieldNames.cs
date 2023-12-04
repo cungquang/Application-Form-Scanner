@@ -263,10 +263,88 @@
             "No",                   //247
             "Bank, financial institution or company name",              //248
             "Applicant",            //249
-            "Spouse"               //250
-
-
-
+            "Spouse",               //250
+            "Type of Assets (including all bank accounts, even with negative balances)",                 //251
+            "Yes",                  //252
+            "No",                   //253
+            "Bank, financial institution or company name",              //254
+            "Applicant",            //255
+            "Spouse",               //256
+            "Type of Assets (including all bank accounts, even with negative balances)",                 //257
+            "Yes",                  //258
+            "No",                   //259
+            "Bank, financial institution or company name",              //260
+            "Applicant",            //261
+            "Spouse",               //262
+            "Type of Assets (including all bank accounts, even with negative balances)",                 //263
+            "Yes",                  //264
+            "No",                   //265
+            "Bank, financial institution or company name",              //266
+            "Applicant",            //267
+            "Spouse",               //268
+            "Type of Assets (including all bank accounts, even with negative balances)",                 //269
+            "Yes",                  //270
+            "No",                   //271
+            "Bank, financial institution or company name",              //272
+            "Applicant",            //273
+            "Spouse",               //274
+            "Type of Assets (including all bank accounts, even with negative balances)",                 //275
+            "Yes",                  //276
+            "No",                   //277
+            "Bank, financial institution or company name",              //278
+            "Applicant",            //279
+            "Spouse",               //280
+            "Type of Assets (including all bank accounts, even with negative balances)",                 //281
+            "Yes",                  //282
+            "No",                   //283
+            "Bank, financial institution or company name",              //284
+            "Applicant",            //285
+            "Spouse",               //286
+            "If you shares in a company or business provide legal name",         //287
+            "Yes",                  //288
+            "No",                   //289
+            "Type of Property",                 //290
+            "Location (Address)",               //291
+            "Year Purchased",                   //292
+            "Value($)",                         //293
+            "Equity($)",                        //294
+            "Type of Property",                 //295
+            "Location (Address)",               //296
+            "Year Purchased",                   //297
+            "Value($)",                         //298
+            "Equity($)",                        //299 End of Page 6
+            "Signature of Applicant",           //300
+            "Date",                             //301
+            "Signature of Spouse (if applicable)",          //302
+            "Date",                             //303 End of Page 7
+            "Provide consent for release of tax information from Canada Revenue Agency (CRA) on page 2 of this application; or",                                                                                            //304
+            "Provide copies of last year's Income Tax Notice of Assessment AND detailed Income Tax return (include all pages); or T-slips from all income sources",                                                         //305
+            "Note: if bankruptcy was declared within the last two taxation years, provide copies of the Income Tax Notices of Assessment and detailed Income Tax returns for both the pre- and post-bankruptcy",            //306
+            "Proof of any regular ongoing funds from non-taxable sources (alimony, family support, on-reserve income, private disability pension, etc.)",                       //307
+            "Proof of current income from all sources if you answered No to questions 10c or 10d",                              //308
+            "Blank cheque marked VOID; or",                                     //309
+            "A Preauthorized Debit Form provided by your financial institution; or",                    //310
+            "The Direct Deposit page included with this application completed by your financial institution",                   //311
+            "Copy of Canadian birth certificate(s) for all family members born in Canada; and",                                 //312
+            "For family members not born in Canada, provide copies of Permanent Residences documents",                          //313
+            "Rent Receipt showing address, rent amount, date and landlord name; or",                                            //314
+            "Copy of recent Rent Increase Notice; or",                                                                          //315
+            "Copy of Lease or Tenancy Agreement (if signed within the past 12 months)",                                         //316
+            "Copies of bank statements from all bank accounts",                                                                 //317
+            "Property tax assessments for value of property owned and proof of outstanding mortgage(s) for equity calculation.",        //318
+            "Other statement showing total value of asset(s)",                                                                  //319
+            "If you have shares in a business, please include proof of corporate shares",                                       //320
+            "Statement of Income and Expenses from last year's Income Tax return and all related worksheets (formT2125)",       //321 End of page 8
+            "A printed, personalized blank cheque marked VOID; or",                                 //322
+            "A Preauthorized Debit Form provided by your financial institution; or",                //323
+            "Have your financial institution complete the information below",                       //324
+            "Name of Applicant",                                //325
+            "Transit Number",                                   //326
+            "Bank Number",                                      //327
+            "Account Number",                                   //328
+            "Name(s) on the account",                           //329
+            "Phone number of financial institution",            //330
+            "Financial Institution Stamp"                       //331 End of Page 9
         };
     }
 }

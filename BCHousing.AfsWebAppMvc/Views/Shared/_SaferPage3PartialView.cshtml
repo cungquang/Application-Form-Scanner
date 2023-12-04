@@ -1,0 +1,540 @@
+﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
+
+
+@using (Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 3 }, FormMethod.Post))
+{
+    <h1>4. Residency Information</h1>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <p><strong>4a.</strong> Have you lived in B.C for the past twelve months? 
+                        @Html.HiddenFor(m => m[0].submissionId)
+                        @Html.HiddenFor(m => m[0].sequence)
+                        @Html.HiddenFor(m => m[0].field_name)
+                        @Html.CheckBox("Yes-Residency-Information", (Model[0].field_value == ":selected:" ? true : false)) Yes
+                        @Html.HiddenFor(m => m[1].submissionId)
+                        @Html.HiddenFor(m => m[1].sequence)
+                        @Html.HiddenFor(m => m[1].field_name)
+                        @Html.CheckBox("No-Residency-Information", (Model[1].field_value == ":selected:" ? true : false)) No
+                    </p>
+                    <p>If no, when did you move to B.C? 
+                        @Html.HiddenFor(m => m[2].submissionId)
+                        @Html.HiddenFor(m => m[2].sequence)
+                        @Html.HiddenFor(m => m[2].field_name)
+                        @Html.EditorFor(m => m[2].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </p>
+                    <p>
+                        How long have you lived in Canada?
+                        @Html.HiddenFor(m => m[3].submissionId)
+                        @Html.HiddenFor(m => m[3].sequence)
+                        @Html.HiddenFor(m => m[3].field_name)
+                        @Html.EditorFor(m => m[3].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>4b.</strong> Please list your address(es) for the past 12 months:</p>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <thead>
+            <tr>
+                <th>Address(es)</th>
+                <th>From Date <br /> (dd/mm/yyyy)</th>
+                <th>To Date <br /> (dd/mm/yyyy)</th>
+                <th>Landlord Name</th>
+                <th>Landlord Phone #</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[4].submissionId)
+                    @Html.HiddenFor(m => m[4].sequence)
+                    @Html.HiddenFor(m => m[4].field_name)
+                    @Html.EditorFor(m => m[4].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[5].submissionId)
+                    @Html.HiddenFor(m => m[5].sequence)
+                    @Html.HiddenFor(m => m[5].field_name)
+                    @Html.EditorFor(m => m[5].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[6].submissionId)
+                    @Html.HiddenFor(m => m[6].sequence)
+                    @Html.HiddenFor(m => m[6].field_name)
+                    @Html.EditorFor(m => m[6].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[7].submissionId)
+                    @Html.HiddenFor(m => m[7].sequence)
+                    @Html.HiddenFor(m => m[7].field_name)
+                    @Html.EditorFor(m => m[7].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[8].submissionId)
+                    @Html.HiddenFor(m => m[8].sequence)
+                    @Html.HiddenFor(m => m[8].field_name)
+                    @Html.EditorFor(m => m[8].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[9].submissionId)
+                    @Html.HiddenFor(m => m[9].sequence)
+                    @Html.HiddenFor(m => m[9].field_name)
+                    @Html.EditorFor(m => m[9].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[10].submissionId)
+                    @Html.HiddenFor(m => m[10].sequence)
+                    @Html.HiddenFor(m => m[10].field_name)
+                    @Html.EditorFor(m => m[10].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[11].submissionId)
+                    @Html.HiddenFor(m => m[11].sequence)
+                    @Html.HiddenFor(m => m[11].field_name)
+                    @Html.EditorFor(m => m[11].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[12].submissionId)
+                    @Html.HiddenFor(m => m[12].sequence)
+                    @Html.HiddenFor(m => m[12].field_name)
+                    @Html.EditorFor(m => m[12].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[13].submissionId)
+                    @Html.HiddenFor(m => m[13].sequence)
+                    @Html.HiddenFor(m => m[13].field_name)
+                    @Html.EditorFor(m => m[13].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[14].submissionId)
+                    @Html.HiddenFor(m => m[14].sequence)
+                    @Html.HiddenFor(m => m[14].field_name)
+                    @Html.EditorFor(m => m[14].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[15].submissionId)
+                    @Html.HiddenFor(m => m[15].sequence)
+                    @Html.HiddenFor(m => m[15].field_name)
+                    @Html.EditorFor(m => m[15].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[16].submissionId)
+                    @Html.HiddenFor(m => m[16].sequence)
+                    @Html.HiddenFor(m => m[16].field_name)
+                    @Html.EditorFor(m => m[16].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[17].submissionId)
+                    @Html.HiddenFor(m => m[17].sequence)
+                    @Html.HiddenFor(m => m[17].field_name)
+                    @Html.EditorFor(m => m[17].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[18].submissionId)
+                    @Html.HiddenFor(m => m[18].sequence)
+                    @Html.HiddenFor(m => m[18].field_name)
+                    @Html.EditorFor(m => m[18].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>4c.</strong> If you and your spouse were not born in Canada, please complete the following:</p>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <thead>
+            <tr>
+                <th rowspan="2">Name</th>
+                <th rowspan="2">Date moved to Canada<br /> (dd/mm/yyyy)</th>
+                <th rowspan="2">Current Status in Canada <br /> (dd/mm/yyyy)</th>
+                <th colspan="2">Sponsored Immigrants Only</th>
+            </tr>
+            <tr>
+                <th>Landlord Name</th>
+                <th>Landlord Phone #</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[19].submissionId)
+                    @Html.HiddenFor(m => m[19].sequence)
+                    @Html.HiddenFor(m => m[19].field_name)
+                    @Html.EditorFor(m => m[19].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[20].submissionId)
+                    @Html.HiddenFor(m => m[20].sequence)
+                    @Html.HiddenFor(m => m[20].field_name)
+                    @Html.EditorFor(m => m[20].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[21].submissionId)
+                    @Html.HiddenFor(m => m[21].sequence)
+                    @Html.HiddenFor(m => m[21].field_name)
+                    @Html.EditorFor(m => m[21].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[22].submissionId)
+                    @Html.HiddenFor(m => m[22].sequence)
+                    @Html.HiddenFor(m => m[22].field_name)
+                    @Html.EditorFor(m => m[22].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+
+                    @Html.HiddenFor(m => m[23].submissionId)
+                    @Html.HiddenFor(m => m[23].sequence)
+                    @Html.HiddenFor(m => m[23].field_name)
+                    @Html.EditorFor(m => m[23].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[24].submissionId)
+                    @Html.HiddenFor(m => m[24].sequence)
+                    @Html.HiddenFor(m => m[24].field_name)
+                    @Html.EditorFor(m => m[24].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[25].submissionId)
+                    @Html.HiddenFor(m => m[25].sequence)
+                    @Html.HiddenFor(m => m[25].field_name)
+                    @Html.EditorFor(m => m[25].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[26].submissionId)
+                    @Html.HiddenFor(m => m[26].sequence)
+                    @Html.HiddenFor(m => m[26].field_name)
+                    @Html.EditorFor(m => m[26].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[27].submissionId)
+                    @Html.HiddenFor(m => m[27].sequence)
+                    @Html.HiddenFor(m => m[27].field_name)
+                    @Html.EditorFor(m => m[27].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[28].submissionId)
+                    @Html.HiddenFor(m => m[28].sequence)
+                    @Html.HiddenFor(m => m[28].field_name)
+                    @Html.EditorFor(m => m[28].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>5. Household Information - Check all options that apply</h1>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <p>
+                        @Html.HiddenFor(m => m[29].submissionId)
+                        @Html.HiddenFor(m => m[29].sequence)
+                        @Html.HiddenFor(m => m[29].field_name)
+                        @Html.CheckBox("Living-Alone", (Model[29].field_value == ":selected:" ? true : false)) Living Alone
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        @Html.HiddenFor(m => m[30].submissionId)
+                        @Html.HiddenFor(m => m[30].sequence)
+                        @Html.HiddenFor(m => m[30].field_name)
+                        @Html.CheckBox("Living-with-a-spouse-or-common-law-partner", (Model[30].field_value == ":selected:" ? true : false)) Living with a spouse or common-law partner
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        @Html.HiddenFor(m => m[31].submissionId)
+                        @Html.HiddenFor(m => m[31].sequence)
+                        @Html.HiddenFor(m => m[31].field_name)
+                        @Html.CheckBox("Sharing-with-another-adult(s)", (Model[31].field_value == ":selected:" ? true : false)) Sharing with another adult(s)
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        @Html.HiddenFor(m => m[32].submissionId)
+                        @Html.HiddenFor(m => m[32].sequence)
+                        @Html.HiddenFor(m => m[32].field_name)
+                        @Html.CheckBox("Other-describe", (Model[32].field_value == ":selected:" ? true : false)) Other, describe:
+                        @Html.HiddenFor(m => m[33].submissionId)
+                        @Html.HiddenFor(m => m[33].sequence)
+                        @Html.HiddenFor(m => m[33].field_name)
+                        @Html.EditorFor(m => m[33].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>5a.</strong> List all other persons who are living with you. (if required attach additional names on a separate sheet)</p>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <thead>
+            <tr>
+                <td><p>Last Name</p></td>
+                <td><p>Given Names</p></td>
+                <td><p>Relationship to Applicant</p></td>
+                <td><p>Birth Date <br /> (dd/mm/yyyy)</p></td>
+                <td><p>Age</p></td>
+                <td><p>Gender <br />(M/F)</p></td>
+            </tr>
+        </thead>
+        <tbody>
+            <!--First Row-->
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[34].submissionId)
+                    @Html.HiddenFor(m => m[34].sequence)
+                    @Html.HiddenFor(m => m[34].field_name)
+                    @Html.EditorFor(m => m[34].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[35].submissionId)
+                    @Html.HiddenFor(m => m[35].sequence)
+                    @Html.HiddenFor(m => m[35].field_name)
+                    @Html.EditorFor(m => m[35].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[36].submissionId)
+                    @Html.HiddenFor(m => m[36].sequence)
+                    @Html.HiddenFor(m => m[36].field_name)
+                    @Html.EditorFor(m => m[36].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[37].submissionId)
+                    @Html.HiddenFor(m => m[37].sequence)
+                    @Html.HiddenFor(m => m[37].field_name)
+                    @Html.EditorFor(m => m[37].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[38].submissionId)
+                    @Html.HiddenFor(m => m[38].sequence)
+                    @Html.HiddenFor(m => m[38].field_name)
+                    @Html.EditorFor(m => m[38].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[39].submissionId)
+                    @Html.HiddenFor(m => m[39].sequence)
+                    @Html.HiddenFor(m => m[39].field_name)
+                    @Html.EditorFor(m => m[39].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <!--Second Row-->
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[40].submissionId)
+                    @Html.HiddenFor(m => m[40].sequence)
+                    @Html.HiddenFor(m => m[40].field_name)
+                    @Html.EditorFor(m => m[34].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[41].submissionId)
+                    @Html.HiddenFor(m => m[41].sequence)
+                    @Html.HiddenFor(m => m[41].field_name)
+                    @Html.EditorFor(m => m[41].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[42].submissionId)
+                    @Html.HiddenFor(m => m[42].sequence)
+                    @Html.HiddenFor(m => m[42].field_name)
+                    @Html.EditorFor(m => m[42].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[43].submissionId)
+                    @Html.HiddenFor(m => m[43].sequence)
+                    @Html.HiddenFor(m => m[43].field_name)
+                    @Html.EditorFor(m => m[43].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[44].submissionId)
+                    @Html.HiddenFor(m => m[44].sequence)
+                    @Html.HiddenFor(m => m[44].field_name)
+                    @Html.EditorFor(m => m[44].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[45].submissionId)
+                    @Html.HiddenFor(m => m[45].sequence)
+                    @Html.HiddenFor(m => m[45].field_name)
+                    @Html.EditorFor(m => m[45].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <!--Third Row-->
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[46].submissionId)
+                    @Html.HiddenFor(m => m[46].sequence)
+                    @Html.HiddenFor(m => m[46].field_name)
+                    @Html.EditorFor(m => m[46].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[47].submissionId)
+                    @Html.HiddenFor(m => m[47].sequence)
+                    @Html.HiddenFor(m => m[47].field_name)
+                    @Html.EditorFor(m => m[47].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[48].submissionId)
+                    @Html.HiddenFor(m => m[48].sequence)
+                    @Html.HiddenFor(m => m[48].field_name)
+                    @Html.EditorFor(m => m[48].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[49].submissionId)
+                    @Html.HiddenFor(m => m[49].sequence)
+                    @Html.HiddenFor(m => m[49].field_name)
+                    @Html.EditorFor(m => m[49].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[50].submissionId)
+                    @Html.HiddenFor(m => m[50].sequence)
+                    @Html.HiddenFor(m => m[50].field_name)
+                    @Html.EditorFor(m => m[50].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[51].submissionId)
+                    @Html.HiddenFor(m => m[51].sequence)
+                    @Html.HiddenFor(m => m[51].field_name)
+                    @Html.EditorFor(m => m[51].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <!--Forth Row-->
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[52].submissionId)
+                    @Html.HiddenFor(m => m[52].sequence)
+                    @Html.HiddenFor(m => m[52].field_name)
+                    @Html.EditorFor(m => m[52].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[53].submissionId)
+                    @Html.HiddenFor(m => m[53].sequence)
+                    @Html.HiddenFor(m => m[53].field_name)
+                    @Html.EditorFor(m => m[53].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[54].submissionId)
+                    @Html.HiddenFor(m => m[54].sequence)
+                    @Html.HiddenFor(m => m[54].field_name)
+                    @Html.EditorFor(m => m[54].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[55].submissionId)
+                    @Html.HiddenFor(m => m[55].sequence)
+                    @Html.HiddenFor(m => m[55].field_name)
+                    @Html.EditorFor(m => m[55].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[56].submissionId)
+                    @Html.HiddenFor(m => m[56].sequence)
+                    @Html.HiddenFor(m => m[56].field_name)
+                    @Html.EditorFor(m => m[56].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[57].submissionId)
+                    @Html.HiddenFor(m => m[57].sequence)
+                    @Html.HiddenFor(m => m[57].field_name)
+                    @Html.EditorFor(m => m[57].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+            <!--Fifth Row-->
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[58].submissionId)
+                    @Html.HiddenFor(m => m[58].sequence)
+                    @Html.HiddenFor(m => m[58].field_name)
+                    @Html.EditorFor(m => m[58].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[59].submissionId)
+                    @Html.HiddenFor(m => m[59].sequence)
+                    @Html.HiddenFor(m => m[59].field_name)
+                    @Html.EditorFor(m => m[59].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[60].submissionId)
+                    @Html.HiddenFor(m => m[60].sequence)
+                    @Html.HiddenFor(m => m[60].field_name)
+                    @Html.EditorFor(m => m[60].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[61].submissionId)
+                    @Html.HiddenFor(m => m[61].sequence)
+                    @Html.HiddenFor(m => m[61].field_name)
+                    @Html.EditorFor(m => m[61].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[62].submissionId)
+                    @Html.HiddenFor(m => m[62].sequence)
+                    @Html.HiddenFor(m => m[62].field_name)
+                    @Html.EditorFor(m => m[62].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[63].submissionId)
+                    @Html.HiddenFor(m => m[63].sequence)
+                    @Html.HiddenFor(m => m[63].field_name)
+                    @Html.EditorFor(m => m[63].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <small>*Birth Date and Gender not required for children aged 25 or older or any other adult(s) living in the household</small>
+
+    <p><strong>5b.</strong> (Optional) Do you or anyone in your household identify as being an Indigenous person of Canada?</p>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td rowspan="2">
+                    @Html.HiddenFor(m => m[64].submissionId)
+                    @Html.HiddenFor(m => m[64].sequence)
+                    @Html.HiddenFor(m => m[64].field_name)
+                    @Html.CheckBox("5b-Yes", (Model[64].field_value == ":selected:" ? true : false)) Yes
+                </td>
+                <td rowspan="2" colspan="5">
+                    @Html.HiddenFor(m => m[65].submissionId)
+                    @Html.HiddenFor(m => m[65].sequence)
+                    @Html.HiddenFor(m => m[65].field_name)
+                    @Html.CheckBox("5b-No", (Model[65].field_value == ":selected:" ? true : false)) No  <strong>If yes,</strong> please select the option(s) that best describe your Indigenous identity:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => m[66].submissionId)
+                    @Html.HiddenFor(m => m[66].sequence)
+                    @Html.HiddenFor(m => m[66].field_name)
+                    @Html.CheckBox("First Nations", (Model[66].field_value == ":selected:" ? true : false)) First Nations
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[67].submissionId)
+                    @Html.HiddenFor(m => m[67].sequence)
+                    @Html.HiddenFor(m => m[67].field_name)
+                    @Html.CheckBox("Metis", (Model[67].field_value == ":selected:" ? true : false)) Metis
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[68].submissionId)
+                    @Html.HiddenFor(m => m[68].sequence)
+                    @Html.HiddenFor(m => m[68].field_name)
+                    @Html.CheckBox("Inuit", (Model[68].field_value == ":selected:" ? true : false)) Inuit
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[69].submissionId)
+                    @Html.HiddenFor(m => m[69].sequence)
+                    @Html.HiddenFor(m => m[69].field_name)
+                    @Html.CheckBox("Other", (Model[69].field_value == ":selected:" ? true : false)) Other
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+        <div class="col-md-offset-2 col-md-19">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}

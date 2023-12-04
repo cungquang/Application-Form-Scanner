@@ -23,6 +23,14 @@ namespace BCHousing.AfsWebAppMvc.Repositories
         {
             return await _dbContext.Form.Where(form => form.submissionId == targetSubmissionId).ToListAsync();
         }
+
+        public async Task<int> UpdateFormBySubmissionIdAndSequence(Guid submissionId, int sequence, string? newValue)
+        {
+            var submission = _dbContext.Form.FirstOrDefault(form => form.submissionId == submissionId && form.sequence == sequence) ?? throw new Exception("Invalid input, the record does not exist in this context");
+            submission.field_value = newValue;
+            _dbContext.Entry(submission).State = EntityState.Modified;
+            return await _dbContext.SaveChangesAsync();
+        }
     }
 
     public interface IFormRepository
@@ -30,5 +38,7 @@ namespace BCHousing.AfsWebAppMvc.Repositories
         Task<int> CreateFormRecord(Form newFormRecord);
 
         Task<IList<Form>> GetFormRecordAsync(Guid submissionId);
+
+        Task<int> UpdateFormBySubmissionIdAndSequence(Guid submissionId, int sequence, string? newValue);
     }
 }

@@ -1,4 +1,5 @@
-﻿using BCHousing.AfsWebAppMvc.Entities.Database;
+﻿using BCHousing.AfsWebAppMvc.Entities;
+using BCHousing.AfsWebAppMvc.Entities.Database;
 using BCHousing.AfsWebAppMvc.Models;
 using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
@@ -61,12 +62,11 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         {
             try
             {
-                Task<IList<Entities.SubmissionLog>>? CacheData = _cacheManagementService.GetCachedDataAsync(
+                Task<IList<SubmissionLog>>? CacheData = _cacheManagementService.GetCachedDataAsync(
                                     CacheKey.GetSubmissionLogCacheKey(),
-                                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
+                                    async () => await _afsDatabaseService.GetAllSaferRapSubmissionLogAsync()
                                 );
-                var model = new ListOfFilesVisualizationViewModel(await CacheData);
-
+                var model = new SubmissionLogsVisualizationViewModel(await CacheData);
                 return View(model);
             }
             catch(Exception ex)
@@ -74,6 +74,30 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 LogRequestError(ex);
                 throw;
             }
+        }
+
+        public async Task<IActionResult> Edit(string submissionId, string classifyType, int? activeTab)
+        {
+            IList<Form> formFields = await _afsDatabaseService.GetFormBySubmissionIdAsync(UtilityService.ConvertStringToGuid(submissionId));
+            var model = new FormsEditViewModel(submissionId, classifyType.Trim(), formFields);
+            ViewBag.ActiveTab = activeTab ?? 1;
+            TempData["ClassifyType"] = classifyType.Trim();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string submissionId, int? activeTab, IList<Form> model)
+        {
+            if(ModelState.IsValid)
+            {
+                for (int i = 0; i < model.Count; i++)
+                {
+                    var submissionFields = await _afsDatabaseService.SetFormBySubmissionIdAndSequenceAsync(UtilityService.ConvertStringToGuid(submissionId), model[i].sequence ?? 1, model[i].field_value);
+                }
+                return RedirectToAction("Edit", new { submissionId, classifyType = TempData["ClassifyType"], activeTab });
+            }
+
+            return RedirectToAction(nameof(Visualization));
         }
         
         [HttpPost]
@@ -86,13 +110,6 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             var pdfStream = await _blobStorageService.DownloadBlobFromAsync(UrlParts["Container Name"], blobFullPath);
             
             return File(pdfStream, "application/pdf");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit()
-        {
-            return default(IActionResult);
         }
 
         [HttpPost]
@@ -155,6 +172,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                 LogRequestError(ex);
                 throw;
             }
+        }
+
+        public async Task<IActionResult> Refresh()
+        {
+            await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(),
+                async () => await _afsDatabaseService.GetAllSubmissionLogsSync());
+            return RedirectToAction("Visualization");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
