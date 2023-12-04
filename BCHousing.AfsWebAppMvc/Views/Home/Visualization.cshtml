@@ -1,4 +1,4 @@
-﻿@model BCHousing.AfsWebAppMvc.Models.ListOfFilesVisualizationViewModel;
+﻿@model BCHousing.AfsWebAppMvc.Models.SubmissionLogsVisualizationViewModel;
 @{
     ViewData["Title"] = "Visualization Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,9 +30,7 @@
                                     <button id="ReviewButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Review</button>
                                 </form>
                                 <form method="post" asp-controller="Home" asp-action="Edit">
-                                    <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
-                                    <input type="hidden" name="classify_type" value="@Model.SubmissionLogs[i].classify_type">
-                                    <button id="EditButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Edit</button>
+                                    @Html.ActionLink("Edit", "Edit", "Home", new {submissionId = Model.SubmissionLogs[i].submissionId, classifyType = Model.SubmissionLogs[i].classify_type, activeTab = 1}, new {@class = "btn btn-dark", style="background-color:transparent; border-block-color:black; color: black"})
                                 </form>
                                 <form method="post" asp-controller="Home" asp-action="Download">
                                     <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">

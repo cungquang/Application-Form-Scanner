@@ -1,22 +1,49 @@
-﻿@model BCHousing.AfsWebAppMvc.Models.PartialView.SaferUserInputViewModel
+﻿@model BCHousing.AfsWebAppMvc.Models.FormsEditViewModel
 @{
     ViewData["Title"] = "Edit Page";
 }
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" data-bs-toggle="tab" href="#partialView2">Page 2</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" aria-current="page" data-bs-toggle="tab" href="#partialView3">Page 3</a>
-    </li>
-</ul>
+<style>
+    th, td {
+        padding: 8px;
+        text-align: left;
+        overflow: hidden;
+    }
 
-<div class="tab-content">
-    <div class="tab-pane fade show active" id="partialView2">
-        @Html.Partial("_SaferPage2")
+    input {
+        padding: 8px;
+        font-size: 16px;
+        color: black;
+    }
+
+    .col-textbox {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+
+@if(Model.ClassifyType == "SAFER")
+{
+    <div class="card-body center">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 2 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView2">Page 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 3 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView3">Page 3</a>
+            </li>
+        </ul>
     </div>
-    <div class="tab-pane fade show" id="partialView3">
-        @Html.Partial("_SaferPage2")
+
+
+    <div class="tab-content mt-2">
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 2 ? "show active": "")" id="partialView2">
+            @Html.Partial("_SaferPage2PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 22).ToList())
+        </div>
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 3 ? "show active": "")" id="partialView3">
+            @Html.Partial("_SaferPage3PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 92 && field.sequence > 22).ToList())
+        </div>
     </div>
-</div>
+}
+
+

@@ -1,23 +1,8 @@
-﻿@model BCHousing.AfsWebAppMvc.Models.PartialView.SaferUserInputViewModel
-<style>
-    th, td{
-        padding: 8px;
-        text-align: left;
-        overflow: hidden;
-    }
+﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
 
-    input{
-        padding: 8px;
-        font-size: 16px;
-        color: black;
-    }
-    .col-textbox{
-        width: 100%;
-        box-sizing: border-box;
-    }
-</style>
 
-<form class="container">
+@using(Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 2 }, FormMethod.Post))
+{
     <h1>1. Applicant Information</h1>
     <table class="table table-bordered table-responsive" style="table-layout:fixed;">
         <tbody>
@@ -25,19 +10,28 @@
                 <td>
                     <div class="container">
                         <p><strong>Social Insurance Number</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="123456" />
+                        @Html.HiddenFor(m => m[0].submissionId)
+                        @Html.HiddenFor(m => m[0].sequence)
+                        @Html.HiddenFor(m => m[0].field_name)
+                        @Html.EditorFor(m => m[0].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Last Name</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Last Name" />
+                        @Html.HiddenFor(m => m[1].submissionId)
+                        @Html.HiddenFor(m => m[1].sequence)
+                        @Html.HiddenFor(m => m[1].field_name)
+                        @Html.EditorFor(m => m[1].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td colspan="2">
                     <div class="container">
                         <p><strong>First Name(s)</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="First Name" />
+                        @Html.HiddenFor(m => m[2].submissionId)
+                        @Html.HiddenFor(m => m[2].sequence)
+                        @Html.HiddenFor(m => m[2].field_name)
+                        @Html.EditorFor(m => m[2].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
             </tr>
@@ -45,25 +39,37 @@
                 <td>
                     <div class="container">
                         <p><strong>Birth Date (dd/mm/yyyy)</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                        @Html.HiddenFor(m => m[3].submissionId)
+                        @Html.HiddenFor(m => m[3].sequence)
+                        @Html.HiddenFor(m => m[3].field_name)
+                        @Html.EditorFor(m => m[3].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Age</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="19" />
+                        @Html.HiddenFor(m => m[4].submissionId)
+                        @Html.HiddenFor(m => m[4].sequence)
+                        @Html.HiddenFor(m => m[4].field_name)
+                        @Html.EditorFor(m => m[4].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Gender</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Male" />
+                        @Html.HiddenFor(m => m[5].submissionId)
+                        @Html.HiddenFor(m => m[5].sequence)
+                        @Html.HiddenFor(m => m[5].field_name)
+                        @Html.EditorFor(m => m[5].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Born in Canada? (Yes/No)</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Yes" />
+                        @Html.HiddenFor(m => m[6].submissionId)
+                        @Html.HiddenFor(m => m[6].sequence)
+                        @Html.HiddenFor(m => m[6].field_name)
+                        @Html.EditorFor(m => m[6].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
             </tr>
@@ -77,19 +83,28 @@
                 <td>
                     <div class="container">
                         <p><strong>Social Insurance Number</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="123456" />
+                        @Html.HiddenFor(m => m[7].submissionId)
+                        @Html.HiddenFor(m => m[7].sequence)
+                        @Html.HiddenFor(m => m[7].field_name)
+                        @Html.EditorFor(m => m[7].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Last Name</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Last Name" />
+                        @Html.HiddenFor(m => m[8].submissionId)
+                        @Html.HiddenFor(m => m[8].sequence)
+                        @Html.HiddenFor(m => m[8].field_name)
+                        @Html.EditorFor(m => m[8].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td colspan="2">
                     <div class="container">
                         <p><strong>First Name(s)</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="First Name" />
+                        @Html.HiddenFor(m => m[9].submissionId)
+                        @Html.HiddenFor(m => m[9].sequence)
+                        @Html.HiddenFor(m => m[9].field_name)
+                        @Html.EditorFor(m => m[9].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
             </tr>
@@ -97,25 +112,37 @@
                 <td>
                     <div class="container">
                         <p><strong>Birth Date (dd/mm/yyyy)</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                        @Html.HiddenFor(m => m[10].submissionId)
+                        @Html.HiddenFor(m => m[10].sequence)
+                        @Html.HiddenFor(m => m[10].field_name)
+                        @Html.EditorFor(m => m[10].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Age</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="19" />
+                        @Html.HiddenFor(m => m[11].submissionId)
+                        @Html.HiddenFor(m => m[11].sequence)
+                        @Html.HiddenFor(m => m[11].field_name)
+                        @Html.EditorFor(m => m[11].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Gender</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Male" />
+                        @Html.HiddenFor(m => m[12].submissionId)
+                        @Html.HiddenFor(m => m[12].sequence)
+                        @Html.HiddenFor(m => m[12].field_name)
+                        @Html.EditorFor(m => m[12].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Born in Canada? (Yes/No)</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Yes" />
+                        @Html.HiddenFor(m => m[13].submissionId)
+                        @Html.HiddenFor(m => m[13].sequence)
+                        @Html.HiddenFor(m => m[13].field_name)
+                        @Html.EditorFor(m => m[13].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
             </tr>
@@ -141,12 +168,18 @@
             <tr>
                 <td>
                     <div class="container">
-                        @Html.CheckBox("myCheckBox", true) Option 1: Consent Granted
+                        @Html.HiddenFor(m => m[14].submissionId)
+                        @Html.HiddenFor(m => m[14].sequence)
+                        @Html.HiddenFor(m => m[14].field_name)
+                        @Html.CheckBox("Option-1:-Consent-Granted", (Model[14].field_value == ":selected:" ? true : false)) Option 1: Consent Granted
                     </div>
                 </td>
                 <td>
                     <div class="container">
-                        @Html.CheckBox("myCheckBox2", false) Option 2: Consent Not Granted
+                        @Html.HiddenFor(m => m[15].submissionId)
+                        @Html.HiddenFor(m => m[15].sequence)
+                        @Html.HiddenFor(m => m[15].field_name)
+                        @Html.CheckBox("Option-1:-Consent-Granted", (Model[15].field_value == ":selected:" ? true : false)) Option 1: Consent Granted
                     </div>
                 </td>
             </tr>
@@ -207,19 +240,28 @@
                 <td>
                     <div class="container">
                         <p><strong>Applicant:</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Applicant Name" />
+                        @Html.HiddenFor(m => m[16].submissionId)
+                        @Html.HiddenFor(m => m[16].sequence)
+                        @Html.HiddenFor(m => m[16].field_name)
+                        @Html.EditorFor(m => m[16].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Signature</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Signature" />
+                        @Html.HiddenFor(m => m[17].submissionId)
+                        @Html.HiddenFor(m => m[17].sequence)
+                        @Html.HiddenFor(m => m[17].field_name)
+                        @Html.EditorFor(m => m[17].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Date</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                        @Html.HiddenFor(m => m[18].submissionId)
+                        @Html.HiddenFor(m => m[18].sequence)
+                        @Html.HiddenFor(m => m[18].field_name)
+                        @Html.EditorFor(m => m[18].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
             </tr>
@@ -227,22 +269,35 @@
                 <td>
                     <div class="container">
                         <p><strong>Applicant:</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Applicant Name" />
+                        @Html.HiddenFor(m => m[19].submissionId)
+                        @Html.HiddenFor(m => m[19].sequence)
+                        @Html.HiddenFor(m => m[19].field_name)
+                        @Html.EditorFor(m => m[19].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Signature</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="Signature" />
+                        @Html.HiddenFor(m => m[20].submissionId)
+                        @Html.HiddenFor(m => m[20].sequence)
+                        @Html.HiddenFor(m => m[20].field_name)
+                        @Html.EditorFor(m => m[20].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
                 <td>
                     <div class="container">
                         <p><strong>Date</strong></p>
-                        <input type="text" class="flex-column col-textbox" placeholder="2023/12/01" />
+                        @Html.HiddenFor(m => m[21].submissionId)
+                        @Html.HiddenFor(m => m[21].sequence)
+                        @Html.HiddenFor(m => m[21].field_name)
+                        @Html.EditorFor(m => m[21].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
-</form>
+
+    <div class="col-md-offset-2 col-md-19">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}
