@@ -64,7 +64,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             {
                 Task<IList<SubmissionLog>>? CacheData = _cacheManagementService.GetCachedDataAsync(
                                     CacheKey.GetSubmissionLogCacheKey(),
-                                    async () => await _afsDatabaseService.GetAllSaferRapSubmissionLogAsync()
+                                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
                                 );
                 var model = new SubmissionLogsVisualizationViewModel(await CacheData);
                 return View(model);

@@ -24,12 +24,25 @@
 </style>
 
 <script>
-    function search(searchBoxId, tableId, targetColumnId) {
-        targetSearchBox = document.getElementById(searchBoxId);
-        targetTable = document.getElementById(searchBoxId, tableId);
+    function searchTextFunction(targetTableId, targetSearchBox, targetColumnIndex) {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById(targetSearchBox);
+        filter = input.value.toUpperCase();
+        table = document.getElementById(targetTableId);
+        tr = table.getElementsByTagName("tr");
 
-        searchtext = targetSearchBox.value.ToUpperCase();
-
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[targetColumnIndex];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
     }
 </script>
 
@@ -42,9 +55,9 @@
 </div>
 
 <div class="container-fluid">
-    <table class="table table-striped">
+    <table id="SubmissionTable" class="table table-striped">
         <thead>
-            <tr style="padding:8px; text-align: left;">
+            <tr>
                 <th>SubmissionId</th>
                 <th>Created Date</th>
                 <th>Document Type (User declaration)</th>
@@ -55,7 +68,24 @@
                 <th></th>
             </tr>
             <tr>
-
+                <th>
+                    <input id="SubmissionIdSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'SubmissionIdSearch', 0)"/>
+                </th>
+                <th>
+                    <input id="CreatedDateSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'CreatedDateSearch', 1)" />
+                </th>
+                <th>
+                    <input id="UserDeclarationSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'UserDeclarationSearch', 2)" />
+                </th>
+                <th>
+                    <input id="OCRClassificationSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'OCRClassificationSearch', 3)" />
+                </th>
+                <th>
+                    <input id="SubmiBySearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'SubmiBySearch', 4)" />
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
