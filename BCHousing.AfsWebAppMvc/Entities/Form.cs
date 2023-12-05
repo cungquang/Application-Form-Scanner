@@ -8,7 +8,7 @@ namespace BCHousing.AfsWebAppMvc.Entities
     public class Form
     {
         [ForeignKey("SubmissionLog")]
-        public Guid? submissionId { get; set; }
+        public Guid submissionId { get; set; }
         public int? sequence {  get; set; }
 
         public string? field_name { get; set; }

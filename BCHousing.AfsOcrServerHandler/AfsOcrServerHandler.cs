@@ -12,13 +12,9 @@ using Azure;
 using Azure.AI.FormRecognizer.DocumentAnalysis;
 using System.Net.Http;
 using System.Text;
-using Microsoft.VisualBasic.FileIO;
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Reflection;
 using BCHousing.AfsOcrServerHandler.Model;
-using System.Text.Json.Nodes;
-using System.Reflection.Metadata;
 
 namespace BCHousing.AfsOcrServerHandler
 {

@@ -16,12 +16,12 @@ namespace BCHousing.AfsWebAppMvc.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IList<SubmissionLog>> GetSubmissionLogs()
+        public async Task<IList<SubmissionLog>> GetSubmissionLogsAsync()
         {
             return await _dbContext.SubmissionLog.ToListAsync();
         }
 
-        public async Task<SubmissionLog> GetSubmissionLog(string fileUrl)
+        public async Task<SubmissionLog> GetSubmissionLogAsync(string fileUrl)
         {
             var submissionLog = await _dbContext.SubmissionLog.FirstOrDefaultAsync(log => log.path_to_document == fileUrl);
 
@@ -34,13 +34,13 @@ namespace BCHousing.AfsWebAppMvc.Repositories
 
         }
 
-        public async Task<int> CreateSubmissionLog(SubmissionLog newSubmissionLog) {
+        public async Task<int> CreateSubmissionLogAsync(SubmissionLog newSubmissionLog) {
             
             _dbContext.SubmissionLog.Add(newSubmissionLog);
             return await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<int> UpdatePathToFile(UpdateFilePath updateFilePath) {
+        public async Task<int> UpdatePathToFileAsync(UpdateFilePath updateFilePath) {
             var logToUpdate = _dbContext.SubmissionLog.FirstOrDefault(log => log.path_to_document == updateFilePath.CurrentFilePath);
 
             if (logToUpdate != null) { 
@@ -51,7 +51,7 @@ namespace BCHousing.AfsWebAppMvc.Repositories
 
         }
 
-        public async Task<int> UpdateLogAfterExtractOCR(UpdateLogAfterOCRExtraction updateLog) { 
+        public async Task<int> UpdateLogAfterExtractOCRAsync(UpdateLogAfterOCRExtraction updateLog) { 
             var logToUpdate = _dbContext.SubmissionLog.FirstOrDefault(log => log.path_to_document == updateLog.FileUrl);
             if (logToUpdate != null)
             {
@@ -67,14 +67,14 @@ namespace BCHousing.AfsWebAppMvc.Repositories
 
     public interface ISubmissionLogRepository
     {
-        Task<IList<SubmissionLog>> GetSubmissionLogs();
+        Task<IList<SubmissionLog>> GetSubmissionLogsAsync();
 
-        Task<int> CreateSubmissionLog(SubmissionLog newSubmissionLog);
+        Task<int> CreateSubmissionLogAsync(SubmissionLog newSubmissionLog);
 
-        Task<SubmissionLog> GetSubmissionLog(string fileUrl);
+        Task<SubmissionLog> GetSubmissionLogAsync(string fileUrl);
 
-        Task<int> UpdatePathToFile(UpdateFilePath updateFilePath);
+        Task<int> UpdatePathToFileAsync(UpdateFilePath updateFilePath);
 
-        Task<int> UpdateLogAfterExtractOCR(UpdateLogAfterOCRExtraction updateLog);
+        Task<int> UpdateLogAfterExtractOCRAsync(UpdateLogAfterOCRExtraction updateLog);
     }
 }

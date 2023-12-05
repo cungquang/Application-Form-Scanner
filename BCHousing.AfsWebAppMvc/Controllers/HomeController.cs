@@ -38,7 +38,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(), () => _afsDatabaseService.GetAllSubmissionLogsSync());
+            await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(), () => _afsDatabaseService.GetAllSubmissionLogsAsync());
             var model = _sessionManagementService.GetSubmissionViewInputModel();
             return View(model);
         }
@@ -64,7 +64,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             {
                 Task<IList<SubmissionLog>>? CacheData = _cacheManagementService.GetCachedDataAsync(
                                     CacheKey.GetSubmissionLogCacheKey(),
-                                    async () => await _afsDatabaseService.GetAllSubmissionLogsSync()
+                                    async () => await _afsDatabaseService.GetAllSubmissionLogsAsync()
                                 );
                 var model = new SubmissionLogsVisualizationViewModel(await CacheData);
                 return View(model);
@@ -177,7 +177,7 @@ namespace BCHousing.AfsWebAppMvc.Controllers
         public async Task<IActionResult> Refresh()
         {
             await _cacheManagementService.RefreshCacheAsync(CacheKey.GetSubmissionLogCacheKey(),
-                async () => await _afsDatabaseService.GetAllSubmissionLogsSync());
+                async () => await _afsDatabaseService.GetAllSubmissionLogsAsync());
             return RedirectToAction("Visualization");
         }
 

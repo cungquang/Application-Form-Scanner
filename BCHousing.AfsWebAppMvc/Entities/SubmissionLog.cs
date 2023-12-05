@@ -8,7 +8,7 @@ namespace BCHousing.AfsWebAppMvc.Entities
     public class SubmissionLog : IEquatable<SubmissionLog>
     {
         [Key]
-        public Guid? submissionId { get; set; }
+        public Guid submissionId { get; set; }
         public DateTime? timestamp { get; set; }
         public string? submit_by { get; set; }
         public string? document_name { get; set; }
