@@ -5,17 +5,17 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 {
     public interface IAfsDatabaseService
     {
-        public Task<IList<SubmissionLog>> GetAllSubmissionLogsSync();
+        public Task<IList<SubmissionLog>> GetAllSubmissionLogsAsync();
 
-        public Task<SubmissionLog> GetSubmissionLogByUrl(string fileUrl);
+        public Task<SubmissionLog> GetSubmissionLogByUrlAsync(string fileUrl);
 
-        public Task<string> CreateSubmissionLog(SubmissionLogRequest requestBody);
+        public Task<string> CreateSubmissionLogAsync(SubmissionLog newLog);
 
-        public Task<FormRecordRequest> CreateFormRecord(FormRecordRequest requestBody);
+        public Task<FormRecordRequest> CreateFormRecordAsync(FormRecordRequest requestBody);
 
-        public Task<string> UpdatePathToFile(UpdateFilePath requestBody);
+        public Task<string> UpdatePathToFileAsync(UpdateFilePath requestBody);
 
-        public Task<string> UpdateSubmissionLogAfterOCRExtraction(UpdateLogAfterOCRExtraction requestBody);
+        public Task<string> UpdateSubmissionLogAfterOCRExtractionAsync(UpdateLogAfterOCRExtraction requestBody);
 
         public Task<IList<SubmissionLog>> GetAllSaferRapSubmissionLogAsync();
 
