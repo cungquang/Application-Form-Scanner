@@ -45,5 +45,11 @@
         </div>
     </div>
 }
+@if(Model.ClassifyType == "RAP")
+{
+    <div class="container">
+        @Html.Partial("_RapPagePartialView", Model.ListOfFormFields.ToList())
+    </div>
+}
 
 
