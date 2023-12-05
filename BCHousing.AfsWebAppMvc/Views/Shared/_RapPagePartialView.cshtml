@@ -1,7 +1,13 @@
 ﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
 
+
+
+
 @using(Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 2 }, FormMethod.Post)){
-    <table>
+    <div class="row">
+        
+    </div>
+    <table id="RapPageTable">
         <thead>
             <tr>
                 <th>Field Name</th>
@@ -29,3 +35,4 @@
         <input type="submit" value="Submit" class="btn btn-primary" />
     </div>
 }
+
