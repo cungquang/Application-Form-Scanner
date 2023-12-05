@@ -4,17 +4,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    th, td {
+        padding: 8px;
+        text-align: left;
+        overflow: auto;
+    }
+
+    input {
+        padding: 8px;
+        font-size: 16px;
+        color: black;
+    }
+
+    .col-textbox {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+
+<script>
+    function search(searchBoxId, tableId, targetColumnId) {
+        targetSearchBox = document.getElementById(searchBoxId);
+        targetTable = document.getElementById(searchBoxId, tableId);
+
+        searchtext = targetSearchBox.value.ToUpperCase();
+
+    }
+</script>
+
 <div class="text-center text-dark">
     <h1 class="display-2">Welcome to Visualization Portal</h1>
 </div>
 
+<div class="btn-group float-sm-end">
+    <button id="RefreshButton" type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Refresh","Home")'">Refresh</button>
+</div>
+
 <div class="container-fluid">
-    <table style="width:100%; border-collapse:collapse; padding: 8px;">
+    <table class="table table-striped">
         <thead>
+            <tr style="padding:8px; text-align: left;">
+                <th>SubmissionId</th>
+                <th>Created Date</th>
+                <th>Document Type (User declaration)</th>
+                <th>Document Type (OCR Classification)</th>
+                <th>Submit By</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
             <tr>
-                <th>
-                    <button id="RefreshButton" type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Refresh","Home")'">Refresh</button>
-                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -22,21 +63,34 @@
                 @for(int i = 0; i < @Model.NumberOfFile; i++)
                 {
                     <tr style="padding:8px; text-align: left;">
-                        <td>@(i+1). @Model.SubmissionLogs[i].submissionId - @Model.SubmissionLogs[i].document_name - @Model.SubmissionLogs[i].document_size [bytes]</td>
+                        <td>@Model.SubmissionLogs[i].submissionId</td>
+                        <td>@Model.SubmissionLogs[i].timestamp</td>
+                        <td>@Model.SubmissionLogs[i].user_declared_type.ToUpper()</td>
+                        <td>@Model.SubmissionLogs[i].classify_type.ToUpper()</td>
+                        <td>@Model.SubmissionLogs[i].submit_by</td>
                         <td>
-                            <div class="btn-group float-sm-end" id="buttonGroup-@i">
-                                <form method="post" asp-controller="Home" asp-action="Review">
-                                    <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
-                                    <button id="ReviewButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black" formtarget="_blank">Review</button>
-                                </form>
+                            <form method="post" asp-controller="Home" asp-action="Review">
+                                <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
+                                <button id="ReviewButton-@i" type="submit" class="btn btn-outline-dark" formtarget="_blank">Review</button>
+                            </form>
+                        </td>
+                        <td>
+                            @if (@Model.SubmissionLogs[i].classify_type.Trim().ToUpper().Equals("SAFER") || @Model.SubmissionLogs[i].classify_type.Trim().ToUpper().Equals("RAP"))
+                            {
                                 <form method="post" asp-controller="Home" asp-action="Edit">
-                                    @Html.ActionLink("Edit", "Edit", "Home", new {submissionId = Model.SubmissionLogs[i].submissionId, classifyType = Model.SubmissionLogs[i].classify_type, activeTab = 1}, new {@class = "btn btn-dark", style="background-color:transparent; border-block-color:black; color: black"})
+                                    @Html.ActionLink("Edit", "Edit", "Home", new {submissionId = Model.SubmissionLogs[i].submissionId, classifyType = Model.SubmissionLogs[i].classify_type, activeTab = 2}, new {@class = "btn btn-outline-dark"})
                                 </form>
-                                <form method="post" asp-controller="Home" asp-action="Download">
-                                    <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
-                                    <button id="DownloadButton-@i" type="submit" class="btn btn-dark" style="background-color:transparent; border-block-color:black; color: black">Download</button>
-                                </form>
-                            </div>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-dark" type="submit" disabled>Edit</button>
+                            }
+                        </td>
+                        <td>
+                            <form method="post" asp-controller="Home" asp-action="Download">
+                                <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
+                                <button id="DownloadButton-@i" type="submit" class="btn btn-outline-dark">Download</button>
+                            </form>
                         </td>
                     </tr>
                 }
