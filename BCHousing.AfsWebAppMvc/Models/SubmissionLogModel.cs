@@ -4,7 +4,7 @@ namespace BCHousing.AfsWebAppMvc.Models
 {
     public class SubmissionLogModel
     {
-        public Guid? submissionId { get; set; }
+        public Guid submissionId { get; set; }
         public DateTime? timestamp { get; set; }
         public string? submit_by { get; set; }
         public string? document_name { get; set; }

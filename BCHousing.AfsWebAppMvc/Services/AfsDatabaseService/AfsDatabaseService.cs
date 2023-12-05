@@ -9,52 +9,30 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 {
     public class AfsDatabaseService : IAfsDatabaseService
     {
-        private readonly IBlobStorageService _blobStorageService;
         private readonly ISubmissionLogRepository _submissionLogRepository;
         private readonly IFormRepository _formRepository;
 
         public AfsDatabaseService(IBlobStorageService blobStorageService, IFormRepository formRepository, ISubmissionLogRepository submissionLogRepository)
         {
-            _blobStorageService = blobStorageService;
             _submissionLogRepository = submissionLogRepository;
             _formRepository = formRepository;
         }
 
-        public async Task<IList<SubmissionLog>> GetAllSubmissionLogsSync()
+        public async Task<IList<SubmissionLog>> GetAllSubmissionLogsAsync()
         {
-            return await _submissionLogRepository.GetSubmissionLogs();
+            return await _submissionLogRepository.GetSubmissionLogsAsync();
         }
 
-        public async Task<SubmissionLog> GetSubmissionLogByUrl(string fileUrl)
+        public async Task<SubmissionLog> GetSubmissionLogByUrlAsync(string fileUrl)
         {
-            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLog(fileUrl);
+            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLogAsync(fileUrl);
 
             return submissionLog;
         }
 
-        public async Task<string> CreateSubmissionLog(SubmissionLogRequest requestBody)
-        {
-            // Blob API will return a proper metadata
-            string[] urlInformation = requestBody.FileUrl.Split("/");
-            string filename = urlInformation[^1];
-            string container = urlInformation[^2];
-
-            var blobInfo = await _blobStorageService.GetMetaDataAsync(container, filename);
-            string blobSubmissionId = blobInfo["SubmissionID"].Split("/")[^1].Split(".")[0];
-
-            SubmissionLog newLog = new SubmissionLog() {
-                submissionId = Guid.Parse(blobSubmissionId),
-                timestamp = DateTime.Parse(blobInfo["Timestamp"]),
-                submit_by = blobInfo["SubmitBy"],
-                document_name = blobInfo["DocumentName"],
-                document_size = int.Parse(blobInfo["DocumentSize"]),
-                user_declared_type = blobInfo["UserDeclaredType"],
-                classify_type = requestBody.ClassifyType,
-                is_read = false,
-                path_to_document = requestBody.FileUrl
-            };
-            
-            int result = await _submissionLogRepository.CreateSubmissionLog(newLog);
+        public async Task<string> CreateSubmissionLogAsync(SubmissionLog newLog)
+        {   
+            int result = await _submissionLogRepository.CreateSubmissionLogAsync(newLog);
             string resultMessage = "Insertion Failed";
             if (result == 1)
             {
@@ -64,32 +42,32 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
             return resultMessage;
         }
 
-        public async Task<FormRecordRequest> CreateFormRecord(FormRecordRequest requestBody)
+        public async Task<FormRecordRequest> CreateFormRecordAsync(FormRecordRequest requestBody)
         {
             List<FormData> formDatas = requestBody.FormDatas;
 
-            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLog(requestBody.fileUrl);
+            SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLogAsync(requestBody.fileUrl);
             Guid? submissionId = submissionLog.submissionId;
 
             foreach (FormData data in formDatas)
             {
                 var form = new Form()
                 {
-                    submissionId = submissionId,
+                    submissionId = submissionId??UtilityService.UtilityService.GenerateSystemGuid(),
                     sequence = int.Parse(data.Key),
                     field_name = "Standby",
                     field_value = data.Content
 
                 };
-                await _formRepository.CreateFormRecord(form);
+                await _formRepository.CreateFormRecordAsync(form);
             }
 
             return requestBody;
         }
 
-        public async Task<string> UpdatePathToFile(UpdateFilePath requestBody)
+        public async Task<string> UpdatePathToFileAsync(UpdateFilePath requestBody)
         {
-            int result = await _submissionLogRepository.UpdatePathToFile(requestBody);
+            int result = await _submissionLogRepository.UpdatePathToFileAsync(requestBody);
             string message = "Log path_to_file not update";
             if (result == 1)
             {
@@ -99,9 +77,9 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
             return message;
         }
 
-        public async Task<string> UpdateSubmissionLogAfterOCRExtraction(UpdateLogAfterOCRExtraction requestBody)
+        public async Task<string> UpdateSubmissionLogAfterOCRExtractionAsync(UpdateLogAfterOCRExtraction requestBody)
         {
-            int result = await _submissionLogRepository.UpdateLogAfterExtractOCR(requestBody);
+            int result = await _submissionLogRepository.UpdateLogAfterExtractOCRAsync(requestBody);
             string message = "Log (avg_confidence_score, isRead, path_to_analysis_report) not update";
             if (result == 1)
             {
@@ -113,7 +91,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 
         public async Task<IList<SubmissionLog>> GetAllSaferRapSubmissionLogAsync()
         {
-            var submission = await _submissionLogRepository.GetSubmissionLogs();
+            var submission = await _submissionLogRepository.GetSubmissionLogsAsync();
             return submission.Where(submission =>
                 submission.classify_type.Trim().Equals("SAFER", StringComparison.OrdinalIgnoreCase) || 
                 submission.classify_type.Trim().Equals("RAP", StringComparison.OrdinalIgnoreCase))
@@ -127,7 +105,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 
         public async Task<int> SetFormBySubmissionIdAndSequenceAsync(Guid targetSubmissionId, int sequence, string? newValue)
         {
-            return (await _formRepository.UpdateFormBySubmissionIdAndSequence(targetSubmissionId, sequence, newValue));
+            return (await _formRepository.UpdateFormBySubmissionIdAndSequenceAsync(targetSubmissionId, sequence, newValue));
         }
 
     }

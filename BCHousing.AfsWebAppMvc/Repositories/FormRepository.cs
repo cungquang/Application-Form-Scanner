@@ -13,7 +13,7 @@ namespace BCHousing.AfsWebAppMvc.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<int> CreateFormRecord(Form newFormRecord)
+        public async Task<int> CreateFormRecordAsync(Form newFormRecord)
         {
             _dbContext.Form.Add(newFormRecord);
             return await _dbContext.SaveChangesAsync();
@@ -24,7 +24,7 @@ namespace BCHousing.AfsWebAppMvc.Repositories
             return await _dbContext.Form.Where(form => form.submissionId == targetSubmissionId).ToListAsync();
         }
 
-        public async Task<int> UpdateFormBySubmissionIdAndSequence(Guid submissionId, int sequence, string? newValue)
+        public async Task<int> UpdateFormBySubmissionIdAndSequenceAsync(Guid submissionId, int sequence, string? newValue)
         {
             var submission = _dbContext.Form.FirstOrDefault(form => form.submissionId == submissionId && form.sequence == sequence) ?? throw new Exception("Invalid input, the record does not exist in this context");
             submission.field_value = newValue;
@@ -35,10 +35,10 @@ namespace BCHousing.AfsWebAppMvc.Repositories
 
     public interface IFormRepository
     {
-        Task<int> CreateFormRecord(Form newFormRecord);
+        Task<int> CreateFormRecordAsync(Form newFormRecord);
 
         Task<IList<Form>> GetFormRecordAsync(Guid submissionId);
 
-        Task<int> UpdateFormBySubmissionIdAndSequence(Guid submissionId, int sequence, string? newValue);
+        Task<int> UpdateFormBySubmissionIdAndSequenceAsync(Guid submissionId, int sequence, string? newValue);
     }
 }
