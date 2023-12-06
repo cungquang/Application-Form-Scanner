@@ -27,10 +27,16 @@
     <div class="card-body center">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link @(ViewBag.ActiveTab == 2 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView2">Page 2</a>
+                <a class="nav-link @(ViewBag.ActiveTab == 2 ? "active": "")" id="tab-2" data-bs-toggle="tab" href="#partialView2">Page 2</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @(ViewBag.ActiveTab == 3 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView3">Page 3</a>
+                <a class="nav-link @(ViewBag.ActiveTab == 3 ? "active": "")" id="tab-3" data-bs-toggle="tab" href="#partialView3">Page 3</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 4 ? "active": "")" id="tab-4" data-bs-toggle="tab" href="#partialView4">Page 4</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 5 ? "active": "")" id="tab-5" data-bs-toggle="tab" href="#partialView5">Page 5</a>
             </li>
 
             <li class="nav-item">
@@ -55,7 +61,12 @@
         <div class="tab-pane fade @(ViewBag.ActiveTab == 3 ? "show active": "")" id="partialView3">
             @Html.Partial("_SaferPage3PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 92 && field.sequence > 22).ToList())
         </div>
-
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 4 ? "show active": "")" id="partialView4">
+            @Html.Partial("_SaferPage4PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 146 && field.sequence > 92).ToList())
+        </div>
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 5 ? "show active": "")" id="partialView5">
+            @Html.Partial("_SaferPage5PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 182 && field.sequence > 146).ToList())
+        </div>
         <div class="tab-pane fade @(ViewBag.ActiveTab == 6 ? "show active": "")" id="partialView6">
             @Html.Partial("_SaferPage6PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 186 && field.sequence > 182).ToList())
         </div>
