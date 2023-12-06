@@ -1,5 +1,6 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities;
 using BCHousing.AfsWebAppMvc.Entities.Database;
+using BCHousing.AfsWebAppMvc.Entities.FieldNames;
 using BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using Microsoft.AspNetCore.Mvc;
@@ -68,8 +69,10 @@ namespace BCHousing.AfsWebAppMvc.APIControllers
         // POST: api/Database/CreateFormRecord
         [HttpPost("CreateFormRecord")]
         public async Task<FormRecordRequest> CreateFormRecordAsync([FromBody] FormRecordRequest requestBody)
-        { 
-            return await _afsDatabaseService.CreateFormRecordAsync(requestBody);
+        {
+            SubmissionLog targetFile = await _afsDatabaseService.GetSubmissionLogByUrlAsync(requestBody.fileUrl);
+            string filetype = targetFile.classify_type.Trim().ToUpper();
+            return await _afsDatabaseService.CreateFormRecordAsync(requestBody, filetype);
         }
 
         // PUT: api/Database/UpdatePathToFile

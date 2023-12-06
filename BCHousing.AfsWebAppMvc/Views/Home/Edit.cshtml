@@ -38,6 +38,18 @@
             <li class="nav-item">
                 <a class="nav-link @(ViewBag.ActiveTab == 5 ? "active": "")" id="tab-5" data-bs-toggle="tab" href="#partialView5">Page 5</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 6 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView6">Page 6</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 7 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView7">Page 7</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.ActiveTab == 8 ? "active": "")" id="tab-1" data-bs-toggle="tab" href="#partialView8">Page 8</a>
+            </li>
         </ul>
     </div>
 
@@ -54,6 +66,15 @@
         </div>
         <div class="tab-pane fade @(ViewBag.ActiveTab == 5 ? "show active": "")" id="partialView5">
             @Html.Partial("_SaferPage5PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 182 && field.sequence > 146).ToList())
+        </div>
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 6 ? "show active": "")" id="partialView6">
+            @Html.Partial("_SaferPage6PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 186 && field.sequence > 182).ToList())
+        </div>
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 7 ? "show active": "")" id="partialView7">
+            @Html.Partial("_SaferPage7PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 209 && field.sequence > 186).ToList())
+        </div>
+        <div class="tab-pane fade @(ViewBag.ActiveTab == 8 ? "show active": "")" id="partialView8">
+            @Html.Partial("_SaferPage8PartialView", Model.ListOfFormFields.Where(field => field.sequence <= 225 && field.sequence > 209).ToList())
         </div>
     </div>
 }
