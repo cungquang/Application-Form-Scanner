@@ -1,5 +1,6 @@
 ﻿using BCHousing.AfsWebAppMvc.Entities;
 using BCHousing.AfsWebAppMvc.Entities.Database;
+using BCHousing.AfsWebAppMvc.Entities.FieldNames;
 using BCHousing.AfsWebAppMvc.Repositories;
 using BCHousing.AfsWebAppMvc.Servives.BlobStorageService;
 using Microsoft.AspNetCore.Mvc;
@@ -42,20 +43,32 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
             return resultMessage;
         }
 
-        public async Task<FormRecordRequest> CreateFormRecordAsync(FormRecordRequest requestBody)
+        public async Task<FormRecordRequest> CreateFormRecordAsync(FormRecordRequest requestBody, string fileType)
         {
             List<FormData> formDatas = requestBody.FormDatas;
 
             SubmissionLog submissionLog = await _submissionLogRepository.GetSubmissionLogAsync(requestBody.fileUrl);
             Guid? submissionId = submissionLog.submissionId;
-
+            
+            string fieldname = "Standby";
             foreach (FormData data in formDatas)
             {
+                if (fileType.Equals("SAFER"))
+                {
+                    // SAFER
+                    fieldname = SaferFieldNames.GetFieldNameBySequence(int.Parse(data.Key));
+                }
+                else 
+                {
+                    // RAP
+                    fieldname = RapFieldNames.GetFieldNameBySequence(int.Parse(data.Key));
+                }
+
                 var form = new Form()
                 {
                     submissionId = submissionId??UtilityService.UtilityService.GenerateSystemGuid(),
                     sequence = int.Parse(data.Key),
-                    field_name = "Standby",
+                    field_name = fieldname,
                     field_value = data.Content
 
                 };

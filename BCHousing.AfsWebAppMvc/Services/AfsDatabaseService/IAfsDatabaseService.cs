@@ -11,7 +11,7 @@ namespace BCHousing.AfsWebAppMvc.Servives.AfsDatabaseService
 
         public Task<string> CreateSubmissionLogAsync(SubmissionLog newLog);
 
-        public Task<FormRecordRequest> CreateFormRecordAsync(FormRecordRequest requestBody);
+        public Task<FormRecordRequest> CreateFormRecordAsync(FormRecordRequest requestBody, string fileType);
 
         public Task<string> UpdatePathToFileAsync(UpdateFilePath requestBody);
 
