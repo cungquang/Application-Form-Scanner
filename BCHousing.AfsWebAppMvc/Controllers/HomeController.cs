@@ -92,7 +92,24 @@ namespace BCHousing.AfsWebAppMvc.Controllers
             {
                 for (int i = 0; i < model.Count; i++)
                 {
-                    var submissionFields = await _afsDatabaseService.SetFormBySubmissionIdAndSequenceAsync(UtilityService.ConvertStringToGuid(submissionId), model[i].sequence ?? 1, model[i].field_value);
+                    string fieldValue = model[i].field_value;
+                    if (!model[i].field_value.IsNullOrEmpty()) {
+                        if (model[i].field_value.Equals("true"))
+                        {
+                            fieldValue = ":selected:";
+                        }
+                        else if (model[i].field_value.Equals("false"))
+                        {
+                            fieldValue = ":unselected:";
+                        }
+                        else
+                        {
+                            fieldValue = model[i].field_value;
+                        }
+                    }
+                    
+
+                    var submissionFields = await _afsDatabaseService.SetFormBySubmissionIdAndSequenceAsync(UtilityService.ConvertStringToGuid(submissionId), model[i].sequence ?? 1, fieldValue);
                 }
                 return RedirectToAction("Edit", new { submissionId, classifyType = TempData["ClassifyType"], activeTab });
             }

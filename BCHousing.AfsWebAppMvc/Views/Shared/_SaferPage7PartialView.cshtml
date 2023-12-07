@@ -13,19 +13,19 @@
                 @Html.HiddenFor(m => m[0].submissionId)
                 @Html.HiddenFor(m => m[0].sequence)
                 @Html.HiddenFor(m => m[0].field_name)
-                @Html.CheckBox("A printed, personalized blank cheque marked VOID; or", (Model[0].field_value == ":selected:" ? true : false)) A printed, personalized blank cheque marked VOID; or
+                @Html.CheckBox("[0].field_value", (Model[0].field_value == ":selected:" ? true : false)) A printed, personalized blank cheque marked VOID; or
             </li>
             <li class="list-group-item" style="border:0 none;">
                 @Html.HiddenFor(m => m[1].submissionId)
                 @Html.HiddenFor(m => m[1].sequence)
                 @Html.HiddenFor(m => m[1].field_name)
-                @Html.CheckBox("A Preauthorized Debit Form provided by your financial institution; or", (Model[1].field_value == ":selected:" ? true : false)) A Preauthorized Debit Form provided by your financial institution; or
+                @Html.CheckBox("[1].field_value", (Model[1].field_value == ":selected:" ? true : false)) A Preauthorized Debit Form provided by your financial institution; or
             </li>
             <li class="list-group-item" style="border:0 none;">
                 @Html.HiddenFor(m => m[2].submissionId)
                 @Html.HiddenFor(m => m[2].sequence)
                 @Html.HiddenFor(m => m[2].field_name)
-                @Html.CheckBox("Have your financial institution complete the information below:", (Model[2].field_value == ":selected:" ? true : false)) Have your financial institution complete the information below:
+                @Html.CheckBox("[2].field_value", (Model[2].field_value == ":selected:" ? true : false)) Have your financial institution complete the information below:
             </li>
         </ul>
     </div>
@@ -158,19 +158,19 @@
                 @Html.HiddenFor(m => m[15].submissionId)
                 @Html.HiddenFor(m => m[15].sequence)
                 @Html.HiddenFor(m => m[15].field_name)
-                @Html.CheckBox("Monthly", (Model[15].field_value == ":selected:" ? true : false)) Monthly
+                @Html.CheckBox("[15].field_value", (Model[15].field_value == ":selected:" ? true : false)) Monthly
             </p>
             <p style="display:inline">
                 @Html.HiddenFor(m => m[16].submissionId)
                 @Html.HiddenFor(m => m[16].sequence)
                 @Html.HiddenFor(m => m[16].field_name)
-                @Html.CheckBox("Weekly", (Model[16].field_value == ":selected:" ? true : false)) Weekly
+                @Html.CheckBox("[16].field_value", (Model[16].field_value == ":selected:" ? true : false)) Weekly
             </p>
             <p style="display:inline">
                 @Html.HiddenFor(m => m[17].submissionId)
                 @Html.HiddenFor(m => m[17].sequence)
                 @Html.HiddenFor(m => m[17].field_name)
-                @Html.CheckBox("Night", (Model[17].field_value == ":selected:" ? true : false)) Night
+                @Html.CheckBox("[17].field_value", (Model[17].field_value == ":selected:" ? true : false)) Night
             </p>
             <br>
             Heat Included?
@@ -178,13 +178,13 @@
                 @Html.HiddenFor(m => m[18].submissionId)
                 @Html.HiddenFor(m => m[18].sequence)
                 @Html.HiddenFor(m => m[18].field_name)
-                @Html.CheckBox("Yes", (Model[18].field_value == ":selected:" ? true : false)) Yes
+                @Html.CheckBox("[18].field_value", (Model[18].field_value == ":selected:" ? true : false)) Yes
             </p>
             <p style="display:inline">
                 @Html.HiddenFor(m => m[19].submissionId)
                 @Html.HiddenFor(m => m[19].sequence)
                 @Html.HiddenFor(m => m[19].field_name)
-                @Html.CheckBox("No", (Model[19].field_value == ":selected:" ? true : false)) No
+                @Html.CheckBox("[19].field_value", (Model[19].field_value == ":selected:" ? true : false)) No
             </p>
             <br>
             Landlord Signature
