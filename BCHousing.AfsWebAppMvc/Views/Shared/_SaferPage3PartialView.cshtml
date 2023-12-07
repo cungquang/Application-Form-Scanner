@@ -12,11 +12,11 @@
                         @Html.HiddenFor(m => m[0].submissionId)
                         @Html.HiddenFor(m => m[0].sequence)
                         @Html.HiddenFor(m => m[0].field_name)
-                        @Html.CheckBox("Yes-Residency-Information", (Model[0].field_value == ":selected:" ? true : false)) Yes
+                        @Html.CheckBox("[0].field_value", (Model[0].field_value == ":selected:" ? true : false)) Yes
                         @Html.HiddenFor(m => m[1].submissionId)
                         @Html.HiddenFor(m => m[1].sequence)
                         @Html.HiddenFor(m => m[1].field_name)
-                        @Html.CheckBox("No-Residency-Information", (Model[1].field_value == ":selected:" ? true : false)) No
+                        @Html.CheckBox("[1].field_value", (Model[1].field_value == ":selected:" ? true : false)) No
                     </p>
                     <p>If no, when did you move to B.C? 
                         @Html.HiddenFor(m => m[2].submissionId)
@@ -239,7 +239,7 @@
                         @Html.HiddenFor(m => m[29].submissionId)
                         @Html.HiddenFor(m => m[29].sequence)
                         @Html.HiddenFor(m => m[29].field_name)
-                        @Html.CheckBox("Living-Alone", (Model[29].field_value == ":selected:" ? true : false)) Living Alone
+                        @Html.CheckBox("[29].field_value", (Model[29].field_value == ":selected:" ? true : false)) Living Alone
                     </p>
                 </td>
                 <td>
@@ -247,7 +247,7 @@
                         @Html.HiddenFor(m => m[30].submissionId)
                         @Html.HiddenFor(m => m[30].sequence)
                         @Html.HiddenFor(m => m[30].field_name)
-                        @Html.CheckBox("Living-with-a-spouse-or-common-law-partner", (Model[30].field_value == ":selected:" ? true : false)) Living with a spouse or common-law partner
+                        @Html.CheckBox("[30].field_value", (Model[30].field_value == ":selected:" ? true : false)) Living with a spouse or common-law partner
                     </p>
                 </td>
             </tr>
@@ -257,7 +257,7 @@
                         @Html.HiddenFor(m => m[31].submissionId)
                         @Html.HiddenFor(m => m[31].sequence)
                         @Html.HiddenFor(m => m[31].field_name)
-                        @Html.CheckBox("Sharing-with-another-adult(s)", (Model[31].field_value == ":selected:" ? true : false)) Sharing with another adult(s)
+                        @Html.CheckBox("[31].field_value", (Model[31].field_value == ":selected:" ? true : false)) Sharing with another adult(s)
                     </p>
                 </td>
                 <td>
@@ -265,7 +265,7 @@
                         @Html.HiddenFor(m => m[32].submissionId)
                         @Html.HiddenFor(m => m[32].sequence)
                         @Html.HiddenFor(m => m[32].field_name)
-                        @Html.CheckBox("Other-describe", (Model[32].field_value == ":selected:" ? true : false)) Other, describe:
+                        @Html.CheckBox("[32].field_value", (Model[32].field_value == ":selected:" ? true : false)) Other, describe:
                         @Html.HiddenFor(m => m[33].submissionId)
                         @Html.HiddenFor(m => m[33].sequence)
                         @Html.HiddenFor(m => m[33].field_name)
@@ -496,13 +496,13 @@
                     @Html.HiddenFor(m => m[64].submissionId)
                     @Html.HiddenFor(m => m[64].sequence)
                     @Html.HiddenFor(m => m[64].field_name)
-                    @Html.CheckBox("5b-Yes", (Model[64].field_value == ":selected:" ? true : false)) Yes
+                    @Html.CheckBox("[64].field_value", (Model[64].field_value == ":selected:" ? true : false)) Yes
                 </td>
                 <td rowspan="2" colspan="5">
                     @Html.HiddenFor(m => m[65].submissionId)
                     @Html.HiddenFor(m => m[65].sequence)
                     @Html.HiddenFor(m => m[65].field_name)
-                    @Html.CheckBox("5b-No", (Model[65].field_value == ":selected:" ? true : false)) No  <strong>If yes,</strong> please select the option(s) that best describe your Indigenous identity:
+                    @Html.CheckBox("[65].field_value", (Model[65].field_value == ":selected:" ? true : false)) No  <strong>If yes,</strong> please select the option(s) that best describe your Indigenous identity:
                 </td>
             </tr>
             <tr>
@@ -510,25 +510,25 @@
                     @Html.HiddenFor(m => m[66].submissionId)
                     @Html.HiddenFor(m => m[66].sequence)
                     @Html.HiddenFor(m => m[66].field_name)
-                    @Html.CheckBox("First Nations", (Model[66].field_value == ":selected:" ? true : false)) First Nations
+                    @Html.CheckBox("[66].field_value", (Model[66].field_value == ":selected:" ? true : false)) First Nations
                 </td>
                 <td>
                     @Html.HiddenFor(m => m[67].submissionId)
                     @Html.HiddenFor(m => m[67].sequence)
                     @Html.HiddenFor(m => m[67].field_name)
-                    @Html.CheckBox("Metis", (Model[67].field_value == ":selected:" ? true : false)) Metis
+                    @Html.CheckBox("[67].field_value", (Model[67].field_value == ":selected:" ? true : false)) Metis
                 </td>
                 <td>
                     @Html.HiddenFor(m => m[68].submissionId)
                     @Html.HiddenFor(m => m[68].sequence)
                     @Html.HiddenFor(m => m[68].field_name)
-                    @Html.CheckBox("Inuit", (Model[68].field_value == ":selected:" ? true : false)) Inuit
+                    @Html.CheckBox("[68].field_value", (Model[68].field_value == ":selected:" ? true : false)) Inuit
                 </td>
                 <td>
                     @Html.HiddenFor(m => m[69].submissionId)
                     @Html.HiddenFor(m => m[69].sequence)
                     @Html.HiddenFor(m => m[69].field_name)
-                    @Html.CheckBox("Other", (Model[69].field_value == ":selected:" ? true : false)) Other
+                    @Html.CheckBox("[69].field_value", (Model[69].field_value == ":selected:" ? true : false)) Other
                 </td>
             </tr>
         </tbody>
