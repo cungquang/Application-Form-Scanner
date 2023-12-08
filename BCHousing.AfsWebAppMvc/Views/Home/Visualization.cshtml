@@ -71,7 +71,14 @@
                 {
                     <tr style="padding:8px; text-align: left;">
                         <td>@Model.SubmissionLogs[i].submissionId</td>
-                        <td>@Model.SubmissionLogs[i].timestamp</td>
+                        <td>
+                            @{
+                                DateTime submissionTimestampUtc = Model.SubmissionLogs[i].timestamp ?? DateTime.MinValue;
+                                TimeZoneInfo pstZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+                                DateTime submissionTimestampPst = TimeZoneInfo.ConvertTimeFromUtc(submissionTimestampUtc, pstZone);
+                            }
+                            @submissionTimestampPst
+                        </td>
                         <td>@Model.SubmissionLogs[i].user_declared_type.ToUpper()</td>
                         <td>@Model.SubmissionLogs[i].classify_type.ToUpper()</td>
                         <td>@Model.SubmissionLogs[i].submit_by</td>
