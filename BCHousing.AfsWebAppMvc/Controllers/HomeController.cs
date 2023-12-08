@@ -66,7 +66,13 @@ namespace BCHousing.AfsWebAppMvc.Controllers
                                     CacheKey.GetSubmissionLogCacheKey(),
                                     async () => await _afsDatabaseService.GetAllSubmissionLogsAsync()
                                 );
+
                 var model = new SubmissionLogsVisualizationViewModel(await CacheData);
+                // Sort the submission log list from latest submission to furthest
+                if (model.NumberOfFile != 0) {
+                    var orderedSubmissionLog = model.SubmissionLogs.OrderByDescending(submissionLog => submissionLog.timestamp).ToList();
+                    model.SubmissionLogs = orderedSubmissionLog;
+                }
                 return View(model);
             }
             catch(Exception ex)
