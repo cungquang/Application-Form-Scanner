@@ -1,0 +1,116 @@
+﻿@model BCHousing.AfsWebAppMvc.Models.SubmissionLogsVisualizationViewModel;
+@{
+    ViewData["Title"] = "Visualization Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    th, td {
+        padding: 8px;
+        text-align: left;
+        overflow: auto;
+    }
+
+    input {
+        padding: 8px;
+        font-size: 16px;
+        color: black;
+    }
+
+    .col-textbox {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+
+<div class="text-center text-dark">
+    <h1 class="display-2">Welcome to Visualization Portal</h1>
+</div>
+
+<div class="btn-group float-sm-end">
+    <button id="RefreshButton" type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Refresh","Home")'">Refresh</button>
+</div>
+
+<div class="container-fluid">
+    <table id="SubmissionTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>SubmissionId</th>
+                <th>Created Date</th>
+                <th>Document Type (User declaration)</th>
+                <th>Document Type (OCR Classification)</th>
+                <th>Submit By</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <th>
+                    <input id="SubmissionIdSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'SubmissionIdSearch', 0)"/>
+                </th>
+                <th>
+                    <input id="CreatedDateSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'CreatedDateSearch', 1)" />
+                </th>
+                <th>
+                    <input id="UserDeclarationSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'UserDeclarationSearch', 2)" />
+                </th>
+                <th>
+                    <input id="OCRClassificationSearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'OCRClassificationSearch', 3)" />
+                </th>
+                <th>
+                    <input id="SubmiBySearch" type="text" placeholder="search..." onkeyup="searchTextFunction('SubmissionTable', 'SubmiBySearch', 4)" />
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(@Model.NumberOfFile > 0) {
+                @for(int i = 0; i < @Model.NumberOfFile; i++)
+                {
+                    <tr style="padding:8px; text-align: left;">
+                        <td>@Model.SubmissionLogs[i].submissionId</td>
+                        <td>
+                            @{
+                                DateTime submissionTimestampUtc = Model.SubmissionLogs[i].timestamp ?? DateTime.MinValue;
+                                TimeZoneInfo pstZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+                                DateTime submissionTimestampPst = TimeZoneInfo.ConvertTimeFromUtc(submissionTimestampUtc, pstZone);
+                            }
+                            @submissionTimestampPst
+                        </td>
+                        <td>@Model.SubmissionLogs[i].user_declared_type.ToUpper()</td>
+                        <td>@Model.SubmissionLogs[i].classify_type.ToUpper()</td>
+                        <td>@Model.SubmissionLogs[i].submit_by</td>
+                        <td>
+                            <form method="post" asp-controller="Home" asp-action="Review">
+                                <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
+                                <button id="ReviewButton-@i" type="submit" class="btn btn-outline-dark" formtarget="_blank">Review</button>
+                            </form>
+                        </td>
+                        <td>
+                            @if (@Model.SubmissionLogs[i].classify_type.Trim().ToUpper().Equals("SAFER") || @Model.SubmissionLogs[i].classify_type.Trim().ToUpper().Equals("RAP"))
+                            {
+                                <form method="post" asp-controller="Home" asp-action="Edit">
+                                    @Html.ActionLink("Edit", "Edit", "Home", new {submissionId = Model.SubmissionLogs[i].submissionId, classifyType = Model.SubmissionLogs[i].classify_type, activeTab = 2}, new {@class = "btn btn-outline-dark"})
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Other file have no data to edit">
+                                <button class="btn btn-outline-dark" type="submit" disabled>Edit</button>
+                                </span>
+                            }
+                        </td>
+                        <td>
+                            <form method="post" asp-controller="Home" asp-action="Download">
+                                <input type="hidden" name="url" value="@Model.SubmissionLogs[i].path_to_document">
+                                <button id="DownloadButton-@i" type="submit" class="btn btn-outline-dark">Download</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

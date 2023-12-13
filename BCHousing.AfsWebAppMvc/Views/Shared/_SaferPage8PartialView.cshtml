@@ -1,0 +1,230 @@
+﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
+
+@using (Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 8 }, FormMethod.Post))
+{
+
+    <h1>Shelter Aid for Elderly Renters (SAFER) - Application Checklist</h1>
+    <p>Incomplete applications will <strong>experience processing delays.</strong> Before submitting your application form please review the following to make sure that all required information is included.</p>
+    <ul>
+        <li>Applications are effective the latter of the month in which they are received by the Shelter Aid for Elderly Renters program or the month in which an applicant is deemed eligible.</li>
+        <li>Incomplete applications will experience processing delays and can be held for up to 90 days to allow time to gather and submit missing documentation.</li>
+        <li>After 90 days, incomplete applications will be cancelled and the applicant will be required to complete a new application. The effective date will be adjusted to the month in which the new application is received.</li>
+    </ul>
+    <hr />
+    <hr />
+    <div class="container text-center">
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <strong>Do NOT include original documents (we require photocopies only)</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Identification and Residency</strong> (Required for applicant and spouse, if applicable)
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <p>If you are receiving Old Age Security, attach a copy of one of the following:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[0].submissionId)
+                            @Html.HiddenFor(m => m[0].sequence)
+                            @Html.HiddenFor(m => m[0].field_name)
+                            @Html.CheckBox("[0].field_value", (Model[0].field_value == ":selected:" ? true : false)) Birth or baptismal certificate, Passport, Driver's License or a BC ID Card.
+                        </li>
+                    </ul>
+                    <p>If you are not in receipt of Old Age Security, please attach:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[1].submissionId)
+                            @Html.HiddenFor(m => m[1].sequence)
+                            @Html.HiddenFor(m => m[1].field_name)
+                            @Html.CheckBox("[1].field_value", (Model[1].field_value == ":selected:" ? true : false)) If born in Canada, Copy of Canadian birth or baptismal certificate, or Passport
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[2].submissionId)
+                            @Html.HiddenFor(m => m[2].sequence)
+                            @Html.HiddenFor(m => m[2].field_name)
+                            @Html.CheckBox("[2].field_value", (Model[2].field_value == ":selected:" ? true : false)) If not born in Canada, documentation showing date of birth as well as your status in Canada and that you are not under private sponsorship. For more information, please call 604-433-2218 or toll-free at 1-800-257-7756.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Power of Attorney</strong> (If applicable)
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[3].submissionId)
+                            @Html.HiddenFor(m => m[3].sequence)
+                            @Html.HiddenFor(m => m[3].field_name)
+                            @Html.CheckBox("[3].field_value", (Model[3].field_value == ":selected:" ? true : false)) Attach Power of Attorney authorizing documents.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Direct Deposit</strong>
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[4].submissionId)
+                            @Html.HiddenFor(m => m[4].sequence)
+                            @Html.HiddenFor(m => m[4].field_name)
+                            @Html.CheckBox("[4].field_value", (Model[4].field_value == ":selected:" ? true : false)) Attach a personalized blank cheque marked VOID to the application form; or
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[5].submissionId)
+                            @Html.HiddenFor(m => m[5].sequence)
+                            @Html.HiddenFor(m => m[5].field_name)
+                            @Html.CheckBox("[5].field_value", (Model[5].field_value == ":selected:" ? true : false)) Attach a Preauthorized Debit Form provided by your financial institution; or
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[6].submissionId)
+                            @Html.HiddenFor(m => m[6].sequence)
+                            @Html.HiddenFor(m => m[6].field_name)
+                            @Html.CheckBox("[6].field_value", (Model[6].field_value == ":selected:" ? true : false)) Have your financial institution complete the SAFER Direct Deposit section of this application.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Proof of Rent</strong>
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[7].submissionId)
+                            @Html.HiddenFor(m => m[7].sequence)
+                            @Html.HiddenFor(m => m[7].field_name)
+                            @Html.CheckBox("[7].field_value", (Model[7].field_value == ":selected:" ? true : false)) Rent Receipt showing address, rent amount, date and landlord name; or
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[8].submissionId)
+                            @Html.HiddenFor(m => m[8].sequence)
+                            @Html.HiddenFor(m => m[8].field_name)
+                            @Html.CheckBox("[8].field_value", (Model[8].field_value == ":selected:" ? true : false)) Copy of recent Rent Increase Notice; or
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[9].submissionId)
+                            @Html.HiddenFor(m => m[9].sequence)
+                            @Html.HiddenFor(m => m[9].field_name)
+                            @Html.CheckBox("[9].field_value", (Model[9].field_value == ":selected:" ? true : false)) Copy of Lease or Tenancy Agreement (if signed within the past 12 months); or
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[10].submissionId)
+                            @Html.HiddenFor(m => m[10].sequence)
+                            @Html.HiddenFor(m => m[10].field_name)
+                            @Html.CheckBox("[10].field_value", (Model[10].field_value == ":selected:" ? true : false)) Have your landlord complete the Proof of Rent - Landlord Declaration section of this application.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Income Tax Information </strong>(Required for applicant and spouse, if applicable)
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[11].submissionId)
+                            @Html.HiddenFor(m => m[11].sequence)
+                            @Html.HiddenFor(m => m[11].field_name)
+                            @Html.CheckBox("[11].field_value", (Model[11].field_value == ":selected:" ? true : false)) Provide consent for release of tax information from Canada Revenue Agency (CRA) on page 2 of this application; or
+                        </li>
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[12].submissionId)
+                            @Html.HiddenFor(m => m[12].sequence)
+                            @Html.HiddenFor(m => m[12].field_name)
+                            @Html.CheckBox("[12].field_value", (Model[12].field_value == ":selected:" ? true : false)) Provide copies of last year's Income Tax Notice of Assessment <strong>AND</strong> detailed Income Tax return (include all pages); or T-slips from all income sources.
+                        </li>
+                    </ul>
+                    <p><strong>Note:</strong> If <strong>bankruptcy</strong> was declared within the last two taxation years, provide copies of the Income Tax Notices of Assessment and detailed Income Tax returns for both the pre- and post-bankruptcy.</p>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Proof of Self-Employment </strong>(If applicable)
+                </p>
+                <p style="text-align:left">If last year's annual income included income from <strong>self-employment,</strong> attach:</p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[13].submissionId)
+                            @Html.HiddenFor(m => m[13].sequence)
+                            @Html.HiddenFor(m => m[13].field_name)
+                            @Html.CheckBox("[13].field_value", (Model[13].field_value == ":selected:" ? true : false)) Statement of Income and Expenses from last year's Income Tax return and all related worksheets (form T2125).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>Proof of Current Income </strong>(If applicable)
+                </p>
+                <p style="text-align:left">
+                    If any income reported on your tax return have stopped or permanently decreased, attach:
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[14].submissionId)
+                            @Html.HiddenFor(m => m[14].sequence)
+                            @Html.HiddenFor(m => m[14].field_name)
+                            @Html.CheckBox("[14].field_value", (Model[14].field_value == ":selected:" ? true : false)) Proof of CURRENT gross monthly income, from all sources (cheque stubs, letter from employer bank statements showing direct deposits or other income statement).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px solid;">
+                <p style="text-align:left">
+                    <strong>BC Bus Pass T5007 Tax Slip </strong>(If applicable)
+                </p>
+                <p style="text-align:left">
+                    If you (or your spouse, if applicable) received a T5 slip from the BC Bus Pass Program last year, attach:
+                </p>
+                <div style="text-align:left; margin-left:10px">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="border:0 none;">
+                            @Html.HiddenFor(m => m[15].submissionId)
+                            @Html.HiddenFor(m => m[15].sequence)
+                            @Html.HiddenFor(m => m[15].field_name)
+                            @Html.CheckBox("[15].field_value", (Model[15].field_value == ":selected:" ? true : false)) The T5007 tax slip that indicates the bus pass benefit amount.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <br />
+    <div class="col-md-offset-2 col-md-19">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}

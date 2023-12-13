@@ -1,0 +1,53 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@domainName=https://bchousingafswebappmvc.azurewebsites.net
+@testDomainName=https://localhost:7158
+@subRoute=api
+@action=BlobStorage
+
+
+### GET metadata
+GET {{testDomainName}}/{{subRoute}}/{{action}}/Metadata?url=https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf
+Content-Type: application/json
+
+
+#### POST Metadata
+POST {{testDomainName}}/{{subRoute}}/{{action}}/Metadata
+Content-Type: application/json
+
+{
+  "URL":"https://afspocstorage.blob.core.windows.net/file-container/Other/Application_Surrey_2.pdf",
+  "Metadata": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Chai\",\"UserDeclaredType\":\"SAFER\"}"
+}
+
+
+#### POST MovingStagingBlob
+POST {{domainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
+Content-Type: application/json
+
+{
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/staging-container/TestNote.txt",
+  "DestinationContainer":"file-container",
+  "DestinationFolder": "Other"
+}
+
+
+### POST MovingStagingBlob
+POST {{testDomainName}}/{{subRoute}}/{{action}}/MoveStagingBlob
+Content-Type: application/json
+
+{
+  "SourceURL":"https://afspocstorage.blob.core.windows.net/file-container/text.json",
+  "DestinationContainer":"test-container",
+  "DestinationFolder": ""
+}
+
+### POST UploadBlobAsync
+POST {{testDomainName}}/{{subRoute}}/{{action}}/UploadBlobAsync
+Content-Type: application/json
+
+{
+  "ContainerName": "file-container",
+  "BlobName": "text.json",
+  "BlobContent": "{\"DocumentName\":\"ApiDocument\",\"SubmitBy\":\"Kai\",\"UserDeclaredType\":\"SAFER\"}",
+  "Metadata":""
+}

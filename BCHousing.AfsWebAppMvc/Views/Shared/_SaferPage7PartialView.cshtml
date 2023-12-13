@@ -1,0 +1,218 @@
+﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
+
+
+@using (Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 7 }, FormMethod.Post))
+{
+    <h1>SAFER Direct Deposit</h1>
+    <p>Assistance is paid by direct deposit to your account on the last working day of each month. The account must be in the name of the applicant and/or spouse (if applicable). The information requested will provide BC Housing with the required financial institution, transit and account numbers needed for processing automatic payments to your account.</p>
+
+    <div>
+        <h3>Please provide one of the following:</h3>
+        <ul class="list-group">
+            <li class="list-group-item" style="border:0 none;">
+                @Html.HiddenFor(m => m[0].submissionId)
+                @Html.HiddenFor(m => m[0].sequence)
+                @Html.HiddenFor(m => m[0].field_name)
+                @Html.CheckBox("[0].field_value", (Model[0].field_value == ":selected:" ? true : false)) A printed, personalized blank cheque marked VOID; or
+            </li>
+            <li class="list-group-item" style="border:0 none;">
+                @Html.HiddenFor(m => m[1].submissionId)
+                @Html.HiddenFor(m => m[1].sequence)
+                @Html.HiddenFor(m => m[1].field_name)
+                @Html.CheckBox("[1].field_value", (Model[1].field_value == ":selected:" ? true : false)) A Preauthorized Debit Form provided by your financial institution; or
+            </li>
+            <li class="list-group-item" style="border:0 none;">
+                @Html.HiddenFor(m => m[2].submissionId)
+                @Html.HiddenFor(m => m[2].sequence)
+                @Html.HiddenFor(m => m[2].field_name)
+                @Html.CheckBox("[2].field_value", (Model[2].field_value == ":selected:" ? true : false)) Have your financial institution complete the information below:
+            </li>
+        </ul>
+    </div>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col" style="border:1px groove;">
+                <p style="text-align:left">
+                    <strong>Name of Applicant</strong>
+                    @Html.HiddenFor(m => m[3].submissionId)
+                    @Html.HiddenFor(m => m[3].sequence)
+                    @Html.HiddenFor(m => m[3].field_name)
+                    @Html.EditorFor(m => m[3].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px groove;">
+                <p style="text-align:left">
+                    Have the following completed by your financial institution <strong>if you are not attaching</strong> a void cheque or a Preauthorized Debit form.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px groove;">
+                <p style="text-align:left">
+                    <strong>Transit Number</strong>
+                    @Html.HiddenFor(m => m[4].submissionId)
+                    @Html.HiddenFor(m => m[4].sequence)
+                    @Html.HiddenFor(m => m[4].field_name)
+                    @Html.EditorFor(m => m[4].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+            <div class="col" style="border:1px groove;">
+                <p style="text-align:left">
+                    <strong>Bank Number</strong>
+                    @Html.HiddenFor(m => m[5].submissionId)
+                    @Html.HiddenFor(m => m[5].sequence)
+                    @Html.HiddenFor(m => m[5].field_name)
+                    @Html.EditorFor(m => m[5].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+            <div class="col" style="border:1px groove;">
+                <p style="text-align:left">
+                    <strong>Account Number</strong>
+                    @Html.HiddenFor(m => m[6].submissionId)
+                    @Html.HiddenFor(m => m[6].sequence)
+                    @Html.HiddenFor(m => m[6].field_name)
+                    @Html.EditorFor(m => m[6].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+        </div>
+        <div class="row" style="border:1px groove;">
+            <div class="col-8">
+                <p style="text-align:left">
+                    <strong>Name(s) on the account</strong>
+                    @Html.HiddenFor(m => m[7].submissionId)
+                    @Html.HiddenFor(m => m[7].sequence)
+                    @Html.HiddenFor(m => m[7].field_name)
+                    @Html.EditorFor(m => m[7].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+            <div class="col-4" style="border:1px groove;">
+                <p style="text-align:left">
+                    <strong>Phone number of financial institution</strong>
+                    @Html.HiddenFor(m => m[8].submissionId)
+                    @Html.HiddenFor(m => m[8].sequence)
+                    @Html.HiddenFor(m => m[8].field_name)
+                    @Html.EditorFor(m => m[8].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="border:1px groove;">
+                <p style="text-align:left">
+                    <strong>Financial Institution Stamp:</strong>
+                    @Html.HiddenFor(m => m[9].submissionId)
+                    @Html.HiddenFor(m => m[9].sequence)
+                    @Html.HiddenFor(m => m[9].field_name)
+                    @Html.EditorFor(m => m[9].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="border border-3 opacity-75">
+    <h1>Proof of Rent - Landlord Declaration</h1>
+    <p>Not required if a Tenancy Agreement or Rent Receipt has been provided with application form.</p>
+    <div style="border: 1px groove">
+        <div style="margin:10px">
+            I
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[10].submissionId)
+                @Html.HiddenFor(m => m[10].sequence)
+                @Html.HiddenFor(m => m[10].field_name)
+                @Html.EditorFor(m => m[10].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger", placeholder = "Landlord / Building Manager Name (Print)"}})
+            </p>
+            confirm that am renting
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[11].submissionId)
+                @Html.HiddenFor(m => m[11].sequence)
+                @Html.HiddenFor(m => m[11].field_name)
+                @Html.EditorFor(m => m[11].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger", placeholder = "Rental address (Unit #, Street #, City)"}})
+            </p>
+            BC
+            <br/>
+            To
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[12].submissionId)
+                @Html.HiddenFor(m => m[12].sequence)
+                @Html.HiddenFor(m => m[12].field_name)
+                @Html.EditorFor(m => m[12].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger", placeholder = "Print Tenant's Name(s)"}})
+            </p>
+            since
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[13].submissionId)
+                @Html.HiddenFor(m => m[13].sequence)
+                @Html.HiddenFor(m => m[13].field_name)
+                @Html.EditorFor(m => m[13].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger", placeholder = "Date tenancy started (MM/DD/YY)"}})
+            </p>
+            <br>
+            The Rent is $
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[14].submissionId)
+                @Html.HiddenFor(m => m[14].sequence)
+                @Html.HiddenFor(m => m[14].field_name)
+                @Html.EditorFor(m => m[14].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger"}})
+            </p>
+            per
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[15].submissionId)
+                @Html.HiddenFor(m => m[15].sequence)
+                @Html.HiddenFor(m => m[15].field_name)
+                @Html.CheckBox("[15].field_value", (Model[15].field_value == ":selected:" ? true : false)) Monthly
+            </p>
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[16].submissionId)
+                @Html.HiddenFor(m => m[16].sequence)
+                @Html.HiddenFor(m => m[16].field_name)
+                @Html.CheckBox("[16].field_value", (Model[16].field_value == ":selected:" ? true : false)) Weekly
+            </p>
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[17].submissionId)
+                @Html.HiddenFor(m => m[17].sequence)
+                @Html.HiddenFor(m => m[17].field_name)
+                @Html.CheckBox("[17].field_value", (Model[17].field_value == ":selected:" ? true : false)) Night
+            </p>
+            <br>
+            Heat Included?
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[18].submissionId)
+                @Html.HiddenFor(m => m[18].sequence)
+                @Html.HiddenFor(m => m[18].field_name)
+                @Html.CheckBox("[18].field_value", (Model[18].field_value == ":selected:" ? true : false)) Yes
+            </p>
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[19].submissionId)
+                @Html.HiddenFor(m => m[19].sequence)
+                @Html.HiddenFor(m => m[19].field_name)
+                @Html.CheckBox("[19].field_value", (Model[19].field_value == ":selected:" ? true : false)) No
+            </p>
+            <br>
+            Landlord Signature
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[20].submissionId)
+                @Html.HiddenFor(m => m[20].sequence)
+                @Html.HiddenFor(m => m[20].field_name)
+                @Html.EditorFor(m => m[20].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger"}})
+            </p>
+            Landlord Phone #
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[21].submissionId)
+                @Html.HiddenFor(m => m[21].sequence)
+                @Html.HiddenFor(m => m[21].field_name)
+                @Html.EditorFor(m => m[21].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger"}})
+            </p>
+            Date
+            <p style="display:inline">
+                @Html.HiddenFor(m => m[22].submissionId)
+                @Html.HiddenFor(m => m[22].sequence)
+                @Html.HiddenFor(m => m[22].field_name)
+                @Html.EditorFor(m => m[22].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger"}})
+            </p>
+        </div>
+    </div>
+
+    <br />
+    <div class="col-md-offset-2 col-md-19">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}
