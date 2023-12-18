@@ -1,0 +1,304 @@
+﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
+
+@using(Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 2 }, FormMethod.Post))
+{
+    <h1>1. Applicant Information</h1>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Social Insurance Number</strong></p>
+                        @Html.HiddenFor(m => m[0].submissionId)
+                        @Html.HiddenFor(m => m[0].sequence)
+                        @Html.HiddenFor(m => m[0].field_name)
+                        @Html.EditorFor(m => m[0].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Last Name</strong></p>
+                        @Html.HiddenFor(m => m[1].submissionId)
+                        @Html.HiddenFor(m => m[1].sequence)
+                        @Html.HiddenFor(m => m[1].field_name)
+                        @Html.EditorFor(m => m[1].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="container">
+                        <p><strong>First Name(s)</strong></p>
+                        @Html.HiddenFor(m => m[2].submissionId)
+                        @Html.HiddenFor(m => m[2].sequence)
+                        @Html.HiddenFor(m => m[2].field_name)
+                        @Html.EditorFor(m => m[2].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Birth Date (dd/mm/yyyy)</strong></p>
+                        @Html.HiddenFor(m => m[3].submissionId)
+                        @Html.HiddenFor(m => m[3].sequence)
+                        @Html.HiddenFor(m => m[3].field_name)
+                        @Html.EditorFor(m => m[3].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Age</strong></p>
+                        @Html.HiddenFor(m => m[4].submissionId)
+                        @Html.HiddenFor(m => m[4].sequence)
+                        @Html.HiddenFor(m => m[4].field_name)
+                        @Html.EditorFor(m => m[4].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Gender</strong></p>
+                        @Html.HiddenFor(m => m[5].submissionId)
+                        @Html.HiddenFor(m => m[5].sequence)
+                        @Html.HiddenFor(m => m[5].field_name)
+                        @Html.EditorFor(m => m[5].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Born in Canada? (Yes/No)</strong></p>
+                        @Html.HiddenFor(m => m[6].submissionId)
+                        @Html.HiddenFor(m => m[6].sequence)
+                        @Html.HiddenFor(m => m[6].field_name)
+                        @Html.EditorFor(m => m[6].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>2. Spouse or Partner Information (if applicable)</h1>
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Social Insurance Number</strong></p>
+                        @Html.HiddenFor(m => m[7].submissionId)
+                        @Html.HiddenFor(m => m[7].sequence)
+                        @Html.HiddenFor(m => m[7].field_name)
+                        @Html.EditorFor(m => m[7].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Last Name</strong></p>
+                        @Html.HiddenFor(m => m[8].submissionId)
+                        @Html.HiddenFor(m => m[8].sequence)
+                        @Html.HiddenFor(m => m[8].field_name)
+                        @Html.EditorFor(m => m[8].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="container">
+                        <p><strong>First Name(s)</strong></p>
+                        @Html.HiddenFor(m => m[9].submissionId)
+                        @Html.HiddenFor(m => m[9].sequence)
+                        @Html.HiddenFor(m => m[9].field_name)
+                        @Html.EditorFor(m => m[9].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Birth Date (dd/mm/yyyy)</strong></p>
+                        @Html.HiddenFor(m => m[10].submissionId)
+                        @Html.HiddenFor(m => m[10].sequence)
+                        @Html.HiddenFor(m => m[10].field_name)
+                        @Html.EditorFor(m => m[10].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Age</strong></p>
+                        @Html.HiddenFor(m => m[11].submissionId)
+                        @Html.HiddenFor(m => m[11].sequence)
+                        @Html.HiddenFor(m => m[11].field_name)
+                        @Html.EditorFor(m => m[11].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Gender</strong></p>
+                        @Html.HiddenFor(m => m[12].submissionId)
+                        @Html.HiddenFor(m => m[12].sequence)
+                        @Html.HiddenFor(m => m[12].field_name)
+                        @Html.EditorFor(m => m[12].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Born in Canada? (Yes/No)</strong></p>
+                        @Html.HiddenFor(m => m[13].submissionId)
+                        @Html.HiddenFor(m => m[13].sequence)
+                        @Html.HiddenFor(m => m[13].field_name)
+                        @Html.EditorFor(m => m[13].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="container">
+                        <h1>3. Consent For Release of Information From Canada Revenue Agency</h1>
+                        <p>
+                            To determine eligibility for the Shelter Aid For Elderly Renters Program, income tax information is required.
+                            give the Canada Revenue Agency permision to provide the required information or you may provide the tax information
+                            directly to BC Housing yourself
+                        </p>
+                        <p><strong>SELECT Option 1 or Option 2 below.</strong> Do not check more than one box.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        @Html.HiddenFor(m => m[14].submissionId)
+                        @Html.HiddenFor(m => m[14].sequence)
+                        @Html.HiddenFor(m => m[14].field_name)
+                        @Html.CheckBox("[14].field_value", (Model[14].field_value == ":selected:" ? true : false)) Option 1: Consent Granted
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        @Html.HiddenFor(m => m[15].submissionId)
+                        @Html.HiddenFor(m => m[15].sequence)
+                        @Html.HiddenFor(m => m[15].field_name)
+                        @Html.CheckBox("[15].field_value", (Model[15].field_value == ":selected:" ? true : false)) Option 2: Consent Not Granted
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p>
+                            <strong>We hereby consent</strong> to the release, by the Canada
+                            Revenue Agency, to BC Housing of information from
+                            my/our income tax records, whether supplied by me/us or
+                            by a third party. The information will be relevant to, and
+                            used solely for the purpose of, determining and verifying
+                            my/our eligibility, entitlement for and the general administration
+                            and enforcement of rental assistance/subsidies from BC Housing.
+
+                            This authorization is valid for the current taxation year,
+                            the two taxation year and each subsequent consecutive taxation
+                            assistance/benefit.
+
+                            I/we understand that if I/we wish to withdraw this consent, I/we may
+                            do so at any time by writing to:
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <p>Manger, Applicant Services <br /> BC Housing, 1701 - 4555 Kingsway <br /> Burnaby,BC V5H 4V8</p>
+                    </div>
+                </td>
+                <td>
+                    <p>
+                        <strong>I/We do not give consent</strong> for the Canada Revenue
+                        Agency to provide my/our income tax information to BC Housing. I/We
+                        understand that I/we will be responsible for providing verification of
+                        my/our income and assets in order to confirm eligibility for rental
+                        assistance/benefit. I/We have attached the following proof:
+                    </p>
+                    <ul>
+                        <li>Copy of Notice of Assessment for the last field tax year</li>
+                        <li>Copy of detailed Income Tax Return for the last filed tax year</li>
+                        <li>
+                            If self-employed: Copy of Statement of Business Activities and all related
+                            worksheets (only required for individuals with self-employment income, either
+                            business or professional on their tax return).
+                        </li>
+                    </ul>
+                    <p>
+                        If you are not able to locate your income documents please obtain a Proof of Income
+                        Statement (Option C print) from www.cra.gc.ca/myaccount or contact the Canada Revenue
+                        Agency at 1-800 959-8281.
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered table-responsive" style="table-layout:fixed;">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Applicant:</strong></p>
+                        @Html.HiddenFor(m => m[16].submissionId)
+                        @Html.HiddenFor(m => m[16].sequence)
+                        @Html.HiddenFor(m => m[16].field_name)
+                        @Html.EditorFor(m => m[16].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Signature</strong></p>
+                        @Html.HiddenFor(m => m[17].submissionId)
+                        @Html.HiddenFor(m => m[17].sequence)
+                        @Html.HiddenFor(m => m[17].field_name)
+                        @Html.EditorFor(m => m[17].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Date</strong></p>
+                        @Html.HiddenFor(m => m[18].submissionId)
+                        @Html.HiddenFor(m => m[18].sequence)
+                        @Html.HiddenFor(m => m[18].field_name)
+                        @Html.EditorFor(m => m[18].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <p><strong>Applicant:</strong></p>
+                        @Html.HiddenFor(m => m[19].submissionId)
+                        @Html.HiddenFor(m => m[19].sequence)
+                        @Html.HiddenFor(m => m[19].field_name)
+                        @Html.EditorFor(m => m[19].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Signature</strong></p>
+                        @Html.HiddenFor(m => m[20].submissionId)
+                        @Html.HiddenFor(m => m[20].sequence)
+                        @Html.HiddenFor(m => m[20].field_name)
+                        @Html.EditorFor(m => m[20].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+                <td>
+                    <div class="container">
+                        <p><strong>Date</strong></p>
+                        @Html.HiddenFor(m => m[21].submissionId)
+                        @Html.HiddenFor(m => m[21].sequence)
+                        @Html.HiddenFor(m => m[21].field_name)
+                        @Html.EditorFor(m => m[21].field_value, new { htmlAttributes = new { @class = "form-control text-danger"}})
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="col-md-offset-2 col-md-19">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+}
+
+

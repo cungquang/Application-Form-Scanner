@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "BCHousing.AfsTriggerStagingContainer": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7120",
+      "launchBrowser": false
+    }
+  }
+}

@@ -1,0 +1,30 @@
+﻿@model BCHousing.AfsWebAppMvc.Entities.Session.SubmissionViewInputModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center text-dark">
+    <h1 class="display-2">Welcome to Submission Portal</h1>
+</div>
+<br />
+@if (Model.UploadFileName.Count > 0)
+{
+    <div class="text-primary">
+        <h2 class="display-0">Log Activities</h2>
+    </div>
+    <div class="text-danger">
+        <ul>
+            @for (int i = 0; i < Model.UploadFileName.Count; i++)
+            {
+                @if (Model.IsSuccess[i])
+                {
+                    <li><b>@Model.UploadFileName[i]</b> (document type: <b>@Model.DocumentType[i]</b>, size: <b>@Model.UploadFileSize[i]</b> bytes) has been uploaded on behalf of <b>@Model.FirstName[i], @Model.LastName[i]</b></li>
+                }else{
+                    <li><b>@Model.UploadFileName[i]</b> (document type: <b>@Model.DocumentType[i]</b>, size: <b>@Model.UploadFileSize[i]</b> bytes) failed to uploaded on behalf of <b>@Model.FirstName[i], @Model.LastName[i]</b></li>
+                }
+
+            }
+        </ul>
+    </div>
+}

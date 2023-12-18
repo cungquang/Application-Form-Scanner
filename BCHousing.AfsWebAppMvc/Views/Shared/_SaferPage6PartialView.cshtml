@@ -1,0 +1,111 @@
+﻿@model IList<BCHousing.AfsWebAppMvc.Entities.Form>
+
+
+
+@using (Html.BeginForm("Edit", "Home", new { submissionId = Model[0].submissionId, activeTab = 6 }, FormMethod.Post))
+{
+    <hr />
+    <h3>Purpose of this form:</h3>
+    <p>This form collects specific information from applicants (the person(s) filling out the form) to determine eligibility for assistance through the Shelter Aid for Elderly Renters (SAFER) program. The information is collected in accordance with section 26(c) of the Freedom of Information and Protection of Privacy Act. If you have any questions about the collection of your information, please call 604-433-1711 and ask to speak to BC Housing's Privacy Officer or write to 4555 Kingsway, Burnaby, BC, V5H 4V8.</p>
+    <br />
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col" style="text-align:left">
+                <h1>10. Declaration and Consent</h1>
+            </div>
+            <div class="col" style="text-align:right">
+                <h4>Please read and sign</h4>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h3>I/We declare:</h3>
+    <ul>
+        <li>This is my/our application and all the information in it is true, correct and complete in every respect; fully discloses my/our income from all sources; and accurately represents my current living circumstances.</li>
+    </ul>
+    <h3>I/We permit:</h3>
+    <ul>
+        <li>BC Housing to verify any of the information I/we have provided in this application in order to access my/our eligibility for benefits under the Shelter Aid For Elderly Renters Program.</li>
+    </ul>
+    <h3>I/We permit:</h3>
+    <ul>
+        <li>It is my/our responsibility to promptly provide, or cause to be provided, all information and documentation that is reasonably requested by BC Housing to determine my/our eligibility for benefits and/or for audit purposes. I/we are responsible to immediately inform BC Housing of any changes in my/our address, rent, marital status, family size, or the people sharing my/our accommodation so that my/our benefit can be adjusted accordingly.</li>
+        <li>Failure to report changes in my/our address or household composition may result in an interruption or suspension of benefits and may also result in an overpayment, which I/we will be required to repay.</li>
+        <li>Failure to report if I/we begin to receive income assistance through the Ministry responsible for the B.C. Employment and Assistance Act or the Employment and Assistance for Persons with Disabilities Act will result in an overpayment of benefits which I/we will be required to repay.</li>
+        <li>Benefits paid under this agreement is a reimbursement of actual rent paid and if I/we fail to pay the full rental amount BC Housing may immediately stop payment of benefits and I/we agree to return to BC Housing all benefits paid for periods in which the full rental amount was not paid.</li>
+        <li>BC Housing will audit some Shelter Aid For Elderly Renters Program applications and benefits may be adjusted if the audit reveals errors or omissions in any information.</li>
+        <li>Misrepresentation of the information provided, in writing or by omission, may result in recovery of benefits in addition to any other remedies available in law or equity.</li>
+        <li>If I/we wish to withdraw this Declaration and Consent, I/we may do so at any time in writing to BC Housing; however, withdrawal will result in my/our being ineligible for assistance through the Shelter Aid For Elderly Renters Program.</li>
+        <li>BC Housing will issue tax slips for annual benefits of $500 or more</li>
+    </ul>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <th>Signature of Applicant</th>
+                        <th>Date</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Signature not allow to edit">
+                                    @Html.TextBoxFor(m => m[0].field_value, new { @readonly="readonly" })
+                                </span>
+                            </td>
+                            <td>
+                                @Html.HiddenFor(m => m[1].submissionId)
+                                @Html.HiddenFor(m => m[1].sequence)
+                                @Html.HiddenFor(m => m[1].field_name)
+                                @Html.EditorFor(m => m[1].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger"}})
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                    <table class="table">
+                        <thead>
+                        <th>Signature of Applicant</th>
+                        <th>Date</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Signature not allow to edit">
+                                    @Html.TextBoxFor(m => m[2].field_value, new { @readonly="readonly" })
+                                    </span>
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(m => m[3].submissionId)
+                                    @Html.HiddenFor(m => m[3].sequence)
+                                    @Html.HiddenFor(m => m[3].field_name)
+                                    @Html.EditorFor(m => m[3].field_value, new { htmlAttributes = new { @class = "mb-2 text-danger"}})
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+
+        <p>Next Steps</p>
+        <div style="border:1px solid #000;">
+            <ol>
+                <li><strong>Sign & Date Application.</strong></li>
+                <li><strong>Attach Supporting Documents:</strong> (Do not send original documents) <br> Review the attached checklist for more information on supporting documents.</li>
+                <li><strong>Submit Application:</strong> Shelter Aid for Elderly Renters, 101 - 4555 Kingsway, Burnaby, BC V5H 4V8</li>
+            </ol>
+            <div style="margin-left:5px">
+                <p>
+                    <strong>Note:</strong>The most common cause of delays is missing documentation. Applications submitted without all required supporting documents can be held for a maximum of 90 days.
+                </p>
+            </div>
+        </div>
+
+        <br />
+        <div class="col-md-offset-2 col-md-19">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+}
