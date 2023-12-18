@@ -29,8 +29,8 @@ namespace BCHousing.AfsOcrServerHandler
             string baseUrl = "https://bchousingafswebappmvcdev.azurewebsites.net/";
 
             // Information for connecting AI Service
-            string endpoint = "https://application-scanner-poc-di-servicedev.cognitiveservices.azure.com/";
-            string key = "486121227ba64b8cb06cc16eb99089ec";
+            string endpoint = "https://application-scanner-poc-di-service-deployment-ai.cognitiveservices.azure.com/";
+            string key = "c545f6b5021149cbb959aa8236a7030b";
             AzureKeyCredential credential = new AzureKeyCredential(key);
             DocumentAnalysisClient client = new DocumentAnalysisClient(new Uri(endpoint), credential);
 
