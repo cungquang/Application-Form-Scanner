@@ -29,14 +29,14 @@ namespace BCHousing.AfsOcrServerHandler
             string baseUrl = "https://bchousingafswebappmvc.azurewebsites.net/";
 
             // Information for connecting AI Service
-            string endpoint = "https://application-scanner-poc-di-service.cognitiveservices.azure.com/";
-            string key = "ab5cf6c8b3264c698ef833de6d4f6d78";
+            string endpoint = "https://afs-ai-bchousing-production.cognitiveservices.azure.com/";
+            string key = "5b5c5b43e4224e69a0ea33194decde0a";
             AzureKeyCredential credential = new AzureKeyCredential(key);
             DocumentAnalysisClient client = new DocumentAnalysisClient(new Uri(endpoint), credential);
 
             // Share Access Signature for Accessing the files in the blob storage
             // This will expire on 2023/12/22
-            string shareAccessSignature = "?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-12-22T08:18:00Z&st=2023-11-18T00:18:00Z&spr=https&sig=Z%2BqyZZ%2By7xfGdZqYrjAmaTizNIKl4QpS%2FYZUevtO0XU%3D";
+            string shareAccessSignature = "?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-12-20T08:01:55Z&st=2023-12-20T00:01:55Z&spr=https&sig=XKLOY7IKiD3FgXB5g7GxWphzmsN0aY9gM%2BBnBTwHnto%3D";
 
 
             // Step 1: Get the target file url for the event grid trigger
