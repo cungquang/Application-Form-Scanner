@@ -16,7 +16,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Get connection string 
-        var BlobConnectionString = builder.Configuration.GetSection("ConnectionString:AzureBlobConnect").Value;
+        var BlobConnectionString = builder.Configuration.GetSection("ConnectionStrings:AzureBlobConnect").Value;
         var DBConnectionString = builder.Configuration.GetSection("ConnectionStrings:AzureDBConnect").Value;
 
         // Add services to the container.
