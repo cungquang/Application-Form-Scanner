@@ -26,7 +26,7 @@ namespace BCHousing.AfsOcrServerHandler
             ILogger log)
         {
             // Information for the REST API calls
-            string baseUrl = "https://bchousingafswebappmvc.azurewebsites.net/";
+            string baseUrl = "https://afsbackendwebapp.azurewebsites.net/";
 
             // Information for connecting AI Service
             string endpoint = "https://afs-ai-bchousing-production.cognitiveservices.azure.com/";
