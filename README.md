@@ -2,7 +2,7 @@
 
 ## Project Information:
 - Genre: Web application
-- [Link to Application](https://afsbackendwebapp.azurewebsites.net/Home/Visualization)
+- Link: [Link to Application](https://afsbackendwebapp.azurewebsites.net/Home/Visualization)
 - Language: C#
 
 ## Project Detail:
@@ -14,7 +14,7 @@
 - Storage: Azure Blob Storage
 - Hosting: Azure App Service
 - Database: Azure SQL Database
-- Azure Function App
+- Others: Azure Function App
 
 ## Project Description:
 
